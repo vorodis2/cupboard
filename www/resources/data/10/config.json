@@ -1,0 +1,55 @@
+{
+    "id": 10,
+    "title": 10,
+    "key": "o_10",
+    "orig": "pic (70).png",
+    "mod": {
+        "key": "n",
+        "name": "n",
+        "r": [
+            -20,
+            -10,
+            -10,
+            40,
+            20,
+            20
+        ],
+        "r1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+    },
+    "param": {
+        "tOt": false,
+        "tNa": false,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "bool": [
+        0,
+        0,
+        0,
+        0
+    ],
+    "num": [
+        10,
+        0,
+        0,
+        0
+    ],
+    "str": [
+        "BInSten",
+        "Unik_Steps",
+        "1110011100",
+        "001"
+    ],
+    "resurs": {
+        "array": []
+    }
+}

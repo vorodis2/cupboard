@@ -1,0 +1,55 @@
+{
+    "id": 17,
+    "title": 17,
+    "key": "o_17",
+    "orig": "w5.png",
+    "mod": {
+        "key": "n",
+        "name": "n",
+        "r": [
+            -6,
+            -5,
+            -5,
+            12,
+            10,
+            10
+        ],
+        "r1": [
+            -50,
+            -50,
+            -50,
+            100,
+            100,
+            100
+        ]
+    },
+    "param": {
+        "tOt": false,
+        "tNa": false,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "bool": [
+        0,
+        0,
+        0,
+        0
+    ],
+    "num": [
+        10,
+        0,
+        0,
+        0
+    ],
+    "str": [
+        "BInSten",
+        "Unik_Vent",
+        "1110001100",
+        "100"
+    ],
+    "resurs": {
+        "array": []
+    }
+}
