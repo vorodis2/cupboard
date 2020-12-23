@@ -7,6 +7,8 @@ export class Board {
     this._height = 100;
     this._depth = 100;
 
+    this.object = obj;
+
     this.content3d = new THREE.Object3D();
     this.par.content3d.add(this.content3d);
 

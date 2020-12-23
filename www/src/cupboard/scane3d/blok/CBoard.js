@@ -1,8 +1,3 @@
-
-
-
-
-
 import { Blok } from './Blok.js';
 
 export class CBoard extends Blok {
@@ -14,31 +9,47 @@ export class CBoard extends Blok {
         this._width = 100;
         this._height = 100;
         this._depth = 100;
+        
+        const cDepth = 10;
 
+        this.arrPalka = [];
 
         this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
+        let aa=new THREE.AxesHelper(100);
+        this.content3d.add(aa);
         this.mesh = new THREE.Mesh(this.boxGeometry);
         this.content3d.add(this.mesh);
         
 
-
-
         this.funDrag=function () {           
-            this.mesh.scale.set(this._width,10,this._depth);
-            this.mesh.position.z=-this._depth/2;
+            this.mesh.scale.set(this._width, cDepth, this._height);
+            this.mesh.position.z=-this._height/2;
+
+            if (this.arrPalka.length) {
+              this.arrPalka.forEach(item => item.height = self._height)
+              this.arrPalka.forEach(item => item.depth = self._depth-cDepth)
+
+              this.arrPalka[0].setXYPosit(self._width/2 - this.arrPalka[1]._width/2, this.arrPalka[0]._depth/2 + cDepth/2 , 0)
+              this.arrPalka[1].setXYPosit(-self._width/2 + this.arrPalka[1]._width/2, this.arrPalka[0]._depth/2 + cDepth/2, 0)
+            }
+            
         }
 
-        
         this.dragObjNWD()
 
-        //this.dragWHD()
         var xz,oo,ooo
-        this.funInitMod=function(){         
-            oo= this.mO.getIdObj(3);                     
-            ooo=this.mO.getBlok(oo.obj);
-            ooo.init();
-            this.add(ooo);
-            trace("dfgdagdsgfdsgfdsgdsgf",ooo)
+        this.funInitMod=function(){
+          trace("sdfsdfsdfsdfsdfsdf")
+            for (let i = 0; i < 2; i++) {
+              oo= this.mO.getIdObj(3);
+              ooo=this.mO.getBlok(oo.obj);
+              ooo.init();
+              ooo.width=5;
+          //ooo.height=5;
+              this.add(ooo);
+              this.arrPalka.push(ooo);
+            }
+            this.dragObjNWD()
         }
 
 
@@ -81,9 +92,6 @@ export class CBoard extends Blok {
             this._height= obj.height;
             this._depth= obj.depth;    
 
-
-
-
             this.dragObjNWD()
 
 
@@ -104,6 +112,7 @@ export class CBoard extends Blok {
     set height(value) {
         if (this._height != value) {
             this._height = value;
+            
             this.dragObjNWD();
         }
     }

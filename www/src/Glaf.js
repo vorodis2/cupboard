@@ -50,7 +50,7 @@ export class Glaf  {
             this.sceneSB.array[i].setBasa(scene[this.sceneSB.array[i].name]);
         }
 
-        this.menu=new Menu(this,function(s,p,p1){           
+        this.menu=new Menu(this,function(s,p,p1){  
             /*  if(s=="mashtab"){
                     self.p20.mashtab=p;
                     self.menu.mashtab=p;

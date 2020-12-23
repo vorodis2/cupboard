@@ -1,8 +1,3 @@
-
-
-
-
-
 import { Blok } from './Blok.js';
 
 export class CPalka extends Blok {
@@ -15,26 +10,18 @@ export class CPalka extends Blok {
         this._height = 100;
         this._depth = 100;
 
-
         this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
         this.mesh = new THREE.Mesh(this.boxGeometry);
         this.content3d.add(this.mesh);
-        
+        let aa=new THREE.AxesHelper(50);
+        this.content3d.add(aa);
+        this.funDrag=function () {       
+            this.mesh.scale.set(this._width,this._depth,this._height);
+            this.mesh.position.z=-this._height/2;
 
-
-
-        this.funDrag=function () {   
-            trace(this.idArr+"   "+this.type)        
-            this.mesh.scale.set(30,30,30);
-            this.mesh.position.z=-this._depth/2;
         }
-
         
         this.dragObjNWD()
-
-        //this.dragWHD()
-
-
 
         this.getObj = function(){
             var obj={}
@@ -47,9 +34,6 @@ export class CPalka extends Blok {
             obj.width=this._width;
             obj.height=this._height;
             obj.depth=this._depth;    
-
-
-
 
             obj.children=[];
             for (var i = 0; i < this.children.length; i++) {

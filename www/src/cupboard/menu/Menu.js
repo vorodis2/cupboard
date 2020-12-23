@@ -61,12 +61,12 @@ export class Menu  {
 
 	    this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
 				if(s=="index")self.menuIndex=p;
+				// trace(s, p)
         // if(s=="gIndex")self.mDragScane.sobMenu(s,p,p1);
            	// trace("$$>>",s,p,p1)
 			});
 			
 			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1) {
-
 			});
 
 		/*this.array[this.array.length]=this.mDragScane=new MDragScane(this, function(s,p){             
