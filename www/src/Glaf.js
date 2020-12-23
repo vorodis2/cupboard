@@ -88,7 +88,8 @@ export class Glaf  {
                 self.menu.setActiveObject(p)
                 return;
             }
-            if(s=="complit"){           
+            
+            /*if(s=="complit"){           
                 return;
             }
             if(s=="indexSP"){ 
@@ -102,39 +103,45 @@ export class Glaf  {
                 self.menu.setSop(s,p,p1)
             } 
 
-            //if(s=="addChild")self[p].addChild(p1);
+            //if(s=="addChild")self[p].addChild(p1);*/
             self.render()
         });
 
-        this.viewServer=new ViewServer(function(s,p,p1,p2){ 
-        /*   
-            if(s=="setObj"){   
+
+
+        this.viewServer = new ViewServer(function(s,p,p1,p2){ 
+           
+            if(s=="setObj"){                 
                 if(p==null)  {
                     self.menu.setMessage("message","Error"+"Проект id ="+self.viewServer.id+" не создан. json еще не сохранен и нечего открывать");
                 }else{
                     //self.p20.setObj(p);
-                    self.p20.setObjOpen(p); 
+
+                    self.сupboard.setObj(p); 
                 }       
                 
-                self.menu.mStart.visiId(self.viewServer.id); 
+
                 return                              
             }
-            if(s=="message"){
-                console.warn(p,p1)
+            if(s=="message"){             
                 self.menu.setMessage(p,p1);
-                if(p2!=undefined){
-                    setTimeout(function() {
-                        self.menu.setMessage("messageClose",500);
-                    }, p2);
-                }
-
                 return
             }
-            if(s=="openStart"){
+          /*  if(s=="openStart"){
                 self.p20.index=1
                 return
             }*/
-        });     
+        });  
+
+
+        setTimeout(function() {
+            var d=new DCont(document.body)    
+            new DButton(d, 0,0,"save", function(){           
+                self.viewServer.saveGetObjId(self.сupboard.getObj())
+            })
+       
+
+        }, 10);   
 
 
         //ап дете сцена деленая на 2 в мейне
@@ -171,7 +178,7 @@ export class Glaf  {
         }
 
 
-       // this.viewServer.openURL();
+        this.viewServer.openURL();
     }
 /*
     set intRend(value) {

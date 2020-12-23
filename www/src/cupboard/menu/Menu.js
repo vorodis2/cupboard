@@ -1,6 +1,7 @@
 
 import { MLeft } from './MLeft.js';
 import { MDev } from './MDev.js'
+import { MInfo} from './MInfo.js';
 
 // import { MDragScane } from './MDragScane.js';
 
@@ -13,7 +14,7 @@ import { MStart} from './MStart.js';
 
 import { MenuV3D } from './MenuV3D.js';
 
-import { MInfo} from './MInfo.js';
+
 
 
 import { LocalStorage } from './LocalStorageE6.js';*/
@@ -83,13 +84,15 @@ export class Menu  {
         this.array[this.array.length]=this.menuV3D = new MenuV3D(this,function(s,p){
            // self.fun(s,p)
         });
-
+*/
 
         this.array[this.array.length]=global.mInfo=this.mInfo = new MInfo(this.par.dCont);
 
 
         this.array[this.array.length]=global.dragPic=this.dragPic = new DDragPic(this.par.dCont);
-        global.dragPic.whBase=this.wh;*/
+        global.dragPic.whBase=this.wh;
+
+
 
 
 /*
@@ -124,7 +127,7 @@ export class Menu  {
 	    	}	    	
 	    	this.openMenu(p);
 	    }*/
-/*
+
 	    this.setMessage=function(p,p1){
 	    	if(p=="messageClose"){
 	    		mInfo.closeTime(p1);
@@ -136,7 +139,7 @@ export class Menu  {
 	    	var s1=!p1 ? "null" : p1;
 	    
 	    	mInfo.setFun(s,s1);
-	    }*/
+	    }/**/
 
 		
 

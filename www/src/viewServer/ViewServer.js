@@ -1,6 +1,6 @@
 
 
-
+import { Php} from './PhpE6.js';
 export class ViewServer  {
   	constructor(fun) {  		
   		this.type="ViewServer";
@@ -9,39 +9,56 @@ export class ViewServer  {
 
         this.id=undefined;
 
-
+        var php=new Php()
         this.openId=function(_id) {
             this.id=_id;
-            
-            var obj={//то что посылаем через аякс на сервер, собственно тут сам запрос
-                url: 'https://alphakp.ru/catalog/plan/'+_id+'/edit_scheme/set_scheme',
-                type: 'GET',
-                data: {
+            trace("---_id",_id)
+            let link = "save/"+_id+"/config.json";
+
+            $.ajax({
+                url: link,
+                success: function function_name(data) {                         
+                    var oo;
+                    if(typeof data === "string") {
+                        var conf = JSON.parse(data)
+                        oo = conf;
+                    } else oo = data;   
+
+                    self.fun("setObj",oo)
+                  
+                   
+                                  
                 },
-                cache: false,
-                async: false,
-                success:function(e){                   
-                    if(e.json!=undefined){                        
-                        self.fun("setObj",JSON.parse(e.json));
-                    }else{
-                        self.fun("setObj",null);
-                        
-                    }
-                },
-                error:function(e){
-                    self.fun("message","Error","Чо то не грузит линк")                 
+                error:function function_name(data) {
+                    self.fun("message","Что то случилось с конфигом","Не верный ид==",self.id)
+                    console.error("Что то случилось с конфигом")
                 }
-            }
-            $.ajax(obj)
+            });          
         }
 
 
         this.saveGetObjId=function(o) {
+            var str=JSON.stringify(o)
+
             if(this.id==undefined){
-                self.fun("message","Error Проект не имеет ИД","Этот проект не открыт, в плане не имеет связи с сервером")
-                return
+                /*self.fun("message","Error Проект не имеет ИД","Этот проект не открыт, в плане не имеет связи с сервером")
+                return*/
+
+
+            }else{
+                var l="../save/"+this.id+"/config.json";  
+                
+                php.load({tip:"saveJSON", link:l, text:str},function(e){
+                    trace(e)
+                    /*var ll = self.link+self.idSave +'/icon.png'            
+                    self.php.savePhoto(ll, self.base, function () {                
+                        self.poiskId3()
+                    });*/
+                });
             }
 
+
+/*
 
             var obj={//то что посылаем через аякс на сервер, собственно тут сам запрос
                 url: 'https://alphakp.ru/catalog/plan/'+this.id+'/edit_scheme/set_scheme',
@@ -60,7 +77,7 @@ export class ViewServer  {
                                       
                 }
             }
-            $.ajax(obj)
+            $.ajax(obj)*/
         }
 
 

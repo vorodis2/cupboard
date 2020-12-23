@@ -1,4 +1,6 @@
-// import { Blok } from './blok/Blok.js';
+ import { Blok } from './blok/Blok.js';
+ import { CBoard } from './blok/CBoard.js';
+  import { CPalka} from './blok/CPalka.js'; 
 // import {  BDoor } from './blok/BDoor.js';
 // import {  BWindow } from './blok/BWindow.js';
 // import {  BTumba } from './blok/BTumba.js';
@@ -56,19 +58,20 @@ export class Menedsher  {
         this.mPanel.add( axesHelper );
 
 
-        this.content3D = new THREE.Object3D();
-        this.par.content3D.add(this.content3D);      
+        this.content3d = new THREE.Object3D();
+        this.par.content3d.add(this.content3d);      
         this.glaf=this.par.par; 
         this.visi3D=this.par.visi3D;     
         this.object=undefined;
         self.objectOld=undefined;
 
-        this.content3D.add(this.mPNa)
+        this.content3d.add(this.mPNa)
 
-        // this.menedsherObject = new MenedsherObject(this,function(s,p){//менеджер обьектов
-        //     fun(s,p)
-        // });
-        // this.menedsherObject.setOB(this.par.par.par.main.objectBase);
+        this.menedsherObject = new MenedsherObject(this,function(s,p){//менеджер обьектов
+            fun(s,p)
+        });
+        this.menedsherObject.setOB(this.par.par.par.objectBase);
+        trace(this.par.par.par.objectBase)
 
         // this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
         //     fun(s,p)
@@ -623,7 +626,7 @@ export class MenedsherObject  {
         this.type="MenedsherObject";
         var self=this;
         this.par=penedsher;
-        this.visi3D=penedsher.par.par.par.visi3D;    
+        this.visi3D=penedsher.par.par.visi3D;    
         this.fun= fun   
         this.array=[];
         this.arrayHron=[];
@@ -960,8 +963,35 @@ export class MenedsherObject  {
 
         var blok
         this.getBlok=function(o){    
-            blok=null;             
-            if(o.str[0]=="BGroup"){
+            blok=null;
+
+
+           /* for (var i = 0; i < this.array.length; i++) {                               
+                if(this.array[i].id==o.id){
+                    if(this.array[i].parent==undefined){
+                        this.array[i].clear()
+                        return this.array[i];
+                    }
+                }
+            }*/
+
+            trace(">>>>>>>>>>>>>>>>>>>>>>>",o.id,o.str[0])
+
+            if(o.str[0]=="CBoard") blok=new CBoard(this, o, this.array.length,this.sob); 
+            if(o.str[0]=="CPalka") blok=new CPalka(this, o, this.array.length,this.sob); 
+
+
+            if(blok==null)blok = new Blok(this,o,this.array.length,this.sob);
+            //blok.init();
+            this.array.push(blok)
+
+             trace(">>>>>>>>>>>>>>>>>>>>>>>",blok.idArr,blok.type)
+
+           
+            return this.array[this.array.length-1];
+            
+            
+            /*if(o.str[0]=="BGroup"){
                 blok=this.getGroup(o)                
                 if(blok.drapPlus!=undefined){                    
                     blok.drapPlus=true
@@ -999,9 +1029,10 @@ export class MenedsherObject  {
 
             if(blok==null)blok = new Blok(this,o,this.array.length,this.sob)
             blok.init();
-            this.array.push(blok)   
+            this.array.push(blok) 
+            */ 
 
-            return this.array[this.array.length-1];
+            //return this.array[this.array.length-1];
         }
 
         this.getGroup=function(o){              
