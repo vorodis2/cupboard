@@ -33,17 +33,11 @@ export class CBoard extends Blok {
 
         //this.dragWHD()
         var xz,oo,ooo
-        this.funInitMod=function(){
-
-         
-            oo= this.mO.getIdObj(3)
-                     
-            ooo=this.mO.getBlok(oo.obj)
-            ooo.init()
-            this.add(ooo)
-
-
-
+        this.funInitMod=function(){         
+            oo= this.mO.getIdObj(3);                     
+            ooo=this.mO.getBlok(oo.obj);
+            ooo.init();
+            this.add(ooo);
             trace("dfgdagdsgfdsgfdsgdsgf",ooo)
         }
 
