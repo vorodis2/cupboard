@@ -71,7 +71,6 @@ export class Menedsher  {
             fun(s,p)
         });
         this.menedsherObject.setOB(this.par.par.par.objectBase);
-        trace(this.par.par.par.objectBase)
 
         // this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
         //     fun(s,p)
@@ -541,7 +540,7 @@ export class Menedsher  {
         this.setObj=function(o){  
             this.menedsherObject.clear();
             this.objectLoad=o;  
-                      
+        
             if(this.testLoad()==true){
                 this.setObjPostLoad(); 
             } 
@@ -800,7 +799,6 @@ export class MenedsherObject  {
         }
         
         this.getIdRecurs=function(id,arr){
-            
             var r=null
             for (var i = 0; i < arr.length; i++) {
                 if(arr[i].id==id) {
@@ -965,8 +963,7 @@ export class MenedsherObject  {
         this.getBlok=function(o){    
             blok=null;
 
-
-           /* for (var i = 0; i < this.array.length; i++) {                               
+            /* for (var i = 0; i < this.array.length; i++) {                               
                 if(this.array[i].id==o.id){
                     if(this.array[i].parent==undefined){
                         this.array[i].clear()
@@ -974,8 +971,6 @@ export class MenedsherObject  {
                     }
                 }
             }*/
-
-            trace(">>>>>>>>>>>>>>>>>>>>>>>",o.id,o.str[0])
 
             if(o.str[0]=="CBoard") blok=new CBoard(this, o, this.array.length,this.sob); 
             if(o.str[0]=="CPalka") blok=new CPalka(this, o, this.array.length,this.sob); 
@@ -985,9 +980,6 @@ export class MenedsherObject  {
             //blok.init();
             this.array.push(blok)
 
-             trace(">>>>>>>>>>>>>>>>>>>>>>>",blok.idArr,blok.type)
-
-           
             return this.array[this.array.length-1];
             
             
@@ -1010,7 +1002,6 @@ export class MenedsherObject  {
                 }
             }
 
-           
             if(o.str[0]=="BDoor") blok=new BDoor(this, o, this.array.length,this.sob); 
             if(o.str[0]=="BWindow") blok=new BWindow(this, o, this.array.length,this.sob);               
             if(o.str[0]=="BTumba") blok=new BTumba(this, o, this.array.length,this.sob);   
@@ -1047,7 +1038,7 @@ export class MenedsherObject  {
             b.setObj(oo) 
             return b
         }
- 
+
 
         this.getModel=function(link, key, fun){              
             for (var i = 0; i < this.arrayHron.length; i++) {
@@ -1062,27 +1053,19 @@ export class MenedsherObject  {
 
         this.setIdColor = function (idColor, tip) {       
             for (var i = 0; i < this.array.length; i++) {
-                
                 if(this.array[i].idCT==tip)this.array[i].setColorId(idColor);
-                
             }
         }
 
         this.sobKey = function(tip,e,arrNa){
-         
             if(e.keyCode==17 && tip=="down")  {
                 this.boolClone=true;
             }
             if(e.keyCode==17 && tip=="up")  {
                 this.boolClone=false;
             }
-
-
             if(this.activObject)this.activObject.sobKey(tip,e,arrNa);
-
-            
-        } 
-
+        }  
         this._activTime=-1;
     }
 

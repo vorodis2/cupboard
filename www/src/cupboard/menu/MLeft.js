@@ -1,7 +1,4 @@
 
-
-
-
 export class MLeft  {
   	constructor(par,fun) {  		
   		this.type="MLeft";
@@ -75,9 +72,8 @@ export class MLeft  {
         }
 
         this.drag=function(s,p){
-            
             if(s=="gallery"){
-               /* trace(s,p)
+                /* trace(s,p)
                 self.fun("gallery",p); 
 
 
@@ -85,7 +81,12 @@ export class MLeft  {
                 return*/
 
             }  
-                   
+
+            if(s=="gIndex"){
+                this.dragPic = new DDragPic(this.dCont);
+                this.dragPic.start(100, 'resources/data/2/64.png');
+            }
+        
             self.fun(s,p);    
         }
         
@@ -97,12 +98,12 @@ export class MLeft  {
         }
 
 
-  		this.sizeWindow = function(w,h,s){ 
-      				
-  		}
+        this.sizeWindow = function(w,h,s){ 
+
+        }
 
 
-  	}
+    }
 
     set index(value) {
         if(this._index!=value){

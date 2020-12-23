@@ -1,5 +1,3 @@
-import { Board, BackPanel } from './Board.js';
-import { CBoard } from './blok/CBoard.js'
 import { Menedsher } from './Menedsher.js';
 
 export class Cupboard {
@@ -23,17 +21,16 @@ export class Cupboard {
         this.content3d = new THREE.Object3D();
         this.par.content3D.add(this.content3d);
 
-        this.menedsher = new Menedsher(this, (s, p, p1) => {}) 
+        this.menedsher = new Menedsher(this, (s, p, p1) => {
+          if (s == "visi3d") { this.render() }
+        }) 
 
         this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
 
-        this.render=function(){
-            self.fun("render");
-        }
+        this.render=function(){ self.fun("render") }
 
         var oo,ooo
-        this.creat=function(id,sObj){
-            
+        this.create=function(id,sObj){
             oo= this.menedsher.menedsherObject.getIdObj(id)
             if(oo){               
                 ooo=this.menedsher.menedsherObject.getBlok(oo.obj)
@@ -43,30 +40,24 @@ export class Cupboard {
                 }
                 this.add(ooo)
                 self.fun("activeObject", ooo)
-                
+  
             }
             return null
         }
 
-
-
-        this.backPanel=undefined;
-        this.cBoard = undefined;
-
         this.init = function() {
-            /*if(this.backPanel!=undefined)return
-            if(this.cBoard!=undefined)return
+
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const id = urlParams.get('id')
+          
+          if (id == null) {
             oo= this.menedsher.menedsherObject.getIdObj(2) ;
             let pp=this.menedsher.menedsherObject.getBlok(oo.obj)
-            trace("oo",pp)  
-            this.add(pp)
-            trace("oo",oo)   
-
-           // this.cBoard = new 
-
-           /* this.backPanel = new BackPanel(this, (s, p, p1) => {});
-            this.visi3D.addChildMouse(this.backPanel.mesh)*/
-           /*self.fun("activeObject", pp)*/
+            this.add(pp) 
+            pp.init()
+            self.fun("activeObject", pp)
+          }          
         }
 
 
@@ -76,6 +67,7 @@ export class Cupboard {
             this.children.push(blok)
             blok.parent=this;
         }
+
         this.remove = function(blok){
             var p = -1;
             var r = null;
@@ -92,18 +84,12 @@ export class Cupboard {
             return r;
         }
 
-
-
-
-
-
         this.setObj = function(o) {
-            trace("!!!!!",o)
             for (var i = 0; i < o.children.length; i++) {
-                this.creat(o.children[i].id,o.children[i])
+                this.create(o.children[i].id,o.children[i])
             }
-
         }
+
         this.getObj = function() {
             var o={}
             o.children=[];

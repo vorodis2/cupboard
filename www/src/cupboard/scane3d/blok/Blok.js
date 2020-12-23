@@ -8,7 +8,7 @@ export class Blok{
         this.typeConst="Blok";
         var self=this;
         
-this.children=[];
+        this.children=[];
         this.boolDinColor=false;
         this.object = o;
         /*this._visiMark= mO._visiMark; 
