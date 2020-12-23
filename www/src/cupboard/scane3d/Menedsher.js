@@ -36,8 +36,7 @@ export class Menedsher  {
     constructor(room, fun) {         
         this.type="Menedsher";
         var self=this;
-        var key="© Все права на данный планировщик принадлежат ЗАО Ларвидж интернешнел. Любое использование конструктора гардеробных систем Larvij не согласованное с компанией Ларвидж будет преследоваться по закону."; 
-        
+     
         this.fun=fun;
         this.par=room;
         this.whDrag=2500;        
