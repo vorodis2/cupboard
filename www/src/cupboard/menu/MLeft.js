@@ -32,28 +32,28 @@ export class MLeft  {
             trace(self.dCont)
         }, 10);*/
 
-       /*var aa=[
-            {src:"resources/image/p1_100.png",array:[]},
-            {src:"resources/image/p2_100.png",array:[
-                {src:"resources/image/p2_100.png",array:[],id:0},
-                {src:"resources/image/p4_100.png",array:[],id:0}
-            ]},
-            {src:"resources/image/size.png",array:[]},
-            {src:"resources/image/w.png",array:[
-                {src:"resources/image/w0.png",array:[],id:0},
-                {src:"resources/image/w1.png",array:[],id:1},
-                {src:"resources/image/w2.png",array:[],id:2},
-                {src:"resources/image/w0.png",array:[],id:4},
-                {src:"resources/image/w4.png",array:[],id:5},
-                {src:"resources/image/w5.png",array:[],id:6},
-            ]},
-        ]
+    //    var aa=[
+    //         {src:"resources/image/p1_100.png",array:[]},
+    //         {src:"resources/image/p2_100.png",array:[
+    //             {src:"resources/image/p2_100.png",array:[],id:0},
+    //             {src:"resources/image/p4_100.png",array:[],id:0}
+    //         ]},
+    //         {src:"resources/image/size.png",array:[]},
+    //         {src:"resources/image/w.png",array:[
+    //             {src:"resources/image/w0.png",array:[],id:0},
+    //             {src:"resources/image/w1.png",array:[],id:1},
+    //             {src:"resources/image/w2.png",array:[],id:2},
+    //             {src:"resources/image/w0.png",array:[],id:4},
+    //             {src:"resources/image/w4.png",array:[],id:5},
+    //             {src:"resources/image/w5.png",array:[],id:6},
+    //         ]},
+    //     ]
 
-        this.objZ={}
-        this.objZ.three=[{
-            keyName:"MLeft",
-            array:aa
-        }]*/
+    //     this.objZ={}
+    //     this.objZ.three=[{
+    //         keyName:"MLeft",
+    //         array:aa
+    //     }]
 
 
 

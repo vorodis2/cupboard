@@ -1,48 +1,32 @@
+// import { Blok } from './blok/Blok.js';
+// import {  BDoor } from './blok/BDoor.js';
+// import {  BWindow } from './blok/BWindow.js';
+// import {  BTumba } from './blok/BTumba.js';
+// import {  BTVstavka } from './blok/BTVstavka.js';
 
-/*
-© Разработано и принадлежит ЗАО Ларвидж интернешнел.
-Москва, ул. Добровольческая, д. 12
-+7 495 912-70-74, sales@larvij.ru
-Конструктор предназначен исключительно для планирования гардеробной системы Larvij.
-Любое другое использование данного продукта будет являться незаконным.
+// import {  BTBox } from './blok/BTBox.js';
+// import {  BTBoxVstavka } from './blok/BTBoxVstavka.js';
 
-мненеджер разруливает процессы драгов и хронит дерево
+// import {  BTBoxDin } from './blok/BTBoxDin.js';
+// import {  BTBoxDV} from './blok/BTBoxDV.js';
 
-
-
-
-*/
-
-
-import { Blok } from './blok/Blok.js';
-import {  BDoor } from './blok/BDoor.js';
-import {  BWindow } from './blok/BWindow.js';
-import {  BTumba } from './blok/BTumba.js';
-import {  BTVstavka } from './blok/BTVstavka.js';
-
-import {  BTBox } from './blok/BTBox.js';
-import {  BTBoxVstavka } from './blok/BTBoxVstavka.js';
-
-import {  BTBoxDin } from './blok/BTBoxDin.js';
-import {  BTBoxDV} from './blok/BTBoxDV.js';
-
-import {  BPieceObject } from './blok/BPieceObject.js';
-import {  BPieceTop } from './blok/BPieceTop.js';
-import {  MUtilit  } from './MUtilit.js';
-import { MenedsherMaterial } from './MenedsherMaterial.js';
+// import {  BPieceObject } from './blok/BPieceObject.js';
+// import {  BPieceTop } from './blok/BPieceTop.js';
+// import {  MUtilit  } from './MUtilit.js';
+// import { MenedsherMaterial } from './MenedsherMaterial.js';
 
 
 export class Menedsher  {
     constructor(room, fun) {         
         this.type="Menedsher";
         var self=this;
-     
+
         this.fun=fun;
         this.par=room;
         this.whDrag=2500;        
-        this.plus=room.par.par.par.plus;
+        // this.plus=room.par.par.par.plus;
         this._materialBase=null;
-        this.csvConfigArray=room.par.par.par.csvConfigArray
+        // this.csvConfigArray=room.par.par.par.csvConfigArray
 
 
 
@@ -60,46 +44,48 @@ export class Menedsher  {
         this.mPanel = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull);
         this.mPanel.layers.set(31);
 
-        //this.mPNa = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull1);
-        //this.mPanel.layers.set(31);
+        this.mPNa = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull1);
+        this.mPanel.layers.set(31);
 
 
         this.mPanel1 = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull1);
         this.mPanel1.layers.set(31);
 
 
-        //var axesHelper = new THREE.AxesHelper( 15 );
-        //this.mPanel.add( axesHelper );
+        var axesHelper = new THREE.AxesHelper( 15 );
+        this.mPanel.add( axesHelper );
 
 
-        this.content3d = new THREE.Object3D();
-        room.content3d.add(this.content3d);       
-        this.glaf=this.par.par.par; 
-        this.visi3D=this.par.par.par.visi3D;         
+        this.content3D = new THREE.Object3D();
+        this.par.content3D.add(this.content3D);      
+        this.glaf=this.par.par; 
+        this.visi3D=this.par.visi3D;     
         this.object=undefined;
         self.objectOld=undefined;
 
-        this.menedsherObject = new MenedsherObject(this,function(s,p){//менеджер обьектов
-            fun(s,p)
-        });
-        this.menedsherObject.setOB(this.par.par.par.main.objectBase);
+        this.content3D.add(this.mPNa)
 
-        this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
-            fun(s,p)
-        });
+        // this.menedsherObject = new MenedsherObject(this,function(s,p){//менеджер обьектов
+        //     fun(s,p)
+        // });
+        // this.menedsherObject.setOB(this.par.par.par.main.objectBase);
 
-        this.mUtilit = new MUtilit(this,function(s,p){
-            fun(s,p)
-        });
+        // this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
+        //     fun(s,p)
+        // });
+
+        // this.mUtilit = new MUtilit(this,function(s,p){
+        //     fun(s,p)
+        // });
 
  
-        this.mMaterial.setConfig(
-            this.par.par.par.visi3D,  
-            this.par.par.par.main.objectBase,
-            this.par.par.par.server
-        )
+        // this.mMaterial.setConfig(
+        //     this.par.visi3D,  
+        //     // this.par.par.par.main.objectBase,
+        //     // this.par.par.par.server
+        // )
         
-        this.menedsherObject.geterMat=this.mMaterial.geterMat
+        // this.menedsherObject.geterMat=this.mMaterial.geterMat
 
         this.clear=function(blok){            
             if(blok.parent!=undefined)blok.parent.remove(blok)
@@ -198,133 +184,136 @@ export class Menedsher  {
         var stenDown
         this.pointReal=new THREE.Vector3(0,0,0)
         this.move = function (e) { 
-            
-            if(e)if(e.target)if(e.target.sten){ 
+            trace(e)
+            // if(e)if(e.target)if(e.target.sten){ 
                 
-                if(self.object!=undefined){
+            //     if(self.object!=undefined){
 
-                    _bb=true
-                    if(self.object.parent!=undefined)
-                    if(self.mPanel.parent!=undefined)     
+            //         _bb=true
+            //         if(self.object.parent!=undefined)
+            //         if(self.mPanel.parent!=undefined)     
                     
-                    if(stenDown!=undefined){
-                        if(self.object.parent.parent!=undefined)if(self.object.parent.parent.idArr==stenDown.idArr)_bb=false
-                        if(self.object.parent!=undefined)if(self.object.parent.idArr==stenDown.idArr)_bb=false    
-                    }                         
+            //         if(stenDown!=undefined){
+            //             if(self.object.parent.parent!=undefined)if(self.object.parent.parent.idArr==stenDown.idArr)_bb=false
+            //             if(self.object.parent!=undefined)if(self.object.parent.idArr==stenDown.idArr)_bb=false    
+            //         }                         
 
-                    if(_bb==false){                            
-                        intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel], true);                        
-                        if(intersects[0]){
-                            self.pointReal.x=(intersects[0].uv.x-0.5)*self.whDrag;
-                            self.pointReal.y=(intersects[0].uv.y-0.5)*self.whDrag;
+            //         if(_bb==false){                            
+            //             intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel], true);                        
+            //             if(intersects[0]){
+            //                 self.pointReal.x=(intersects[0].uv.x-0.5)*self.whDrag;
+            //                 self.pointReal.y=(intersects[0].uv.y-0.5)*self.whDrag;
 
 
-                            _xx=self.pointZdvig.x + self.pointReal.x;
-                            _yy=self.pointZdvig.y + self.pointReal.y;
+            //                 _xx=self.pointZdvig.x + self.pointReal.x;
+            //                 _yy=self.pointZdvig.y + self.pointReal.y;
 
-                            self.object.setXY(_xx, _yy)                    
-                            self.fun("visi3d");
-                            self.par.visiActiv.dragActiv() 
-                            _bb=false
-                        }                                                
-                    } 
+            //                 self.object.setXY(_xx, _yy)                    
+            //                 self.fun("visi3d");
+            //                 self.par.visiActiv.dragActiv() 
+            //                 _bb=false
+            //             }                                                
+            //         } 
 
-                    if(_bb==true){
-                        _xx=e.uv.x*e.target.sten.width;
-                        _yy=e.uv.y*e.target.sten.height;
-                        self.object.setXY(_xx, _yy)                    
-                        self.fun("visi3d");
-                        self.par.visiActiv.dragActiv() 
-                    }                    
-                }
-            } 
+            //         if(_bb==true){
+            //             _xx=e.uv.x*e.target.sten.width;
+            //             _yy=e.uv.y*e.target.sten.height;
+            //             self.object.setXY(_xx, _yy)                    
+            //             self.fun("visi3d");
+            //             self.par.visiActiv.dragActiv() 
+            //         }                    
+            //     }
+            // } 
 
-            if(self.object)if(self.object.parent==undefined){
-                self.over(e)
+            // if(self.object)if(self.object.parent==undefined){
+            //     self.over(e)
 
-            } 
+            // } 
         }
 
 
         this.out = function (e) { 
-            if(self.par.par.bactive==false)return  
+
+            trace(e)
+            // if(self.par.par.bactive==false)return  
 
 
-            if(e)if(e.target){
-                if(e.target.sten){  
-                    if(self.mPanel1.parent!=undefined) self.mPanel1.parent.remove(self.mPanel1)
+            // if(e)if(e.target){
+            //     if(e.target.sten){  
+            //         if(self.mPanel1.parent!=undefined) self.mPanel1.parent.remove(self.mPanel1)
 
-                    self.sten=undefined
-                    if(self.object!=undefined){//разруливаем тоскаемый элемент                    
-                        if(self.object.parent!=undefined){  
+            //         self.sten=undefined
+            //         if(self.object!=undefined){//разруливаем тоскаемый элемент                    
+            //             if(self.object.parent!=undefined){  
                                         
-                            e.target.sten.remove(self.object); 
-                            var l=self.getLink(self.object.object)                        
-                            self.glaf.dragPic.start(32, l, null,null,true);
-                            self.dragPriceScane();  
+            //                 e.target.sten.remove(self.object); 
+            //                 var l=self.getLink(self.object.object)                        
+            //                 self.glaf.dragPic.start(32, l, null,null,true);
+            //                 self.dragPriceScane();  
                             
 
-                        }
-                        if(self.object.outDrag)self.object.outDrag()
-                    }
-                }
-            }
-            self.fun("visi3d");    
-            window.document.body.style.cursor = "auto";    
-            blok=null 
-            self.par.visiActiv.dragActiv();       
+            //             }
+            //             if(self.object.outDrag)self.object.outDrag()
+            //         }
+            //     }
+            // }
+            // self.fun("visi3d");    
+            // window.document.body.style.cursor = "auto";    
+            // blok=null 
+            // self.par.visiActiv.dragActiv();       
         }
 
         var _yy1,_xx1
-        this.over = function (e) {           
-            if(self.par.par.bactive==false)return
-            if(e)if(e.target){
-                if(e.target.sten){
-                    if(self.mPanel1.parent==undefined) e.target.sten.content3d.add(self.mPanel1) 
+        this.over = function (e) {      
+            trace(e)     
+            // if(self.par.par.bactive==false)return
+            // if(e)if(e.target){
+            //     if(e.target.sten){
+            //         if(self.mPanel1.parent==undefined) e.target.sten.content3d.add(self.mPanel1) 
 
-                    self.sten=e.target.sten
-                    if(self.object!=undefined){//разруливаем тоскаемый элемент                    
-                        if(self.object.parent==undefined){
-                            let b=true;
+            //         self.sten=e.target.sten
+            //         if(self.object!=undefined){//разруливаем тоскаемый элемент                    
+            //             if(self.object.parent==undefined){
+            //                 let b=true;
 
-                            intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel], true);                            
+            //                 intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel], true);                            
                             
-                            if(intersects.length!=0){
-                                _xx=self.pointZdvig.x + (intersects[0].uv.x-0.5)*self.whDrag;
-                                _yy=self.pointZdvig.y + (intersects[0].uv.y-0.5)*self.whDrag;
-                            }
+            //                 if(intersects.length!=0){
+            //                     _xx=self.pointZdvig.x + (intersects[0].uv.x-0.5)*self.whDrag;
+            //                     _yy=self.pointZdvig.y + (intersects[0].uv.y-0.5)*self.whDrag;
+            //                 }
 
-                            intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel1], true);
-                            if(intersects.length!=0){
-                                _xx1 = (intersects[0].uv.x-0.5)*self.whDrag;
-                                _yy1 = (intersects[0].uv.y-0.5)*self.whDrag;
+            //                 intersects=self.par.par.par.visi3D.event3DArr.raycaster.intersectObjects([self.mPanel1], true);
+            //                 if(intersects.length!=0){
+            //                     _xx1 = (intersects[0].uv.x-0.5)*self.whDrag;
+            //                     _yy1 = (intersects[0].uv.y-0.5)*self.whDrag;
 
-                                if(self.object.isOver!=undefined){
-                                    b=self.object.isOver(e.target.sten,_xx1,_yy1)                                    
-                                }
+            //                     if(self.object.isOver!=undefined){
+            //                         b=self.object.isOver(e.target.sten,_xx1,_yy1)                                    
+            //                     }
                                
 
-                                if(b){//если можно пихнуть
-                                    e.target.sten.add(self.object);
-                                    //self.move(e)
-                                    self.glaf.dragPic.stop();
-                                    self.dragPriceScane();   
-                                }else{
-                                    //mHelp.setHelp("Данный обьект не может быть размещен, не хватает пространства","resources/image/mhelp.png",mHelp.dCNM,{x:13,y:-13});
-                                }
-                            }
-                        }                        
-                        if(self.object.overDrag)self.object.overDrag()                   
-                    }
-                } 
+            //                     if(b){//если можно пихнуть
+            //                         e.target.sten.add(self.object);
+            //                         //self.move(e)
+            //                         self.glaf.dragPic.stop();
+            //                         self.dragPriceScane();   
+            //                     }else{
+            //                         //mHelp.setHelp("Данный обьект не может быть размещен, не хватает пространства","resources/image/mhelp.png",mHelp.dCNM,{x:13,y:-13});
+            //                     }
+            //                 }
+            //             }                        
+            //             if(self.object.overDrag)self.object.overDrag()                   
+            //         }
+            //     } 
 
-                blok=self.poiscParam(e.target,"blok");
-                if(blok!=null){                    
-                    window.document.body.style.cursor = "pointer";  
-                }
-            }
-            self.par.visiActiv.dragActiv()
-            self.fun("visi3d");
+            //     blok=self.poiscParam(e.target,"blok");
+            //     if(blok!=null){                    
+            //         window.document.body.style.cursor = "pointer";  
+            //     }
+            // }
+            // self.par.visiActiv.dragActiv()
+            // self.fun("visi3d");
         }
 
         this.clik1 = function (e) {           
@@ -360,31 +349,30 @@ export class Menedsher  {
         var blok=null
         var p={x:0,y:0}
         this.down = function (e) { 
-                      
-            if(self.par.par.bactive==false)return
-            if(e){
-                if(e.target){
+            trace(e)
+            // if(self.par.par.bactive==false)return
+            // if(e){
+            //     if(e.target){
                     
-                    blok=self.poiscParam(e.target,"blok");
-                    self.testActSten(e.target)
-                    if(blok!=null){ 
-                      
-                        p.x=e.originalEvent.clientX;
-                        p.y=e.originalEvent.clientY;
-                        self.par.par.dubag.setBlok(blok); 
-                        self.start(blok);                                           
-                        self.downZdig(e,blok)
-                        if(blok.dragStart)  if(blok.dragStart()!=true)return 
-                    }else{
+            //         blok=self.poiscParam(e.target,"blok");
+            //         self.testActSten(e.target)
+            //         if(blok!=null){ 
+            //             p.x=e.originalEvent.clientX;
+            //             p.y=e.originalEvent.clientY;
+            //             self.par.par.dubag.setBlok(blok); 
+            //             self.start(blok);                                           
+            //             self.downZdig(e,blok)
+            //             if(blok.dragStart)  if(blok.dragStart()!=true)return 
+            //         }else{
                         
-                        self.glaf.dragPic.testDrag(1, self.clik1, null);  
-                    }                    
-                }
+            //             self.glaf.dragPic.testDrag(1, self.clik1, null);  
+            //         }                    
+            //     }
                 
-            }else{
-                if(blok==null) self.menedsherObject.activIndex=-1;
-            }            
-            self.fun("visi3d");
+            // }else{
+            //     // if(blok==null) self.menedsherObject.activIndex=-1;
+            // }            
+            // self.fun("visi3d");
         }
 
         this.setBlokActiv = function (b) {  
@@ -534,17 +522,17 @@ export class Menedsher  {
         }
 
 
-        self.glaf.dragPic.addFunAp(function(){        
-            if(self.glaf.dragPic.object!=undefined){            
-                if(self.glaf.dragPic.object.id!=undefined){
-                    if((self.glaf.dragPic.object.id+"").indexOf("m_")!=-1){                     
-                        if(blok!=null){                            
-                            blok.idColor=self.glaf.dragPic.object.id;
-                        }                        
-                    }
-                }
-            }
-        })
+        // self.glaf.dragPic.addFunAp(function(){        
+        //     if(self.glaf.dragPic.object!=undefined){            
+        //         if(self.glaf.dragPic.object.id!=undefined){
+        //             if((self.glaf.dragPic.object.id+"").indexOf("m_")!=-1){                     
+        //                 if(blok!=null){                            
+        //                     blok.idColor=self.glaf.dragPic.object.id;
+        //                 }                        
+        //             }
+        //         }
+        //     }
+        // })
 
         this.objectL
         this.setObj=function(o){  
@@ -945,17 +933,15 @@ export class MenedsherObject  {
             }
         }
 
-        if(tStyle.glaf.debug==true){
-            var ccc=new DCont(document.body)
-            new DColor(ccc,350,120,"#ff0000",function(){
-                self.matBTBDV.color=new THREE.Color(this.value)
-            })
-            new DSliderBig(ccc,350,150,function(){
-                self.matBTBDV.opacity=this.value
-            },"opacity",0,1).value=this.matBTBDV.opacity;
-
-
-        }
+        // if(tStyle.glaf.debug==true){
+        //     var ccc=new DCont(document.body)
+        //     new DColor(ccc,350,120,"#ff0000",function(){
+        //         self.matBTBDV.color=new THREE.Color(this.value)
+        //     })
+        //     new DSliderBig(ccc,350,150,function(){
+        //         self.matBTBDV.opacity=this.value
+        //     },"opacity",0,1).value=this.matBTBDV.opacity;
+        // }
 
 
 

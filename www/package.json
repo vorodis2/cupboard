@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "dev": "webpack-dev-server --hotOnly --mode development",
+    "dev": "webpack-dev-server --mode development",
     "dev:auto": "webpack-dev-server --open --mode development"
   },
   "author": "",
@@ -19,7 +19,7 @@
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "path": "^0.12.7"

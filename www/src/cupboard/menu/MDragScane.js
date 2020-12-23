@@ -1,18 +1,18 @@
 
 
-import { SobIndex } from './fManager/SobIndex.js';
-import { SobIndex0 } from './fManager/SobIndex0.js';
-import { SobIndex1 } from './fManager/SobIndex1.js';
-import { SobIndex2 } from './fManager/SobIndex2.js';
-import { SobIndex3 } from './fManager/SobIndex3.js';
-import { SobIndex4 } from './fManager/SobIndex4.js';
+// import { SobIndex } from './fManager/SobIndex.js';
+// import { SobIndex0 } from './fManager/SobIndex0.js';
+// import { SobIndex1 } from './fManager/SobIndex1.js';
+// import { SobIndex2 } from './fManager/SobIndex2.js';
+// import { SobIndex3 } from './fManager/SobIndex3.js';
+// import { SobIndex4 } from './fManager/SobIndex4.js';
 
-import { SpDebugPixi } from '../spSten/SpDebugPixi.js';
+// import { SpDebugPixi } from '../spSten/SpDebugPixi.js';
 
 export class MDragScane  {
-  	constructor(par,fun) {  		
-  		this.type="MDragScane";
-  		var self=this;
+    constructor(par,fun) {  		
+        this.type="MDragScane";
+        var self=this;
         this.par=par
         this.fun=fun
         this.p20=undefined;
@@ -27,7 +27,7 @@ export class MDragScane  {
         this.wh=this.par.wh;
 
 
-       /* function disablecontext(e) {
+        /* function disablecontext(e) {
             trace(e)
             var clickedEl = (e==null) ? event.srcElement.tagName : e.target.tagName;
             if (clickedEl == "IMG") {
@@ -43,17 +43,15 @@ export class MDragScane  {
 
         this.actAI=undefined;
         this.sobIndex=[];
-        this.sobIndex[0]=new SobIndex0(this);
-        this.sobIndex[1]=new SobIndex1(this);
-        this.sobIndex[2]=new SobIndex2(this);
-        this.sobIndex[3]=new SobIndex3(this);
-        this.sobIndex[4]=new SobIndex4(this);
+        // this.sobIndex[0]=new SobIndex0(this);
+        // this.sobIndex[1]=new SobIndex1(this);
+        // this.sobIndex[2]=new SobIndex2(this);
+        // this.sobIndex[3]=new SobIndex3(this);
+        // this.sobIndex[4]=new SobIndex4(this);
 
 
 
 
-
-           
 
 
         this.sobSP=function(s,p,e){                       
@@ -73,7 +71,7 @@ export class MDragScane  {
         this.content2d = new PIXI.Container();*/
       
        
-        this.helpDP=new SpDebugPixi(); 
+        // this.helpDP=new SpDebugPixi(); 
 
 
 

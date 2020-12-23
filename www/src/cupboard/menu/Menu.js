@@ -1,9 +1,10 @@
 
 import { MLeft } from './MLeft.js';
+import { MDev } from './MDev.js'
 
-/*import { MDragScane } from './MDragScane.js';
+// import { MDragScane } from './MDragScane.js';
 
-import { MObject } from './MObject.js';
+/*import { MObject } from './MObject.js';
 import { MGridDrag } from './MGridDrag.js';
 
 import { MCont2dHelp } from './MCont2dHelp.js';
@@ -32,11 +33,13 @@ export class Menu  {
 		this.sizeMax=this.par.sizeMax;
 		dcmParam.activButton="#f28044";
 		this._menuIndex=-1;
-	    this.dCont=new DCont(this.par.dCont);
+		this.dCont=new DCont(this.par.dCont);
+		
+		// this.mDragScane = new MDragScane(this)
 
-	    this.localStorage=par.par.localStorage;//new LocalStorage(function(){},"planer2020")	   
+	  this.localStorage=par.par.localStorage;//new LocalStorage(function(){},"planer2020")	   
 	    
-	    this.array=[];
+	  this.array=[];
 
 	/*	this.array[this.array.length] = this.mGridDrag = new MGridDrag(this, function(s,p,p1){ 
 
@@ -56,11 +59,14 @@ export class Menu  {
 
 
 	    this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
-           //	if(s=="index")self.menuIndex=p;
-          // 	if(s=="gIndex")self.mDragScane.sobMenu(s,p,p1);
+				if(s=="index")self.menuIndex=p;
+        // if(s=="gIndex")self.mDragScane.sobMenu(s,p,p1);
+           	// trace("$$>>",s,p,p1)
+			});
+			
+			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1) {
 
-           	//trace("$$>>",s,p,p1)
-        });
+			});
 
 		/*this.array[this.array.length]=this.mDragScane=new MDragScane(this, function(s,p){             
            	
@@ -175,18 +181,22 @@ export class Menu  {
 	   // this.menuIndex=0;
 	}
 
-/*	set menuIndex(value) {		
+	setActiveObject(obj) {
+		this.mDev.setActiveObject(obj);
+	}
+
+	set menuIndex(value) {		
         if(this._menuIndex!=value){
             this._menuIndex= value;
             this.mLeft.index=value;
-            this.mDragScane.menuIndex= value;
-            this.mGridDrag.menuIndex= value;
+            // this.mDragScane.menuIndex= value;
+            // this.mGridDrag.menuIndex= value;
 
-            this.mObject.clear()
-            if(this.sp)this.sp.setActive();
+            // this.mObject.clear()
+            // if(this.sp)this.sp.setActive();
         }
     }    
-    get menuIndex() { return  this._menuIndex;}*/
+    get menuIndex() { return  this._menuIndex;}
 
 
   /*  set mashtab(value) {  
