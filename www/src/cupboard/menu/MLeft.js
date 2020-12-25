@@ -5,17 +5,17 @@ export class MLeft  {
   		var self=this;
         this.par=par
         this.fun=fun
-        this.otstup=this.par.otstup;
-        this.otstup1=this.par.otstup1;
-        this.wh=this.par.wh;       
+        this.otstup=this.par._otstup;
+        this.otstup1=this.par._otstup1;
+        this.wh=this.par._wh;       
 
 
         this._index=-1;
         this._tipVisi=-1;
         this._tipDrav=-1;
         this.dCont=new DCont(par.dCont);
-        this.dCont.x=this.otstup*2;
-        this.dCont.y=this.otstup*5+this.wh;
+        this.dCont.x=this.otstup;
+        this.dCont.y=this.otstup*4+this.wh;
 
         this.objectBase=undefined;
         this.objThree=undefined;
@@ -83,8 +83,14 @@ export class MLeft  {
             }  
 
             if(s=="gIndex"){
-                this.dragPic = new DDragPic(this.dCont);
-                this.dragPic.start(100, 'resources/data/2/64.png');
+                // this.dragPic = new DDragPic(this.dCont);
+                // this.dragPic.whBase = this.wh;
+                // this.dragPic.start(100, 'resources/data/2/64.png');
+                self.world = self.par.par.world;
+                let stick = self.world.array[0].createStick()
+                self.world.menedsher.start(stick)
+                
+                
             }
         
             self.fun(s,p);    
@@ -102,7 +108,18 @@ export class MLeft  {
 
         }
 
+    }
 
+
+    changeOtstups(){
+        this.otstup=this.par._otstup;
+        this.otstup1=this.par._otstup1;
+        this.wh=this.par._wh;  
+
+        this.dCont.x=this.otstup;
+        this.dCont.y=this.otstup*4+this.wh;
+
+        this.array.forEach(item => item.changeOtstups())
     }
 
     set index(value) {
@@ -115,7 +132,6 @@ export class MLeft  {
                 }else{
                     this.array[i].active=false;
                 }
-
             }       
         }
     }    
@@ -212,16 +228,18 @@ export class MLButGal  {
 
                     if(this._startIndex!=-1)this.gallery.index=this._startIndex;
                 }
-
-
-
             }
-
-
-           
-
-
         }
+    }
+
+    changeOtstups(){
+        this.otstup=this.par.otstup;
+        this.otstup1=this.par.otstup1;
+        this.wh=this.par.wh;  
+
+        this.button.y = this.idArr*(this.wh+this.otstup)
+        this.button.width = this.button.height = this.wh
+        this.dCGal.x=(this.wh+this.otstup)
     }
 
     set active(value) {

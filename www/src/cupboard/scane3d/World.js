@@ -1,6 +1,6 @@
 import { Menedsher } from './Menedsher.js';
 
-export class Cupboard {
+export class World {
     constructor(par, fun) {
         var self = this;
 
@@ -22,10 +22,8 @@ export class Cupboard {
         this.par.content3D.add(this.content3d);
 
         this.menedsher = new Menedsher(this, (s, p, p1) => {
-          if (s == "visi3d") { this.render() }
+            if (s == "visi3d") { this.render() }
         }) 
-
-        this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
 
         this.render=function(){ self.fun("render") }
 
@@ -40,24 +38,24 @@ export class Cupboard {
                 }
                 this.add(ooo)
                 self.fun("activeObject", ooo)
-  
+
             }
             return null
         }
 
         this.init = function() {
 
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          const id = urlParams.get('id')
-          
-          if (id == null) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id')
+            
+            if (id == null) {
             oo= this.menedsher.menedsherObject.getIdObj(2) ;
             let pp=this.menedsher.menedsherObject.getBlok(oo.obj)
             this.add(pp) 
             pp.init()
             self.fun("activeObject", pp)
-          }          
+            }          
         }
 
 
@@ -105,7 +103,6 @@ export class Cupboard {
     set active(value) {
         if (this._active != value) {
             this._active = value;
-            this.backPanel.active = value;
             this.render()
         }
     }
@@ -115,7 +112,6 @@ export class Cupboard {
     set width(value) {
         if (this._width != value) {
             this._width = value;
-            this.backPanel.width = value;
         }
     }
     get width() {return this._width}
@@ -123,7 +119,6 @@ export class Cupboard {
     set height(value) {
         if (this._height != value) {
             this._height = value;
-            this.backPanel.height = value;
         }
     }
     get height() {return this._height}

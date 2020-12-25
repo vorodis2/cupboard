@@ -35,6 +35,7 @@ export function LocalStorage(fun,_key) {
 
 	// сохраняем в localStorage данные
 	this.save = function() {		
+		trace(this.object)
 		window.localStorage[this.key] = JSON.stringify(self.object);
 	}
 

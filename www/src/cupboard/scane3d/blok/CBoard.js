@@ -10,43 +10,57 @@ export class CBoard extends Blok {
         this._height = 100;
         this._depth = 100;
         
-        const cDepth = 10;
+        this._cDepth = 10;
 
         this.arrPalka = [];
 
-        this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
-        let aa=new THREE.AxesHelper(100);
-        this.content3d.add(aa);
-        this.mesh = new THREE.Mesh(this.boxGeometry);
-        this.content3d.add(this.mesh);
-        
+        this.cnt3d = new THREE.Object3D()
+        this.content3d.add(this.cnt3d);
 
-        this.funDrag=function () {           
-            this.mesh.scale.set(this._width, cDepth, this._height);
-            this.mesh.position.z=-this._height/2;
+        oo = this.mO.getIdObj(3);
+        ooo = this.mO.getBlok(oo.obj);
+
+        ooo.init();
+        this.add(ooo);
+
+        ooo.putMeshInContent(this.cnt3d)
+        this.backPanel = ooo.mesh;
+
+        // let aa=new THREE.AxesHelper(100);
+        // this.cnt3d.add(aa)
+
+        this.funDrag=function () {     
+            this.cnt3d.position.z = -this._height/2;
+            this.cnt3d.position.y = -this._depth/2 + this._cDepth/2;
 
             if (this.arrPalka.length) {
-              this.arrPalka.forEach(item => item.height = self._height)
-              this.arrPalka.forEach(item => item.depth = self._depth-cDepth)
+              this.backPanel.scale.set(this._width, this._cDepth, this._height);
+              this.arrPalka.forEach(item => {
+                item.height = self._height;
+                item.depth = self._depth - self._cDepth;
+                item.cDepth = self._cDepth;
+                item.mesh.position.y = -self._depth/2 + self._cDepth/2
+              })
 
-              this.arrPalka[0].setXYPosit(self._width/2 - this.arrPalka[1]._width/2, this.arrPalka[0]._depth/2 + cDepth/2 , 0)
-              this.arrPalka[1].setXYPosit(-self._width/2 + this.arrPalka[1]._width/2, this.arrPalka[0]._depth/2 + cDepth/2, 0)
+              this.arrPalka[0].setXYPosit(self._width/2 - this.arrPalka[0]._width/2, 0, 0)
+              this.arrPalka[1].setXYPosit(-self._width/2 + this.arrPalka[1]._width/2, 0, 0)
             }
-            
-        }
+        } 
 
         this.dragObjNWD()
 
         var xz,oo,ooo
         this.funInitMod=function(){
-          trace("sdfsdfsdfsdfsdfsdf")
             for (let i = 0; i < 2; i++) {
               oo= this.mO.getIdObj(3);
               ooo=this.mO.getBlok(oo.obj);
+
               ooo.init();
-              ooo.width=5;
-          //ooo.height=5;
               this.add(ooo);
+
+              ooo.width=5;
+
+              ooo.putMeshInContent();
               this.arrPalka.push(ooo);
             }
             this.dragObjNWD()
@@ -72,6 +86,7 @@ export class CBoard extends Blok {
 
             obj.children=[];
             for (var i = 0; i < this.children.length; i++) {
+                if(this.children[i].notSave)continue;
                 obj.children[i]=this.children[i].getObj();
             }
             return obj;            
@@ -79,26 +94,70 @@ export class CBoard extends Blok {
 
 
         var ob,ooo
-        this.setObj = function(obj){                      
+        this.setObj = function(obj){       
+            trace(obj)              
             this.setXYPosit(obj.x,obj.y,obj.z); 
-            if(obj.children);          
-            for (var i = 0; i < obj.children.length; i++) {
-                ooo= mO.getIdObj(obj.children[i].id)                  
-                ob=mO.getBlok(ooo.obj)
-                ob.setObj(obj.children[i])
-                this.add(ob);                 
+            if(obj.children.length) {       
+              for (var i = 0; i < obj.children.length; i++) {
+                  if (obj.children[i]) {
+                    ooo= mO.getIdObj(obj.children[i].id)                  
+                    ob=mO.getBlok(ooo.obj)
+                    ob.setObj(obj.children[i])
+                    ob.putMeshInContent()
+                    this.arrPalka.push(ob)
+                    this.add(ob);  
+                  }               
+              }
             }
-            this._width= obj.width;
-            this._height= obj.height;
-            this._depth= obj.depth;    
+            
+            this._width = obj.width;
+            this._height = obj.height;
+            this._depth = obj.depth;    
 
             this.dragObjNWD()
-
-
             return obj;            
         }
+    }
 
-        
+    createRandomStick() {
+      let oo, ooo
+      oo = this.mO.getIdObj(3);
+      ooo = this.mO.getBlok(oo.obj);
+      ooo.init();
+      ooo.putMeshInContent()
+      ooo.setXYPosit(
+        Math.random() * (this.backPanel.position.x + this._width/2 - (this.backPanel.position.x - this._width/2)) + (this.backPanel.position.x - this._width/2),
+        0,
+        0
+      )
+      ooo.width = 5;
+      ooo.notSave = false;
+      this.add(ooo);
+      this.arrPalka.push(ooo);
+      this.dragObjNWD()
+    }
+
+    createStick() {
+      let oo, ooo
+
+      oo = this.mO.getIdObj(3);
+      ooo = this.mO.getBlok(oo.obj);
+      ooo.init();
+      ooo.putMeshInContent()
+
+      ooo.width = 5;
+      ooo.notSave = false;
+      this.add(ooo);
+
+      return ooo;
+    }
+
+    removeRandomStick() {
+      if (this.arrPalka.length > 2) {
+        this.remove(this.arrPalka[this.arrPalka.length-1]);
+        this.arrPalka.pop();
+        this.dragObjNWD()
+      }
     }
 
     set width(value) {
@@ -125,6 +184,14 @@ export class CBoard extends Blok {
         }
     }
     get depth() {return this._depth}
+
+    set cDepth(value) {
+      if (this._cDepth != value) {
+        this._cDepth = value;
+        this.dragObjNWD();
+      }
+    }
+    get cDepth() {return this._cDepth}
 }
 
 

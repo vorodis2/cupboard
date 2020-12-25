@@ -1,7 +1,21 @@
-import { Blok } from './blok/Blok.js';
+ import { Blok } from './blok/Blok.js';
+ import { CBoard } from './blok/CBoard.js';
+  import { CPalka} from './blok/CPalka.js'; 
+// import {  BDoor } from './blok/BDoor.js';
+// import {  BWindow } from './blok/BWindow.js';
+// import {  BTumba } from './blok/BTumba.js';
+// import {  BTVstavka } from './blok/BTVstavka.js';
 
-import { CBoard } from './blok/CBoard.js';
-import { CPalka } from './blok/CPalka.js'; 
+// import {  BTBox } from './blok/BTBox.js';
+// import {  BTBoxVstavka } from './blok/BTBoxVstavka.js';
+
+// import {  BTBoxDin } from './blok/BTBoxDin.js';
+// import {  BTBoxDV} from './blok/BTBoxDV.js';
+
+// import {  BPieceObject } from './blok/BPieceObject.js';
+// import {  BPieceTop } from './blok/BPieceTop.js';
+// import {  MUtilit  } from './MUtilit.js';
+// import { MenedsherMaterial } from './MenedsherMaterial.js';
 
 
 export class Menedsher  {
@@ -35,11 +49,14 @@ export class Menedsher  {
         this.mPNa = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull1);
         this.mPanel.layers.set(31);
 
+
         this.mPanel1 = new THREE.Mesh(new THREE.BoxBufferGeometry(this.whDrag,this.whDrag,0.001),this.matNull1);
         this.mPanel1.layers.set(31);
 
+
         var axesHelper = new THREE.AxesHelper( 15 );
         this.mPanel.add( axesHelper );
+
 
         this.content3d = new THREE.Object3D();
         this.par.content3d.add(this.content3d);      
@@ -63,7 +80,7 @@ export class Menedsher  {
         //     fun(s,p)
         // });
 
-
+ 
         // this.mMaterial.setConfig(
         //     this.par.visi3D,  
         //     // this.par.par.par.main.objectBase,
@@ -77,11 +94,14 @@ export class Menedsher  {
             self.fun("visi3d");
         }
 
-        this.copy=function(blok){}
+        this.copy=function(blok){
+            
+        }
 
 
         this.dragPriceScane=function(){
             if(this.par.par.par.menuDiv){
+                
                 this.dragTime()
             }           
         }
@@ -110,7 +130,7 @@ export class Menedsher  {
 
         this.start=function(obj){  
             trace(obj)
-            // this.stop();             
+            this.stop();             
             // this.visi3D.position3d.pause=true;
             // this.par.name3d='xzPoisk';            
             this.object=obj;
@@ -120,8 +140,8 @@ export class Menedsher  {
             // if(this.object.tsSet)this.object.tsSet();           
             
             this.visi3D.addEvent("move", this.move);
-            if (dcmParam.mobile==false)document.addEventListener("mouseup", self.mouseup);
-            else document.addEventListener("touchend", self.mouseup);
+            // if (dcmParam.mobile==false)document.addEventListener("mouseup", self.mouseup);
+            // else document.addEventListener("touchend", self.mouseup);
 
         }
 
@@ -152,9 +172,9 @@ export class Menedsher  {
 
 
         this.mouseup = function (e) { 
-            // self.stop();
-            // self.par.par.tudaSuda.saveMod() 
-            // self.par.drawTestUp()            
+            self.stop();
+            self.par.par.tudaSuda.saveMod() 
+            self.par.drawTestUp()            
         }
 
 

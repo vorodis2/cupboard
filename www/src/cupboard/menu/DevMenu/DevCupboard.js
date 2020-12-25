@@ -1,4 +1,4 @@
-export class DebCupboard {
+export class DevCupboard {
   constructor(par, fun) {
     var self = this;
 
@@ -13,6 +13,7 @@ export class DebCupboard {
 
     this.pan = new DPanel(this.dCont, 0, 0)
     this.pan.width = 300;
+
 /*
     this.pan.visible = this._active;
 
@@ -42,6 +43,7 @@ export class DebCupboard {
   var pObject=new DParamObject(this.pan ,2,2,function(){			
     
   },true);
+  // new DButton(this.pan, 200, 2, "Save", () => {this.par.par.localStorage.save()})
 
 
 

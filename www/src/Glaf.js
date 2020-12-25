@@ -1,13 +1,14 @@
 
 
-import { Cupboard } from './cupboard/scane3d/Cupboard.js';
+import { World } from './cupboard/scane3d/World.js';
 import { Menu} from './cupboard/menu/Menu.js';
     
-
 import { ViewServer } from './viewServer/ViewServer.js';
 
 import { MVisi3D } from './visi3D/MVisi3D.js';
 import { SceneSB } from './visi3D/SceneSB.js';
+
+import { LocalStorage } from './localStorage/LocalStorageE6.js'
 
 export class Glaf  {
     constructor(par) {  		
@@ -23,6 +24,8 @@ export class Glaf  {
         this.render = function () {
             this.intRend=1;
         }
+
+        this.localStorage = new LocalStorage(function(s,p,p1){}, "otstups");
 
         this.div = document.createElement('div');
         this.div.style.position = 'fixed';
@@ -78,7 +81,7 @@ export class Glaf  {
                 self.render()
             });
 
-        this.сupboard=new Cupboard(this,function(s,p,p1){                  
+        this.world=new World(this,function(s,p,p1){                  
             if(s=="render"){ 
                 self.visi3D.intRend=p ? p: 1          
                 return;
@@ -107,17 +110,17 @@ export class Glaf  {
             self.render()
         });
 
+        this.menu.finishInit(this.world);
+
 
 
         this.viewServer = new ViewServer(function(s,p,p1,p2){ 
-           
-            if(s=="setObj"){                 
+            if(s=="setObj"){             
                 if(p==null)  {
                     self.menu.setMessage("message","Error"+"Проект id ="+self.viewServer.id+" не создан. json еще не сохранен и нечего открывать");
                 }else{
                     //self.p20.setObj(p);
-
-                    self.сupboard.setObj(p); 
+                    self.world.setObj(p); 
                 }       
                 
 
@@ -127,7 +130,8 @@ export class Glaf  {
                 self.menu.setMessage(p,p1);
                 return
             }
-          /*  if(s=="openStart"){
+            
+            /*  if(s=="openStart"){
                 self.p20.index=1
                 return
             }*/
@@ -136,18 +140,17 @@ export class Glaf  {
 
         setTimeout(function() {
             var d=new DCont(document.body)    
-            new DButton(d, 0,0,"save", function(){           
-                self.viewServer.saveGetObjId(self.сupboard.getObj())
+            new DButton(d, 0,0,"save", function(){          
+                self.viewServer.saveGetObjId(self.world.getObj())
             })
-       
 
         }, 10);   
 
 
         //ап дете сцена деленая на 2 в мейне
         this.update = function () {
-          /*  if(this.p20.upDate()==true)this.intRend=1;
-     
+            /*  if(this.p20.upDate()==true)this.intRend=1;
+    
             if(this._intRend<=1 || this._intRend==100){
                 this.visiPixi.render();
                 this.visi3D.intRend=1;

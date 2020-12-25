@@ -2,6 +2,7 @@
 import { MLeft } from './MLeft.js';
 import { MDev } from './MDev.js'
 import { MInfo} from './MInfo.js';
+import { MTop } from './MTop.js'
 
 // import { MDragScane } from './MDragScane.js';
 
@@ -26,11 +27,12 @@ export class Menu  {
 		this.par=par;
 		this.fun=fun;
 		this._mashtab=1;
-		this.wh=48;
+		this.localStorage=par.localStorage;
+		this._wh=this.localStorage.object.menu.wh||48;
 
 		this.objectBase=par.par.objectBase
-		this.otstup=5;
-		this.otstup1=10;
+		this._otstup=this.localStorage.object.menu.otstup||5;
+		this._otstup1=this.localStorage.object.menu.otstup1||10;
 		this.sizeMax=this.par.sizeMax;
 		dcmParam.activButton="#f28044";
 		this._menuIndex=-1;
@@ -38,13 +40,13 @@ export class Menu  {
 		
 		// this.mDragScane = new MDragScane(this)
 
-	  this.localStorage=par.par.localStorage;//new LocalStorage(function(){},"planer2020")	   
-	    
-	  this.array=[];
+		//new LocalStorage(function(){},"planer2020")	   
+	
+		this.array=[];
 
 	/*	this.array[this.array.length] = this.mGridDrag = new MGridDrag(this, function(s,p,p1){ 
 
-           	self.fun(s,p,p1)
+      self.fun(s,p,p1)
         });
 
 
@@ -55,9 +57,6 @@ export class Menu  {
            	self.fun(s,p,p1)
         });*/
 
-      
-        
-
 
 	    this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
 				if(s=="index")self.menuIndex=p;
@@ -66,8 +65,8 @@ export class Menu  {
            	// trace("$$>>",s,p,p1)
 			});
 			
-			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1) {
-			});
+			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1){});
+			this.array[this.array.length] = this.mTop = new MTop(this, function(s, p, p1){})
 
 		/*this.array[this.array.length]=this.mDragScane=new MDragScane(this, function(s,p){             
            	
@@ -91,8 +90,6 @@ export class Menu  {
 
         this.array[this.array.length]=global.dragPic=this.dragPic = new DDragPic(this.par.dCont);
         global.dragPic.whBase=this.wh;
-
-
 
 
 /*
@@ -180,12 +177,17 @@ export class Menu  {
 	    	} 
         }
 
-
 	   // this.menuIndex=0;
 	}
 
+
 	setActiveObject(obj) {
+		// this.mDev.setActiveObject(this);
 		this.mDev.setActiveObject(obj);
+	}
+
+	finishInit(world) {
+		this.mDev.devControl.finishInit(world)
 	}
 
 	set menuIndex(value) {		
@@ -206,11 +208,40 @@ export class Menu  {
         if(this._mashtab!= value) {
             this._mashtab= value;
             for (var i = this.array.length - 1; i >= 0; i--) {
-	    		if(this.array[i]._mashtab!=undefined)this.array[i].mashtab=value;
-	    	}
-        }    
-              
+	  			if(this.array[i]._mashtab!=undefined)this.array[i].mashtab=value;
+	  		}
+      }    
     }    
-    get mashtab() { return  this._mashtab;}*/
+		get mashtab() { return  this._mashtab;}*/
+		
+		set otstup(value) {
+			if (this._otstup != value) {
+				this._otstup = value;
+				this.mTop.changeOtstups()
+				this.mLeft.changeOtstups()
+				this.localStorage.object.menu.otstup = this._otstup;
+			}
+		}
+		get otstup() { return this._otstup }
+
+		set otstup1(value) {
+			if (this._otstup1 != value) {
+				this._otstup1 = value;
+				this.mTop.changeOtstups()
+				this.mLeft.changeOtstups()
+				this.localStorage.object.menu.otstup1 = this._otstup1;
+			}
+		}
+		get otstup1() { return this._otstup1 }
+
+		set wh(value) {
+			if (this._wh != value) {
+				this._wh= value;
+				this.mTop.changeOtstups()
+				this.mLeft.changeOtstups()
+				this.localStorage.object.menu.wh = this._wh;
+			}
+		}
+		get wh() { return this._wh }
 } 
 

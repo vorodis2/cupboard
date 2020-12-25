@@ -7,7 +7,7 @@ export class Blok{
         this.type="Blok";
         this.typeConst="Blok";
         var self=this;
-        
+        this.uuid=Math.random()
         this.children=[];
         this.boolDinColor=false;
         this.object = o;

@@ -12,7 +12,6 @@ export class ViewServer  {
         var php=new Php()
         this.openId=function(_id) {
             this.id=_id;
-            trace("---_id",_id)
             let link = "save/"+_id+"/config.json";
 
             $.ajax({
@@ -25,9 +24,6 @@ export class ViewServer  {
                     } else oo = data;   
 
                     self.fun("setObj",oo)
-                  
-                   
-                                  
                 },
                 error:function function_name(data) {
                     self.fun("message","Что то случилось с конфигом","Не верный ид==",self.id)
@@ -44,12 +40,11 @@ export class ViewServer  {
                 /*self.fun("message","Error Проект не имеет ИД","Этот проект не открыт, в плане не имеет связи с сервером")
                 return*/
 
-
             }else{
-                var l="../save/"+this.id+"/config.json";  
+                var l="../save/"+this.id+"/config.json";
                 
                 php.load({tip:"saveJSON", link:l, text:str},function(e){
-                    trace(e)
+                    trace("sdfdfd", e)
                     /*var ll = self.link+self.idSave +'/icon.png'            
                     self.php.savePhoto(ll, self.base, function () {                
                         self.poiskId3()
