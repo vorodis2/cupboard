@@ -109,9 +109,9 @@ export class Menedsher  {
 
 
         this.start=function(obj){  
-            trace(obj)
-            // this.stop();             
-            // this.visi3D.position3d.pause=true;
+            trace("^start^",obj)
+             this.stop();             
+             this.visi3D.position3d.pause=true;
             // this.par.name3d='xzPoisk';            
             this.object=obj;
             // this.objectOld=obj;
@@ -127,7 +127,7 @@ export class Menedsher  {
 
         
         this.stop=function(){  
-                    
+            trace("^stop^")        
             // this.par.pozZdvigAll(0)
             this.pointZdvig.set(0,0,0)
             if(self.mPanel.parent!=undefined) {
@@ -142,7 +142,7 @@ export class Menedsher  {
             this.visi3D.position3d.pause=false;
             if(this.object)if(this.object.parent==undefined)this.object.clear();
             this.par.name3d='null';            
-            if(this.object)this.object.activObject=false
+            //if(this.object)this.object.activObject=false
             this.object=undefined;          
             this.visi3D.removeEvent("move", this.move); 
 
@@ -152,9 +152,10 @@ export class Menedsher  {
 
 
         this.mouseup = function (e) { 
-            // self.stop();
+             self.stop();
             // self.par.par.tudaSuda.saveMod() 
-            // self.par.drawTestUp()            
+            // self.par.drawTestUp() 
+            trace("^mouseup^")              
         }
 
 
@@ -165,8 +166,21 @@ export class Menedsher  {
         var stenDown
         this.pointReal=new THREE.Vector3(0,0,0)
         this.move = function (e) { 
-            trace(e)
-            // if(e)if(e.target)if(e.target.sten){ 
+           
+            
+            if(e)if(e.target){ 
+                if(self.object!=undefined){
+                    if(self.object.parent!=undefined){
+                        trace("^move^",e.point)  
+                        self.object.setpositLocel(e.point.x, e.point.y, e.point.z)
+                        self.fun("visi3d");   
+                    }
+
+                }
+
+
+
+            }
                 
             //     if(self.object!=undefined){
 
@@ -214,8 +228,18 @@ export class Menedsher  {
 
 
         this.out = function (e) { 
+            trace("^out^",e)  
 
-            trace(e)
+            if(e)if(e.target){
+                if(self.object!=undefined){
+
+                    if(self.object.parent!=undefined){
+                        self.object.parent.remove(self.object)
+                    }
+                }
+                self.fun("visi3d");   
+            }
+          
             // if(self.par.par.bactive==false)return  
 
 
@@ -244,9 +268,40 @@ export class Menedsher  {
 
         var _yy1,_xx1
         this.over = function (e) {      
-            trace(e)     
+           
+            trace("^over^",e)     
             // if(self.par.par.bactive==false)return
-            // if(e)if(e.target){
+
+
+
+
+            if(e)if(e.target){
+
+                if(self.object==undefined){
+                    if(global.dragPic.object!=undefined){
+                        let oo= self.menedsherObject.getIdObj(3);
+                        let pp=self.menedsherObject.getBlok(oo.obj)
+                        //this.add(pp)               
+                        pp.init()
+                        self.start(pp)
+                    }
+                }
+
+
+
+                if(self.object!=undefined){
+                    
+                    let ppp=self.poiscParam(e.target,"xzPar");
+                    trace("@@@@@@@@@@@@@@object@@@@@@@@@@@@",ppp);
+                    if(ppp!=null){
+                        ppp.add(self.object)
+                    }
+                    self.fun("visi3d");   
+                }
+
+               
+                //p.obj
+
             //     if(e.target.sten){
             //         if(self.mPanel1.parent==undefined) e.target.sten.content3d.add(self.mPanel1) 
 
@@ -283,7 +338,7 @@ export class Menedsher  {
             //             }                        
             //             if(self.object.overDrag)self.object.overDrag()                   
             //         }
-            //     } 
+                } 
 
             //     blok=self.poiscParam(e.target,"blok");
             //     if(blok!=null){                    
@@ -327,10 +382,16 @@ export class Menedsher  {
         var blok=null
         var p={x:0,y:0}
         this.down = function (e) { 
-            trace(e)
+            trace("^down^",e)  
             // if(self.par.par.bactive==false)return
-            // if(e){
-            //     if(e.target){
+             if(e){
+                if(e.target){
+                    blok=self.poiscParam(e.target,"blok");
+                    if(blok!=null){ 
+                        self.start(blok);  
+                    }
+                }
+            }
                     
             //         blok=self.poiscParam(e.target,"blok");
             //         self.testActSten(e.target)
@@ -484,10 +545,11 @@ export class Menedsher  {
 
         this.poiscParam = function (o,p) {
             if(o[p]!=undefined)return o[p];
+
             if(o.parent!=undefined)return this.poiscParam(o.parent, p)
             return null;
         }         
-
+        this.visi3D.event3DArr.activ=true
 
         this.visi3D.addEvent("out", this.out);        
         this.visi3D.addEvent("over", this.over);
@@ -640,10 +702,14 @@ export class MenedsherObject  {
             opacity:0.7
         });
         this.mat2 = new THREE.MeshPhongMaterial({
-            color:0x00ff00,
-            transparent:true,
-            opacity:0.7
+            color:0xffffff,
+            /*transparent:true,
+            opacity:0.7*/
         });
+
+        this.mat2.map = new THREE.TextureLoader().load( 'resources/image/pic.png' );
+  
+
 
         this.dragPriceScane=function(){ 
             this.par.dragPriceScane()

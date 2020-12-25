@@ -14,7 +14,7 @@ export class CBoard extends Blok {
 
         this.arrPalka = [];
 
-        this.cnt3d = new THREE.Object3D()
+       /* this.cnt3d = new THREE.Object3D()
         this.content3d.add(this.cnt3d);
 
         oo = this.mO.getIdObj(3);
@@ -24,13 +24,14 @@ export class CBoard extends Blok {
         this.add(ooo);
 
         ooo.putMeshInContent(this.cnt3d)
-        this.backPanel = ooo.mesh;
+        this.backPanel = ooo.mesh;*/
 
-        // let aa=new THREE.AxesHelper(100);
-        // this.cnt3d.add(aa)
-
+        // 
+        let aa=new THREE.AxesHelper(100);
+        aa.position.x=20
+        this.content3d.add(aa)
         this.funDrag=function () {     
-            this.cnt3d.position.z = -this._height/2;
+            /*this.cnt3d.position.z = -this._height/2;
             this.cnt3d.position.y = -this._depth/2 + this._cDepth/2;
 
             if (this.arrPalka.length) {
@@ -44,27 +45,80 @@ export class CBoard extends Blok {
 
               this.arrPalka[0].setXYPosit(self._width/2 - this.arrPalka[0]._width/2, 0, 0)
               this.arrPalka[1].setXYPosit(-self._width/2 + this.arrPalka[1]._width/2, 0, 0)
+            }*/
+
+            if(this.arrPalka)if(this.arrPalka[0]){
+                this.arrPalka[0].width=this._cDepth
+                
+                this.arrPalka[0].setXYPosit(this._width/2, -this._depth/2+this._cDepth/2,-this._height/2)
+              
+
+                this.arrPalka[0].height = this._height
+                this.arrPalka[0].depth = this._width
+
+
+
+                this.arrPalka[1].setXYPosit(-this._width/2+this.arrPalka[1]._width/2, -this._depth/2+this._cDepth,-this._height/2)
+              
+                this.arrPalka[1].height=this._height
+                this.arrPalka[1].depth=this._depth- this._cDepth
+
+                this.arrPalka[2].setXYPosit(this._width/2-this.arrPalka[2]._width/2,-this._depth/2+this._cDepth,-this._height/2)
+              
+                this.arrPalka[2].height=this._height
+                this.arrPalka[2].depth=this._depth- this._cDepth
+
+
+
+
+
+              /*  this.arrPalka[0].setXYPosit(0,0,this._height/2)
+                this.arrPalka[0].width=self._width
+                this.arrPalka[0].height=self._height
+                this.arrPalka[0].depth=this._cDepth*/
+
+                
+                
+
+
+
+
             }
         } 
 
         this.dragObjNWD()
 
+
+        /*
+        0-зад
+        1-лево
+        2-право
+        */
+
         var xz,oo,ooo
         this.funInitMod=function(){
-            for (let i = 0; i < 2; i++) {
+           
+            for ( let i = 0; i < 3; i++) {
               oo= this.mO.getIdObj(3);
               ooo=this.mO.getBlok(oo.obj);
+              ooo.xzPar = this;
+              ooo.content3d.xzPar = this;
+             
 
               ooo.init();
               this.add(ooo);
-
               ooo.width=5;
 
-              ooo.putMeshInContent();
+             // ooo.putMeshInContent();
               this.arrPalka.push(ooo);
             }
+
+           this.arrPalka[0].content3d.rotation.z=Math.PI/2
+
             this.dragObjNWD()
         }
+
+     
 
 
 
@@ -86,7 +140,7 @@ export class CBoard extends Blok {
 
             obj.children=[];
             for (var i = 0; i < this.children.length; i++) {
-                if(this.children[i].notSave)continue;
+                if(this.children[i].xzPar!=undefined)continue;
                 obj.children[i]=this.children[i].getObj();
             }
             return obj;            
@@ -95,7 +149,7 @@ export class CBoard extends Blok {
 
         var ob,ooo
         this.setObj = function(obj){       
-            trace(obj)              
+                          
             this.setXYPosit(obj.x,obj.y,obj.z); 
             if(obj.children.length) {       
               for (var i = 0; i < obj.children.length; i++) {
@@ -117,9 +171,11 @@ export class CBoard extends Blok {
             this.dragObjNWD()
             return obj;            
         }
+
+       
     }
 
-    createRandomStick() {
+   /* createRandomStick() {
       let oo, ooo
       oo = this.mO.getIdObj(3);
       ooo = this.mO.getBlok(oo.obj);
@@ -158,7 +214,7 @@ export class CBoard extends Blok {
         this.arrPalka.pop();
         this.dragObjNWD()
       }
-    }
+    }*/
 
     set width(value) {
         if (this._width != value) {

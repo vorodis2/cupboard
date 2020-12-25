@@ -12,7 +12,7 @@ export class MDev {
 
     this.dCompDev = new DCompDev(this.dCont,0,0,"DevWindow",function(s,p,p1){});
     this.dCompDev.x = -50;
-    this.dCompDev.y = window.innerHeight - this.dCompDev.height - 120;
+    this.dCompDev.y = 300//window.innerHeight - this.dCompDev.height - 120;
 
 
     this.devCupboard = new DevCupboard(this, function(s, p, p1){})

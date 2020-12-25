@@ -6,32 +6,46 @@ export class CPalka extends Blok {
         var self=this;
         this.type = "CPalka";
 
-        this._width = 100;
+        this._width = 10;
         this._height = 100;
         this._depth = 100;
 
         this.notSave = true;
 
-        this._cDepth = 10;
 
-        this.boxGeometry = new THREE.BoxBufferGeometry(1,1,1);
-        this.texture = new THREE.TextureLoader().load( '../../../../resources/image/pic.png' );
-        this.material = mO.mat2;
-        this.material.map = this.texture;
-        this.mesh = new THREE.Mesh(this.boxGeometry, this.material);
+
+   
+        
+        
 
         this.cnt3d = new THREE.Object3D();
         this.content3d.add(this.cnt3d)
 
-        // let aa=new THREE.AxesHelper(100);
-        // aa.rotation.x = Math.PI / 2;
+        this.mesh = new THREE.Mesh(mO.gBox, mO.mat2);
+        this.mesh.rotation.x=-Math.PI/2
+        this.content3d.add(this.mesh)
 
 
-        this.funDrag=function () {       
-            this.mesh.scale.set(this._width,this._depth,this._height);
-            this.cnt3d.position.z = -this._height/2;
-            this.cnt3d.position.y = this._depth/2+this._cDepth/2;
+        let aa=new THREE.AxesHelper(50);
+        this.content3d.add(aa)
+
+
+        this.funDrag=function () {    
+
+            this.mesh.scale.set(this._width,this._height,this._depth);            
+            this.mesh.position.y = this._depth/2;
+
         }
+
+
+        this.setpositLocel=function (x,y,z) {    
+            this.setXYPosit(x,y,z)
+
+        }
+
+
+
+
 
         this.dragObjNWD()
 
@@ -109,13 +123,7 @@ export class CPalka extends Blok {
     }
     get depth() {return this._depth}
 
-    set cDepth(value) {
-      if (this._cDepth != value) {
-        this._cDepth = value;
-        this.dragObjNWD();
-      }
-    }
-    get cDepth() {return this._cDepth}
+
 }
 
 

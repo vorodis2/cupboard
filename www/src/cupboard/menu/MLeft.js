@@ -81,14 +81,15 @@ export class MLeft  {
                 return*/
 
             }  
-
+            trace(s,p)
             if(s=="gIndex"){
                 // this.dragPic = new DDragPic(this.dCont);
                 // this.dragPic.whBase = this.wh;
-                // this.dragPic.start(100, 'resources/data/2/64.png');
-                self.world = self.par.par.world;
+                global.dragPic.start(100, 'resources/data/2/64.png', p.obj );
+
+               /* self.world = self.par.par.world;
                 let stick = self.world.array[0].createStick()
-                self.world.menedsher.start(stick)
+                self.world.menedsher.start(stick)*/
                 
                 
             }

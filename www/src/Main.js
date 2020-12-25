@@ -94,6 +94,7 @@ export class Main  {
 			s= w/self._width;
 			if(s>h/self._height)s=h/self._height;
 			this.scale = s;
+			this.scale = 1;
 			if(dcmParam.isIE==true)this.scale = 1;			
 			
   			if (self.glaf) { 

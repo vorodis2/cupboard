@@ -50,11 +50,16 @@ export class World {
             const id = urlParams.get('id')
             
             if (id == null) {
-            oo= this.menedsher.menedsherObject.getIdObj(2) ;
-            let pp=this.menedsher.menedsherObject.getBlok(oo.obj)
-            this.add(pp) 
-            pp.init()
-            self.fun("activeObject", pp)
+                oo= this.menedsher.menedsherObject.getIdObj(2) ;
+                let pp=this.menedsher.menedsherObject.getBlok(oo.obj)
+
+                this.add(pp)
+
+               
+                pp.init()
+
+
+                self.fun("activeObject", pp)
             }          
         }
 

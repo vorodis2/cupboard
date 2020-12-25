@@ -42,7 +42,9 @@ export class Blok{
         this._material=roomBig[this.matBas];*/
 
         this.c3dNa = new THREE.Object3D();
-        this.content3d.add(this.c3dNa);        
+        this.content3d.add(this.c3dNa); 
+
+               
         /*this.markers=new Markers(this);
         this.content = new PIXI.Container();
         this.graphics = new PIXI.Graphics();  
@@ -414,7 +416,7 @@ export class Blok{
             }
             
             */
-            
+       
              if(self.funInitMod!=undefined)self.funInitMod(); 
         }
 
@@ -575,13 +577,16 @@ export class Blok{
 
 
     set parent(v) {
+        trace("@@_parent@",v)
         if(this._parent!=v){
           // if(this.dragParentDo) this.dragParentDo(this._parent, v)   
             this._parent= v; 
             if(this._parent==undefined){
-                this.mO.visi3D.event3DArr.removeChild(this.c3dNa);
+                
+                this.mO.visi3D.event3DArr.removeChild(this.content3d);
             } else{
-                this.mO.visi3D.event3DArr.addChild(this.c3dNa);
+                trace("@@@@@@@@@@@@@_parent@@@@@@@@@@@@@@@@@@@@@@@",this.mO.visi3D.event3DArr,this._parent)
+                this.mO.visi3D.event3DArr.addChild(this.content3d);
             }  
            /* if(this.dragParent) this.dragParent()  
 

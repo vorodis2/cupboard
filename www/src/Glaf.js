@@ -169,7 +169,9 @@ export class Glaf  {
         this.sizeWindow = function(w,h,s){              
             this.scale=s;
             this.dCont.scale=s;
-            this.menu.sizeWindow(w,h,s);                  
+            this.menu.sizeWindow(w,h,s);  
+
+            this.visi3D.sizeWindow(0,0,w,h);                  
         }
 
         this.keydown=function(e){ 
