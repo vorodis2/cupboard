@@ -9,44 +9,16 @@ export class CBoard extends Blok {
         this._width = 100;
         this._height = 100;
         this._depth = 100;
-        
         this._cDepth = 10;
+        this._boolInt = 100;
 
         this.arrPalka = [];
 
-       /* this.cnt3d = new THREE.Object3D()
-        this.content3d.add(this.cnt3d);
-
-        oo = this.mO.getIdObj(3);
-        ooo = this.mO.getBlok(oo.obj);
-
-        ooo.init();
-        this.add(ooo);
-
-        ooo.putMeshInContent(this.cnt3d)
-        this.backPanel = ooo.mesh;*/
-
-        // 
         let aa=new THREE.AxesHelper(100);
         aa.position.x=20
         this.content3d.add(aa)
+
         this.funDrag=function () {     
-            /*this.cnt3d.position.z = -this._height/2;
-            this.cnt3d.position.y = -this._depth/2 + this._cDepth/2;
-
-            if (this.arrPalka.length) {
-              this.backPanel.scale.set(this._width, this._cDepth, this._height);
-              this.arrPalka.forEach(item => {
-                item.height = self._height;
-                item.depth = self._depth - self._cDepth;
-                item.cDepth = self._cDepth;
-                item.mesh.position.y = -self._depth/2 + self._cDepth/2
-              })
-
-              this.arrPalka[0].setXYPosit(self._width/2 - this.arrPalka[0]._width/2, 0, 0)
-              this.arrPalka[1].setXYPosit(-self._width/2 + this.arrPalka[1]._width/2, 0, 0)
-            }*/
-
             if(this.arrPalka)if(this.arrPalka[0]){
                 this.arrPalka[0].width=this._cDepth
                 
@@ -68,21 +40,22 @@ export class CBoard extends Blok {
                 this.arrPalka[2].height=this._height
                 this.arrPalka[2].depth=this._depth- this._cDepth
 
+                this.arrPalka[3].setXYPosit(0, -this._depth/2+this.cDepth, -this.arrPalka[3]._width/2-this._boolInt)
+
+                this.arrPalka[3].height = this._width-this.arrPalka[4]._width*2;
+                this.arrPalka[3].depth = this._depth-this.cDepth;
+
+                this.arrPalka[4].setXYPosit(0, -this._depth/2+this.cDepth, -this._height+this.arrPalka[4]._width/2)
+
+                this.arrPalka[4].height = this._width-this.arrPalka[4]._width*2;
+                this.arrPalka[4].depth = this._depth-this.cDepth;
 
 
+                this.arrPalka[5].setXYPosit(0, -this._depth/2+this.cDepth, -this._boolInt/2)
 
-
-              /*  this.arrPalka[0].setXYPosit(0,0,this._height/2)
-                this.arrPalka[0].width=self._width
-                this.arrPalka[0].height=self._height
-                this.arrPalka[0].depth=this._cDepth*/
-
-                
-                
-
-
-
-
+                this.arrPalka[5].width = this._boolInt;
+                this.arrPalka[5].height = this._width-this.arrPalka[4]._width*2;
+                this.arrPalka[5].depth = this._depth-this.cDepth;
             }
         } 
 
@@ -97,28 +70,32 @@ export class CBoard extends Blok {
 
         var xz,oo,ooo
         this.funInitMod=function(){
-           
-            for ( let i = 0; i < 3; i++) {
+        
+            for ( let i = 0; i < 6; i++) {
               oo= this.mO.getIdObj(3);
               ooo=this.mO.getBlok(oo.obj);
               ooo.xzPar = this;
-              ooo.content3d.xzPar = this;
-             
+              ooo.content3d.xzPar = this;      
 
               ooo.init();
               this.add(ooo);
               ooo.width=5;
 
-             // ooo.putMeshInContent();
+              ooo.content3d.blok = null;    
+              ooo.content3d.parent.blok = null;
+
               this.arrPalka.push(ooo);
             }
 
-           this.arrPalka[0].content3d.rotation.z=Math.PI/2
+            this.arrPalka[0].content3d.rotation.z=Math.PI/2
+
+            this.arrPalka[3].content3d.rotation.y=Math.PI/2
+            this.arrPalka[4].content3d.rotation.y=Math.PI/2
+            this.arrPalka[5].content3d.rotation.y=Math.PI/2
 
             this.dragObjNWD()
         }
 
-     
 
 
 
@@ -134,9 +111,8 @@ export class CBoard extends Blok {
             obj.width=this._width;
             obj.height=this._height;
             obj.depth=this._depth;    
-
-
-
+            obj.boolInt=this._boolInt;   
+            
 
             obj.children=[];
             for (var i = 0; i < this.children.length; i++) {
@@ -149,7 +125,6 @@ export class CBoard extends Blok {
 
         var ob,ooo
         this.setObj = function(obj){       
-                          
             this.setXYPosit(obj.x,obj.y,obj.z); 
             if(obj.children.length) {       
               for (var i = 0; i < obj.children.length; i++) {
@@ -157,7 +132,6 @@ export class CBoard extends Blok {
                     ooo= mO.getIdObj(obj.children[i].id)                  
                     ob=mO.getBlok(ooo.obj)
                     ob.setObj(obj.children[i])
-                    ob.putMeshInContent()
                     this.arrPalka.push(ob)
                     this.add(ob);  
                   }               
@@ -167,54 +141,12 @@ export class CBoard extends Blok {
             this._width = obj.width;
             this._height = obj.height;
             this._depth = obj.depth;    
+            this._boolInt = obj.boolInt||100;
 
             this.dragObjNWD()
             return obj;            
         }
-
-       
     }
-
-   /* createRandomStick() {
-      let oo, ooo
-      oo = this.mO.getIdObj(3);
-      ooo = this.mO.getBlok(oo.obj);
-      ooo.init();
-      ooo.putMeshInContent()
-      ooo.setXYPosit(
-        Math.random() * (this.backPanel.position.x + this._width/2 - (this.backPanel.position.x - this._width/2)) + (this.backPanel.position.x - this._width/2),
-        0,
-        0
-      )
-      ooo.width = 5;
-      ooo.notSave = false;
-      this.add(ooo);
-      this.arrPalka.push(ooo);
-      this.dragObjNWD()
-    }
-
-    createStick() {
-      let oo, ooo
-
-      oo = this.mO.getIdObj(3);
-      ooo = this.mO.getBlok(oo.obj);
-      ooo.init();
-      ooo.putMeshInContent()
-
-      ooo.width = 5;
-      ooo.notSave = false;
-      this.add(ooo);
-
-      return ooo;
-    }
-
-    removeRandomStick() {
-      if (this.arrPalka.length > 2) {
-        this.remove(this.arrPalka[this.arrPalka.length-1]);
-        this.arrPalka.pop();
-        this.dragObjNWD()
-      }
-    }*/
 
     set width(value) {
         if (this._width != value) {
@@ -248,6 +180,14 @@ export class CBoard extends Blok {
       }
     }
     get cDepth() {return this._cDepth}
+
+    set boolInt(value) {
+      if (this._boolInt != value) {
+        this._boolInt = value;
+        this.dragObjNWD();
+      }
+    }
+    get boolInt() {return this._boolInt}
 }
 
 

@@ -4,22 +4,6 @@ import { MDev } from './MDev.js'
 import { MInfo} from './MInfo.js';
 import { MTop } from './MTop.js'
 
-// import { MDragScane } from './MDragScane.js';
-
-/*import { MObject } from './MObject.js';
-import { MGridDrag } from './MGridDrag.js';
-
-import { MCont2dHelp } from './MCont2dHelp.js';
-
-import { MStart} from './MStart.js';
-
-import { MenuV3D } from './MenuV3D.js';
-
-
-
-
-import { LocalStorage } from './LocalStorageE6.js';*/
-
 export class Menu  {
     constructor(par,fun) {    	
 		this.type="Menu";		
@@ -28,68 +12,34 @@ export class Menu  {
 		this.fun=fun;
 		this._mashtab=1;
 		this.localStorage=par.localStorage;
-		this._wh=this.localStorage.object.menu.wh||48;
 
+		this.param=this.par.param;	
 		this.objectBase=par.par.objectBase
-		this._otstup=this.localStorage.object.menu.otstup||5;
-		this._otstup1=this.localStorage.object.menu.otstup1||10;
+
 		this.sizeMax=this.par.sizeMax;
 		dcmParam.activButton="#f28044";
 		this._menuIndex=-1;
 		this.dCont=new DCont(this.par.dCont);
+
+
 		
 		// this.mDragScane = new MDragScane(this)
 
-		//new LocalStorage(function(){},"planer2020")	   
 	
 		this.array=[];
 
-	/*	this.array[this.array.length] = this.mGridDrag = new MGridDrag(this, function(s,p,p1){ 
-
-      self.fun(s,p,p1)
-        });
-
-
-
-	    this.array[this.array.length]=this.mStart=new MStart(this, function(s,p,p1){             
-           	if(s=="index")self.menuIndex=p;
-
-           	self.fun(s,p,p1)
-        });*/
-
-
-	    this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
+			this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
 				if(s=="index")self.menuIndex=p;
-				// trace(s, p)
-        // if(s=="gIndex")self.mDragScane.sobMenu(s,p,p1);
-           	// trace("$$>>",s,p,p1)
 			});
 			
 			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1){});
 			this.array[this.array.length] = this.mTop = new MTop(this, function(s, p, p1){})
 
-		/*this.array[this.array.length]=this.mDragScane=new MDragScane(this, function(s,p){             
-           	
-        });
-	   
-		this.array[this.array.length]=this.mObject = new MObject(this,function(s,p){
-           // self.fun(s,p)
-        });
-
-		this.array[this.array.length]=this.mCont2dHelp = new MCont2dHelp(this,function(s,p){
-           // self.fun(s,p)
-        });
-
-        this.array[this.array.length]=this.menuV3D = new MenuV3D(this,function(s,p){
-           // self.fun(s,p)
-        });
-*/
-
-        this.array[this.array.length]=global.mInfo=this.mInfo = new MInfo(this.par.dCont);
+			this.array[this.array.length]=global.mInfo=this.mInfo = new MInfo(this.par.dCont);
 
 
-        this.array[this.array.length]=global.dragPic=this.dragPic = new DDragPic(this.par.dCont);
-        global.dragPic.whBase=this.wh;
+			this.array[this.array.length]=global.dragPic=this.dragPic = new DDragPic(this.par.dCont);
+			global.dragPic.whBase=this.wh;
 
 
 /*
@@ -123,7 +73,14 @@ export class Menu  {
 	    		}	    			
 	    	}	    	
 	    	this.openMenu(p);
-	    }*/
+			}*/
+		this.dragParam=function(){
+			for (var i = this.array.length - 1; i >= 0; i--) {
+				if(this.array[i].dragParam)this.array[i].dragParam();
+			}
+		}
+
+		
 
 	    this.setMessage=function(p,p1){
 	    	if(p=="messageClose"){
@@ -182,12 +139,7 @@ export class Menu  {
 
 
 	setActiveObject(obj) {
-		// this.mDev.setActiveObject(this);
 		this.mDev.setActiveObject(obj);
-	}
-
-	finishInit(world) {
-		this.mDev.devControl.finishInit(world)
 	}
 
 	set menuIndex(value) {		
@@ -213,35 +165,5 @@ export class Menu  {
       }    
     }    
 		get mashtab() { return  this._mashtab;}*/
-		
-		set otstup(value) {
-			if (this._otstup != value) {
-				this._otstup = value;
-				this.mTop.changeOtstups()
-				this.mLeft.changeOtstups()
-				this.localStorage.object.menu.otstup = this._otstup;
-			}
-		}
-		get otstup() { return this._otstup }
-
-		set otstup1(value) {
-			if (this._otstup1 != value) {
-				this._otstup1 = value;
-				this.mTop.changeOtstups()
-				this.mLeft.changeOtstups()
-				this.localStorage.object.menu.otstup1 = this._otstup1;
-			}
-		}
-		get otstup1() { return this._otstup1 }
-
-		set wh(value) {
-			if (this._wh != value) {
-				this._wh= value;
-				this.mTop.changeOtstups()
-				this.mLeft.changeOtstups()
-				this.localStorage.object.menu.wh = this._wh;
-			}
-		}
-		get wh() { return this._wh }
 } 
 

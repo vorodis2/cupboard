@@ -55,12 +55,9 @@ export class World {
 
                 this.add(pp)
 
-               
                 pp.init()
-
-
                 self.fun("activeObject", pp)
-            }          
+            }        
         }
 
 

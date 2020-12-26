@@ -5,17 +5,14 @@ export class MLeft  {
   		var self=this;
         this.par=par
         this.fun=fun
-        this.otstup=this.par._otstup;
-        this.otstup1=this.par._otstup1;
-        this.wh=this.par._wh;       
+        
+        this.param = this.par.param;
 
 
         this._index=-1;
         this._tipVisi=-1;
         this._tipDrav=-1;
         this.dCont=new DCont(par.dCont);
-        this.dCont.x=this.otstup;
-        this.dCont.y=this.otstup*4+this.wh;
 
         this.objectBase=undefined;
         this.objThree=undefined;
@@ -53,75 +50,41 @@ export class MLeft  {
     //     }]
 
 
-
-
-
-
-
-        this.init=function(o){            
-            this.objectBase=o;
-            for (var i = 0; i < o.three.length; i++) {                
-                if(o.three[i].keyName=="MLeft"){
-                    this.objThree=o.three[i]
-                }
-            }            
-
-            for (var i = 0; i < this.objThree.array.length; i++) {
-                this.array[i]= new MLButGal(this,this.drag,i,this.objThree.array[i])
-            }            
-        }
-
-        this.drag=function(s,p){
-            if(s=="gallery"){
-                /* trace(s,p)
-                self.fun("gallery",p); 
-
-
-                //self.korektGallery(s,p)
-                return*/
-
-            }  
-            trace(s,p)
-            if(s=="gIndex"){
-                // this.dragPic = new DDragPic(this.dCont);
-                // this.dragPic.whBase = this.wh;
-                global.dragPic.start(100, 'resources/data/2/64.png', p.obj );
-
-               /* self.world = self.par.par.world;
-                let stick = self.world.array[0].createStick()
-                self.world.menedsher.start(stick)*/
-                
-                
+    this.init=function(o){            
+        this.objectBase=o;
+        for (var i = 0; i < o.three.length; i++) {                
+            if(o.three[i].keyName=="MLeft"){
+                this.objThree=o.three[i]
             }
+        }            
+
+        for (var i = 0; i < this.objThree.array.length; i++) {
+            this.array[i]= new MLButGal(this,this.drag,i,this.objThree.array[i])
+        }         
         
-            self.fun(s,p);    
-        }
-        
-        this.init(this.par.objectBase)
-        //this.init(this.objZ); 
-
-        this.sobMenu=function(s,p,e){
-            
-        }
-
-
-        this.sizeWindow = function(w,h,s){ 
-
-        }
-
+        this.array[0].active = true;
     }
 
-
-    changeOtstups(){
-        this.otstup=this.par._otstup;
-        this.otstup1=this.par._otstup1;
-        this.wh=this.par._wh;  
-
-        this.dCont.x=this.otstup;
-        this.dCont.y=this.otstup*4+this.wh;
-
-        this.array.forEach(item => item.changeOtstups())
+    this.drag=function(s,p){
+        if(s=="gallery"){}  
+        if(s=="gIndex"){
+            global.dragPic.start(64, 'resources/data/'+p.obj.id+'/64.png', p.obj );
+        }
+        self.fun(s,p);    
     }
+        
+    this.init(this.par.objectBase)
+
+    this.dragParam=function(){
+        this.dCont.x=this.param.otstup;
+        this.dCont.y=this.param.otstup*4 + this.param.wh*0.8;
+
+        for (var i = this.array.length - 1; i >= 0; i--) {
+            if(this.array[i].dragParam)this.array[i].dragParam();
+        }
+    }
+    this.sobMenu=function(s,p,e){}
+}
 
     set index(value) {
         if(this._index!=value){
@@ -169,33 +132,40 @@ export class MLButGal  {
         this._active=false;
         this._startIndex=-1;
 
-        this.otstup=this.par.otstup;
-        this.otstup1=this.par.otstup1;
-        this.wh=this.par.wh;
+        this.param = this.par.param;
 
         this.gallery=undefined;
 
-        this.dCont=new DCont(par.dCont);        
-        this.button=new DButton(this.dCont,0,idArr*(this.wh+this.otstup),"",function(){
-            self.fun("index",self.idArr);
-        },"resources/data/"+obj.id+"/100.png");
-        this.button.width=this.button.height=this.wh;
+        this.dCont=new DCont(par.dCont);
+        this.dCGal=new DCont(this.dCont);     
+        this.button=new DButton(this.dCont,0,0,"",() => this.fun("index",this.idArr),"resources/data/"+obj.id+"/100.png");
 
+        this.dragParam=function(){  
+            this.button.y = this.idArr*(this.param.wh+this.param.otstup)
+            this.button.width = this.button.height = this.param.wh
+            this.dCGal.x=(this.param.wh)
 
-        this.dCGal=new DCont(this.dCont);  
-        this.dCGal.x=(this.wh+this.otstup)
+            if (this.gallery) {
+                this.gallery.widthPic=this.param.wh*1.5; 
+                this.gallery.heightPic=this.param.wh*1.5; 
+
+                this.gallery.otstup = this.param.otstup;
+                this.gallery.y = -this.param.otstup;
+                this.gallery.width = this.param.wh*1.5*2 + this.gallery.otstup*2+2;
+                this.gallery.height = this.param.wh*1.5* this.gallery.kolII+2 + this.gallery.otstup*2+2;
+                this.gallery.panelBool = false;
+                this.gallery.boolPositOtctup = false;
+                this.gallery.boolPositScrol = false;
+                this.gallery.boolWheel = false;
+            }
+        }
 
         this.init=function(o){ 
             if(this.gallery!=undefined)return
-
             if(this.obj.array.length!=0){
-
                 if(this.idArr==2) {
-                    this.gallery=new DGalObj(this.dCGal,0,0,function(s,p){
-                            
-                    },this)
+                    this.gallery=new DGalObj(this.dCGal,0,0,function(s,p){},this)
                 }    
-
                 if(this.idArr==0||this.idArr==1||this.idArr==3||this.idArr==4) {
                     this.gallery=new DGallery(this.dCGal,0,0,function(){
                         var o={}
@@ -203,7 +173,7 @@ export class MLButGal  {
                         o.index=this.index;
                         o.obj=this.obj;
                         self.fun("gIndex", o);
-                    })                    
+                    })              
                 }            
                 this.gallery.kolII=3;
                 this.gallery.widthPic=64;
@@ -233,21 +203,12 @@ export class MLButGal  {
         }
     }
 
-    changeOtstups(){
-        this.otstup=this.par.otstup;
-        this.otstup1=this.par.otstup1;
-        this.wh=this.par.wh;  
-
-        this.button.y = this.idArr*(this.wh+this.otstup)
-        this.button.width = this.button.height = this.wh
-        this.dCGal.x=(this.wh+this.otstup)
-    }
-
     set active(value) {
         if(this._active!=value){
             this._active= value;
             this.dCGal.visible= value;           
             this.init() 
+            this.dragParam()
 
             if(this._active==true)this.button.color=dcmParam.activButton;
             else this.button.color=dcmParam.color;

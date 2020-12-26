@@ -109,7 +109,6 @@ export class Menedsher  {
 
 
         this.start=function(obj){  
-            trace("^start^",obj)
              this.stop();             
              this.visi3D.position3d.pause=true;
             // this.par.name3d='xzPoisk';            
@@ -126,8 +125,7 @@ export class Menedsher  {
         }
 
         
-        this.stop=function(){  
-            trace("^stop^")        
+        this.stop=function(){      
             // this.par.pozZdvigAll(0)
             this.pointZdvig.set(0,0,0)
             if(self.mPanel.parent!=undefined) {
@@ -154,8 +152,7 @@ export class Menedsher  {
         this.mouseup = function (e) { 
              self.stop();
             // self.par.par.tudaSuda.saveMod() 
-            // self.par.drawTestUp() 
-            trace("^mouseup^")              
+            // self.par.drawTestUp()             
         }
 
 
@@ -170,8 +167,7 @@ export class Menedsher  {
             
             if(e)if(e.target){ 
                 if(self.object!=undefined){
-                    if(self.object.parent!=undefined){
-                        trace("^move^",e.point)  
+                    if(self.object.parent!=undefined){ 
                         self.object.setpositLocel(e.point.x, e.point.y, e.point.z)
                         self.fun("visi3d");   
                     }
@@ -228,13 +224,14 @@ export class Menedsher  {
 
 
         this.out = function (e) { 
-            trace("^out^",e)  
+           
 
             if(e)if(e.target){
                 if(self.object!=undefined){
 
                     if(self.object.parent!=undefined){
                         self.object.parent.remove(self.object)
+                        global.dragPic.start(64, 'resources/data/'+self.object.object.id+'/64.png', self.object.object );
                     }
                 }
                 self.fun("visi3d");   
@@ -269,7 +266,6 @@ export class Menedsher  {
         var _yy1,_xx1
         this.over = function (e) {      
            
-            trace("^over^",e)     
             // if(self.par.par.bactive==false)return
 
 
@@ -279,6 +275,7 @@ export class Menedsher  {
 
                 if(self.object==undefined){
                     if(global.dragPic.object!=undefined){
+                        
                         let oo= self.menedsherObject.getIdObj(3);
                         let pp=self.menedsherObject.getBlok(oo.obj)
                         //this.add(pp)               
@@ -292,8 +289,8 @@ export class Menedsher  {
                 if(self.object!=undefined){
                     
                     let ppp=self.poiscParam(e.target,"xzPar");
-                    trace("@@@@@@@@@@@@@@object@@@@@@@@@@@@",ppp);
                     if(ppp!=null){
+                        global.dragPic.stop()
                         ppp.add(self.object)
                     }
                     self.fun("visi3d");   
@@ -381,10 +378,9 @@ export class Menedsher  {
 
         var blok=null
         var p={x:0,y:0}
-        this.down = function (e) { 
-            trace("^down^",e)  
+        this.down = function (e) {  
             // if(self.par.par.bactive==false)return
-             if(e){
+            if(e){
                 if(e.target){
                     blok=self.poiscParam(e.target,"blok");
                     if(blok!=null){ 
@@ -545,7 +541,6 @@ export class Menedsher  {
 
         this.poiscParam = function (o,p) {
             if(o[p]!=undefined)return o[p];
-
             if(o.parent!=undefined)return this.poiscParam(o.parent, p)
             return null;
         }         
