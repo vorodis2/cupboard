@@ -16,10 +16,18 @@ export class DevCupboard {
     this.pan = new DPanel(this.dCont, 0, 0)
     this.pan.width = 300;
 
-    var pObject1=new DParamObject(this.pan ,2,250,function(){			
+    var pObject1=new DParamObject(this.pan ,2,250,function(s){			
       self.par.par.par.dragParam()
       self.par.par.par.par.localStorage.object=self.param
       self.par.par.par.par.localStorage.save()
+
+
+      if(s)if(s.param)if(s.param=="debug"){          
+          setTimeout(function() {
+              location.reload()
+          }, 10);
+          return;
+      }   
 
     });
     pObject1.tipRide=true

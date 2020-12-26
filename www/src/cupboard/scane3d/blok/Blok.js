@@ -11,6 +11,7 @@ export class Blok{
         this.children=[];
         this.boolDinColor=false;
         this.object = o;
+        this._material=mO.mat2.idObj.id;
         /*this._visiMark= mO._visiMark; 
         this._avAct = true;
         this.idRandom=Math.random();
@@ -283,9 +284,9 @@ export class Blok{
         var mDin      
         var mDin    
         var bb 
-
+*/
         this.dragColor=function(){ 
-            if(self._material==undefined)return
+       /*     if(self._material==undefined)return
             mDin=self._material 
             
             this.bvColor=true
@@ -323,10 +324,10 @@ export class Blok{
                     self.arrayMat[i].material=mDin;
                 }   
                     
-            }    
+            } */   
         }
 
-*/
+/*
         //------------------------------
         
 
@@ -539,18 +540,21 @@ export class Blok{
     get x() { return  this._x;}
 
    
-/*
+
 
     set material(v) {
-        if(this._material!=v){
-            if(this.boolDinColor == true)return;
+        if(this._material!=v){           
             this._material = v;            
+            
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].material=v;
+            }
             this.dragColor();
         }       
     }   
     get material() { return  this._material;}
 
-
+/*
     set idColor(v) {
         if(this._idColor!=v){            
             if(this.boolDinColor == true)return;

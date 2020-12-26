@@ -3,6 +3,8 @@ import { Blok } from './blok/Blok.js';
 import { CBoard } from './blok/CBoard.js';
 import { CPalka } from './blok/CPalka.js'; 
 
+import { MenedsherMaterial } from './MenedsherMaterial.js'; 
+
 
 export class Menedsher  {
     constructor(room, fun) {         
@@ -55,22 +57,26 @@ export class Menedsher  {
         });
         this.menedsherObject.setOB(this.par.par.par.objectBase);
 
-        // this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
-        //     fun(s,p)
-        // });
+        /*this.mMaterial = new MenedsherMaterial(this,function(s,p){//менеджер матерьялов
+            fun(s,p)
+        });*/
+
 
         // this.mUtilit = new MUtilit(this,function(s,p){
         //     fun(s,p)
         // });
 
 
-        // this.mMaterial.setConfig(
-        //     this.par.visi3D,  
-        //     // this.par.par.par.main.objectBase,
-        //     // this.par.par.par.server
-        // )
+       /* trace(this.visi3D)
+        trace(this.par.par.par.objectBase)
+        trace(this.par.par.par.server)
+        this.mMaterial.setConfig(
+            this.visi3D,  
+            this.par.par.par.objectBase,
+            this.par.par.par.server
+        )*/
         
-        // this.menedsherObject.geterMat=this.mMaterial.geterMat
+        //this.menedsherObject.geterMat=this.mMaterial.geterMat
 
         this.clear=function(blok){            
             if(blok.parent!=undefined)blok.parent.remove(blok)
@@ -286,8 +292,7 @@ export class Menedsher  {
 
 
 
-                if(self.object!=undefined){
-                    
+                if(self.object!=undefined){                    
                     let ppp=self.poiscParam(e.target,"xzPar");
                     if(ppp!=null){
                         global.dragPic.stop()
@@ -696,15 +701,19 @@ export class MenedsherObject  {
             transparent:true,
             opacity:0.7
         });
-        this.mat2 = new THREE.MeshPhongMaterial({
+       /* this.mat2 = new THREE.MeshPhongMaterial({
             color:0xffffff,
-            /*transparent:true,
-            opacity:0.7*/
-        });
+            transparent:true,
+            opacity:0.7
+        });*/
 
-        this.mat2.map = new THREE.TextureLoader().load( 'resources/image/pic.png' );
+        //this.mat2.map = new THREE.TextureLoader().load( 'resources/image/pic.png' );
   
 
+        
+        let mmO=pm.getThreeName("defolt_mat");
+        this.mat2 =pm.mat.getId(mmO.id);
+      
 
         this.dragPriceScane=function(){ 
             this.par.dragPriceScane()

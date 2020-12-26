@@ -68,7 +68,8 @@ export class MLeft  {
     this.drag=function(s,p){
         if(s=="gallery"){}  
         if(s=="gIndex"){
-            global.dragPic.start(64, 'resources/data/'+p.obj.id+'/64.png', p.obj );
+            if(this.idArr==0)global.dragPic.start(64, 'resources/data/'+p.obj.id+'/64.png', p.obj );
+            if(this.idArr==1)self.fun("material",p.obj.id)
         }
         self.fun(s,p);    
     }

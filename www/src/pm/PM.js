@@ -39,12 +39,32 @@ export function PM(visi3D, objbase) {
             }
         }
         this.arrayHron.push(new Hron(this, idObj, fun));
+
     }
 
 
 
-    
-
+    var r
+    this.getThreeName=function(name){       
+        for (var i = 0; i < objbase.three.length; i++) {
+            r=this.gTN(objbase.three[i],name)
+            if(r!=null)return r
+        }
+        return null;
+    }
+    this.gTN=function(o,name){
+        let r1
+        if(o.keyName){
+            if(o.keyName==name)return o
+            if(o.array){
+                for (var i = 0; i < o.array.length; i++) {
+                    r1=this.gTN(o.array[i],name)
+                    if(r1!=null)return o.array[i]
+                }
+            }
+        }
+        return null;
+    }
 
 
 

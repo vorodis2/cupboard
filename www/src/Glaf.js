@@ -56,6 +56,10 @@ export class Glaf  {
         }
 
         this.menu=new Menu(this,function(s,p,p1){  
+            trace(s,p,p1)
+            if(s=="material"){
+                self.world.material=p;
+            }
             /*  if(s=="mashtab"){
                     self.p20.mashtab=p;
                     self.menu.mashtab=p;

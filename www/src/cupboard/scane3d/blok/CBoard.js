@@ -22,11 +22,11 @@ export class CBoard extends Blok {
             if(this.arrPalka)if(this.arrPalka[0]){
                 this.arrPalka[0].width=this._cDepth
                 
-                this.arrPalka[0].setXYPosit(this._width/2, -this._depth/2+this._cDepth/2,-this._height/2)
+                this.arrPalka[0].setXYPosit(this._width/2, -this._depth/2+this._cDepth/2,-this._height/2);
               
 
-                this.arrPalka[0].height = this._height
-                this.arrPalka[0].depth = this._width
+                this.arrPalka[0].height = this._height;
+                this.arrPalka[0].depth = this._width;
 
 
 

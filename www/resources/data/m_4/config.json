@@ -16,12 +16,12 @@
         "wireframe": false,
         "reflectivity": 1,
         "refractionRatio": 0.98,
-        "emissive": "#000000",
+        "emissive": "#1f1f1f",
         "specular": "#111111",
         "shininess": 30,
         "textur": [
             {
-                "id": "t_4",
+                "id": "t_1",
                 "name": "map"
             }
         ]
@@ -29,5 +29,6 @@
     "mirro": false,
     "resurs": {
         "array": []
-    }
+    },
+    "orig": "xz.png"
 }

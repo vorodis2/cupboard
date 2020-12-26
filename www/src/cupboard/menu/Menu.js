@@ -30,10 +30,13 @@ export class Menu  {
 
 			this.array[this.array.length]=this.mLeft=new MLeft(this, function(s,p,p1){             
 				if(s=="index")self.menuIndex=p;
+				self.fun(s,p,p1)
 			});
 			
-			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1){});
+			
 			this.array[this.array.length] = this.mTop = new MTop(this, function(s, p, p1){})
+
+			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1){});
 
 			this.array[this.array.length]=global.mInfo=this.mInfo = new MInfo(this.par.dCont);
 

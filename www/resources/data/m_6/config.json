@@ -1,0 +1,38 @@
+{
+    "id": "m_6",
+    "title": "title_m_6",
+    "key": "MeshPhongMaterial",
+    "obj": {
+        "type": "MeshPhongMaterial",
+        "color": "#ffffff",
+        "skinning": false,
+        "flatShading": false,
+        "depthFunc": 3,
+        "blending": 1,
+        "side": 0,
+        "opacity": 1,
+        "transparent": false,
+        "alphaTest": 0,
+        "wireframe": false,
+        "reflectivity": 1,
+        "refractionRatio": 0.98,
+        "shininess": 15.6,
+        "emissive": "#000000",
+        "specular": "#111111",
+        "textur": [
+            {
+                "id": "t_8",
+                "name": "map"
+            },
+            {
+                "id": "t_8",
+                "name": "bumpMap"
+            }
+        ]
+    },
+    "mirro": false,
+    "resurs": {
+        "array": []
+    },
+    "orig": "xz.png"
+}

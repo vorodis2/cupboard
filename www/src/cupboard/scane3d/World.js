@@ -1,4 +1,6 @@
+
 import { Menedsher } from './Menedsher.js';
+import { PM } from '../../pm/PM.js';
 
 export class World {
     constructor(par, fun) {
@@ -20,6 +22,13 @@ export class World {
 
         this.content3d = new THREE.Object3D();
         this.par.content3D.add(this.content3d);
+
+
+        global.pm=this.pm=new PM(this.visi3D, this.par.par.objectBase)
+
+        this._material=pm.getThreeName("defolt_mat").id;
+
+        
 
         this.menedsher = new Menedsher(this, (s, p, p1) => {
             if (s == "visi3d") { this.render() }
@@ -124,4 +133,17 @@ export class World {
         }
     }
     get height() {return this._height}
+
+
+    set material(v) {
+        if(this._material!=v){           
+            this._material = v;            
+            
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].material=v;
+            }
+           // this.dragColor();
+        }       
+    }   
+    get material() { return  this._material;}
 }

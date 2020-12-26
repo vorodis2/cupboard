@@ -35,6 +35,15 @@ export class CPalka extends Blok {
 
         this.dragObjNWD()
 
+
+
+        this.dragColor=function () {  
+            this.mesh.material =pm.mat.getId(this._material);
+            trace("!!!!!!!!!!!!!!!!!!")
+        }
+
+
+
         this.getObj = function(){
             var obj={}
             obj.type=this.type;
@@ -53,6 +62,8 @@ export class CPalka extends Blok {
             }
             return obj;            
         }
+
+
 
 
         var ob,ooo

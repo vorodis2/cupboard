@@ -31,8 +31,8 @@ export class Main  {
 		document.body.appendChild(this.contentHTML);  		
 
 		this.param={}
-		this.param.otstup=10;
-		this.param.wh=24;
+		this.param.otstup=5;
+		this.param.wh=64;
 		this.param.debug=true;
 
 		//создание сцены
@@ -55,7 +55,7 @@ export class Main  {
 		
 
 		//стартуем дальше
-    this.fina = function () { 
+    	this.fina = function () { 
         	self.localStorage.object.debug=true
 			self.glaf=new Glaf(self)		
 			sizeWindow()
