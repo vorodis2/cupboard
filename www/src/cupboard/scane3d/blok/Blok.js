@@ -43,8 +43,6 @@ export class Blok{
 
         this.c3dNa = new THREE.Object3D();
         this.content3d.add(this.c3dNa); 
-
-               
         /*this.markers=new Markers(this);
         this.content = new PIXI.Container();
         this.graphics = new PIXI.Graphics();  

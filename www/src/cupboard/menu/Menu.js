@@ -37,6 +37,8 @@ export class Menu  {
 		dcmParam.activButton="#f28044";
 		this._menuIndex=-1;
 		this.dCont=new DCont(this.par.dCont);
+
+		
 		
 		// this.mDragScane = new MDragScane(this)
 

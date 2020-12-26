@@ -52,10 +52,7 @@ export class World {
             if (id == null) {
                 oo= this.menedsher.menedsherObject.getIdObj(2) ;
                 let pp=this.menedsher.menedsherObject.getBlok(oo.obj)
-
-                this.add(pp)
-
-               
+                this.add(pp)               
                 pp.init()
 
 
