@@ -6,6 +6,8 @@ export class DevCupboard {
     this.fun = fun;
     this.dC = par.dCont;
 
+    this.param=this.par.param;	
+
     this.otstup=2
 
     this.dCont = new DCont(this.dC);
@@ -14,31 +16,15 @@ export class DevCupboard {
     this.pan = new DPanel(this.dCont, 0, 0)
     this.pan.width = 300;
 
-/*
-    this.pan.visible = this._active;
+    var pObject1=new DParamObject(this.pan ,2,250,function(){			
+      self.par.par.par.dragParam()
+      self.par.par.par.par.localStorage.object=self.param
+      self.par.par.par.par.localStorage.save()
 
-    var yy = this.otstup;
-    var yOtstup = this.otstup;
-    
+    });
+    pObject1.tipRide=true
+    pObject1.addObject(this.param)
 
-    this.slider = new DSliderBig(self.pan, this.otstup, yy, function(){
-      if(self.activeObject != undefined){
-        self.activeObject[this.text]=this.value
-      }
-    }, 'height', 1, 500);
-    yy+=this.otstup+this.slider.height
-    this.slider1 = new DSliderBig(self.pan, this.otstup, yy, null, 'height', 1, 500);
-    yy+=this.otstup+this.slider.height
-    this.slider2 = new DSliderBig(self.pan, this.otstup, yy, null, 'Depth', 1, 500);
-    yy+=this.otstup+this.slider.height
-
-
-
-    this.slider.width = this.pan.width-this.otstup*2;
-    this.slider1.width = this.pan.width-this.otstup*2;
-    this.slider2.width = this.pan.width-this.otstup*2;
-
-*/
 
   var pObject=new DParamObject(this.pan ,2,2,function(){			
     
@@ -50,6 +36,7 @@ export class DevCupboard {
     this.activeObject = undefined;
     this.setActiveObject = function(obj) {
       this.activeObject = obj;
+
       pObject.addObject(obj)
 /*
       this.slider.value = this.activeObject.width;

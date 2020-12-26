@@ -12,32 +12,42 @@ import { Glaf } from './Glaf.js';
 import { LocalStorage } from './localStorage/LocalStorageE6.js';
 
 export class Main  {
-  	constructor(fun) {  		
-  		this.type="LMain";
-  		this.fun=fun
-  		var self=this;
+	constructor(fun) {  		
+		this.type="LMain";
+		this.fun=fun
+		var self=this;
 		this.glaf=null;
 		this._width=100;
 		this._height=100;
 		self.resolution=1
 		self.objectBase=null
 		self.confText=null 
-        this.localStorage=undefined;
-        this.debug=false;
+		this.localStorage=undefined;
+		this.debug=false;
 		this.contentHTML= document.createElement('div');
 		this.contentHTML.style.position = 'fixed';
 		this.contentHTML.style.top = '0px';
 		this.contentHTML.style.left = '0px';
 		document.body.appendChild(this.contentHTML);  		
 
+		this.param={}
+		this.param.otstup=10;
+		this.param.wh=24;
+		this.param.debug=true;
 
 		//создание сцены
   		this.start = function () {	   
 			this.tick();            
-            this.localStorage = new LocalStorage(null, "localStorage"); 
+            this.localStorage = new LocalStorage(null, "localStorage111"); 
 
-            if(self.localStorage.object.debug==undefined)self.localStorage.object.debug=false            
-       
+						if(self.localStorage.object.debug==undefined)self.localStorage.object.debug=false;
+
+						for (let s in self.localStorage.object) {
+							if(this.param[s]!=undefined){
+								this.param[s]=self.localStorage.object[s]
+							}
+							
+						}
             this.debug=self.localStorage.object.debug;           
             this.fina();
 		};
@@ -45,7 +55,7 @@ export class Main  {
 		
 
 		//стартуем дальше
-        this.fina = function () { 
+    this.fina = function () { 
         	self.localStorage.object.debug=true
 			self.glaf=new Glaf(self)		
 			sizeWindow()

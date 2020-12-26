@@ -1,1 +1,1 @@
-{"children":[{"type":"CBoard","id":2,"x":0,"y":0,"z":0,"width":320.49,"height":316.69,"depth":176.06,"children":[]}]}
+{"children":[{"type":"CBoard","id":2,"x":0,"y":0,"z":0,"width":365.77,"height":292.76,"depth":216.93,"boolInt":50,"children":[null,null,null,null,null,null,{"type":"CPalka","id":3,"x":39.21805831507824,"y":124.80947580888753,"z":-64.73000000000002,"width":10,"height":100,"depth":100,"children":[]},{"type":"CPalka","id":3,"x":-81.75375311971887,"y":74.39336741937991,"z":-64.72999999999998,"width":10,"height":100,"depth":100,"children":[]}]}]}

@@ -575,7 +575,6 @@ export class Blok{
 
 
     set parent(v) {
-        trace("@@_parent@",v)
         if(this._parent!=v){
           // if(this.dragParentDo) this.dragParentDo(this._parent, v)   
             this._parent= v; 
@@ -583,7 +582,6 @@ export class Blok{
                 
                 this.mO.visi3D.event3DArr.removeChild(this.content3d);
             } else{
-                trace("@@@@@@@@@@@@@_parent@@@@@@@@@@@@@@@@@@@@@@@",this.mO.visi3D.event3DArr,this._parent)
                 this.mO.visi3D.event3DArr.addChild(this.content3d);
             }  
            /* if(this.dragParent) this.dragParent()  

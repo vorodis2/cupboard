@@ -1,30 +1,42 @@
 export class MTop  {
   constructor(par,fun) {  		
-    this.type="MTop";
-    var self=this;
+      this.type="MTop";
+      var self=this;
       this.par=par
       this.fun=fun
-      this.otstup=this.par._otstup;
-      this.otstup1=this.par._otstup1;
-      this.wh=this.par._wh;       
+      
+      this.param=this.par.param;
 
       this._index=-1;
 
       this.dCont=new DCont(par.dCont);
 
-      this.panel = new DPanel(this.dCont, this.otstup, this.otstup)
-      this.panel.height = this.wh + this.otstup * 2;
-      this.panel.width = 800;
-  }
+      this.panel = new DPanel(this.dCont, 0, 0)
+      this.btn = new DButton(this.panel, 0,0,"save", () => {      
+        this.par.par.viewServer.saveGetObjId(this.par.par.world.getObj())
+      })
 
-  changeOtstups() {
-    this.otstup=this.par._otstup;
-    this.otstup1=this.par._otstup1;
-    this.wh=this.par._wh;  
 
-    this.panel.x = this.otstup;
-    this.panel.y = this.otstup;
+      this.dragParam=function(){
+        this.panel.x=this.param.otstup
+        this.panel.y=this.param.otstup
+        this.panel.height = this.param.wh*0.8 + this.param.otstup*2;
+        
+        this.btn.x = this.param.otstup;
+        this.btn.y = this.param.otstup;
+        this.btn.height = this.param.wh*0.8
 
-    this.panel.height = this.wh + this.otstup * 2;
+        this.sizeWindow()
+      }
+
+      var w,h,s
+      this.sizeWindow=function(_w,_h,_s){
+        if(_w){
+          w=_w
+          h=_h
+          s=_s
+        }
+        this.panel.width = w - this.param.otstup*2;
+      }
   }
 } 

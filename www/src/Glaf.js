@@ -8,7 +8,6 @@ import { ViewServer } from './viewServer/ViewServer.js';
 import { MVisi3D } from './visi3D/MVisi3D.js';
 import { SceneSB } from './visi3D/SceneSB.js';
 
-import { LocalStorage } from './localStorage/LocalStorageE6.js'
 
 export class Glaf  {
     constructor(par) {  		
@@ -16,6 +15,7 @@ export class Glaf  {
         var self=this;
         this.par=par;
 
+      
         this.sizeMax=10000;
 
         this.dCont=new DCont(document.body);
@@ -25,7 +25,9 @@ export class Glaf  {
             this.intRend=1;
         }
 
-        this.localStorage = new LocalStorage(function(s,p,p1){}, "otstups");
+        this.param=this.par.param;
+
+
 
         this.div = document.createElement('div');
         this.div.style.position = 'fixed';
@@ -88,6 +90,7 @@ export class Glaf  {
             }
             if (s=="activeObject") {
                 //self.debCupboard.setActiveObj(p);
+                
                 self.menu.setActiveObject(p)
                 return;
             }
@@ -110,7 +113,6 @@ export class Glaf  {
             self.render()
         });
 
-        this.menu.finishInit(this.world);
 
 
 
@@ -137,14 +139,9 @@ export class Glaf  {
             }*/
         });  
 
-
-        setTimeout(function() {
-            var d=new DCont(document.body)    
-            new DButton(d, 0,0,"save", function(){          
-                self.viewServer.saveGetObjId(self.world.getObj())
-            })
-
-        }, 10);   
+        this.dragParam=function(){
+            self.menu.dragParam()
+        }
 
 
         //ап дете сцена деленая на 2 в мейне
@@ -183,6 +180,7 @@ export class Glaf  {
         }
 
 
+        this.dragParam()
         this.viewServer.openURL();
     }
 /*
