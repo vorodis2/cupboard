@@ -27,6 +27,7 @@ export class World {
         this._material = pm.getThreeName('defolt_mat').id;
 
         this.menedsher = new Menedsher(this, (s, p, p1) => {
+             self.fun(s, p, p1);
             if (s == 'visi3d') {
                 this.render();
             }

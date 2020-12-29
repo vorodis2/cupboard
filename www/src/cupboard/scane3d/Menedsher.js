@@ -389,6 +389,7 @@ export class Menedsher  {
                 if(e.target){
                     blok=self.poiscParam(e.target,"blok");
                     if(blok!=null){ 
+                        self.fun("activeObject",blok)
                         self.start(blok);  
                     }
                 }

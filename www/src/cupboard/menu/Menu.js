@@ -3,7 +3,7 @@ import { MLeft } from './MLeft.js';
 import { MDev } from './MDev.js'
 import { MInfo} from './MInfo.js';
 import { MTop } from './MTop.js'
-
+import { MObject } from './MObject.js'
 export class Menu  {
     constructor(par,fun) {    	
 		this.type="Menu";		
@@ -39,6 +39,9 @@ export class Menu  {
 			this.array[this.array.length]= this.mDev = new MDev(this, function(s, p, p1){});
 
 			this.array[this.array.length]=global.mInfo=this.mInfo = new MInfo(this.par.dCont);
+
+
+			this.array[this.array.length]= this.mObject = new MObject(this, function(s, p, p1){});
 
 
 			this.array[this.array.length]=global.dragPic=this.dragPic = new DDragPic(this.par.dCont);
@@ -142,6 +145,7 @@ export class Menu  {
 
 
 	setActiveObject(obj) {
+		this.mObject.setObject(obj)
 		this.mDev.setActiveObject(obj);
 	}
 

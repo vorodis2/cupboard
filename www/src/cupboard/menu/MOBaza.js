@@ -14,7 +14,7 @@ export class MOBaza  {
         this.otstup=this.par.otstup;
         this.otstup1=this.par.otstup;
         this.wh=this.par.wh;
-        this.width=(this.par.wh+this.otstup)*4+this.otstup;
+        this.width=200;
         this.whSize=this.par.whSize;
 
         this.dCont=new DCont(par.dCont);

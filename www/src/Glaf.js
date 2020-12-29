@@ -8,6 +8,7 @@ import { ViewServer } from './viewServer/ViewServer.js';
 import { MVisi3D } from './visi3D/MVisi3D.js';
 import { SceneSB } from './visi3D/SceneSB.js';
 
+import { Calc } from './Calc.js';
 
 export class Glaf  {
     constructor(par) {  		
@@ -27,7 +28,7 @@ export class Glaf  {
 
         this.param=this.par.param;
 
-
+        global.calc=new Calc()
 
         this.div = document.createElement('div');
         this.div.style.position = 'fixed';

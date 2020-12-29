@@ -1,13 +1,15 @@
 export class Outline {
-    constructor(par, cubs, materialName) {
+    constructor(par) {
         var self = this;
         this.type = 'Outline';
         this.par = par;
-        this.cubs = cubs;
-        this._materialName = materialName || 'm_5';
+        
+        this._materialName = "null";
 
-        this._bLeft = true;
-        this._bRight = true;
+        this._bLeft = true;//?????????????????
+        this._bRight = true;//?????????????????
+
+
         this._width = 100;
         this._height = 100;
         this._depth = 100;
@@ -15,15 +17,30 @@ export class Outline {
         this.content3d = new THREE.Object3D();
         this.par.content3d.add(this.content3d);
 
-        this.geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        this.geometry.computeBoundingBox();
-        this.material = global.pm.mat.getId(this._materialName, () => {});
 
+        this._material = undefined //global.pm.mat.getId(this._materialName, () => {});
+
+
+        this.cubs=[]    
+
+
+/*
         this.cubs.forEach((cub) => (cub.material = this.material));
         this.setCubs(this.cubs[0], this.cubs[1], this.cubs[2]);
+
+
+*/
+
+
+
+
+        
     }
 
     redrawCubes() {
+        if(this.cubs.length==0)return
+            trace("!!!!")
+
         if (this._bLeft && this._bRight) {
             this.cubs[0].scale.x =
                 this._width - this.getCubParam(this.cubs[1], 'x') * 2;
@@ -51,7 +68,22 @@ export class Outline {
     }
 
     setCubs(c, c1, c2) {
+       
+        for (var i = 0; i < this.cubs.length; i++) {
+            if(this.cubs[i].parent!=undefined)this.cubs[i].parent.remove(this.cubs[i])
+        }
+
+        this.cubs.length=0;
+        this.cubs.push(c, c1, c2)
+        if(this._material!=undefined){
+            for (var i = 0; i < this.cubs.length; i++) {
+                this.cubs[i].material=this._material
+            }
+        }
+        
+
         this.content3d.add(c, c1, c2);
+        trace(this.cubs)
         this._width =
             this.getCubParam(c, 'x') +
             this.getCubParam(c1, 'x') +
@@ -59,11 +91,11 @@ export class Outline {
 
         this._height = this.getCubParam(c, 'z');
         this._depth = this.getCubParam(c, 'y');
-
         this.setCubsPosition(c, c1, c2);
     }
 
     setCubsPosition(c, c1, c2) {
+        
         if (!this._bLeft) {
             c.position.x = -this.getCubParam(c1, 'x') / 2;
         }
@@ -88,6 +120,7 @@ export class Outline {
     }
 
     getCubParam(c, param) {
+        
         return (
             c.geometry.boundingBox.max[param] -
             c.geometry.boundingBox.min[param]
@@ -97,6 +130,12 @@ export class Outline {
     set materialName(value) {
         if (this._materialName != value) {
             this._materialName = value;
+            this._material=global.pm.mat.getId(this._materialName, () => {});
+            for (var i = 0; i < this.cubs.length; i++) {
+                this.cubs[i].material=this._material
+            }
+
+
             this.redrawCubes();
         }
     }
