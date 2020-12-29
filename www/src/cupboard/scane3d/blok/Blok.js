@@ -1,17 +1,13 @@
-
-
-
-
-export class Blok{
+export class Blok {
     constructor(mO, o, idArr, fun) {
-        this.type="Blok";
-        this.typeConst="Blok";
-        var self=this;
-        this.uuid=Math.random()
-        this.children=[];
-        this.boolDinColor=false;
+        this.type = 'Blok';
+        this.typeConst = 'Blok';
+        var self = this;
+        this.uuid = Math.random();
+        this.children = [];
+        this.boolDinColor = false;
         this.object = o;
-        this._material=mO.mat2.idObj.id;
+        this._material = mO.mat2.idObj.id;
         /*this._visiMark= mO._visiMark; 
         this._avAct = true;
         this.idRandom=Math.random();
@@ -21,29 +17,29 @@ export class Blok{
         this._activObject=false;
         this._activTime=false;
         this.boolOTS=true//откат при удаоления со стенки*/
-        this.idArr=idArr;
-        this.fun=fun;
-        this.mO=mO;
-        this.id=o.id;
-       // this.linkMod="resources/data/"+this.id+"/mod/"+o.mod.name;
-        this.link="resources/data/"+this.id+"/original.png";
-        
-        this.aa=["copy","clear"]
-        this.funDrag=undefined;
-        this.funInitMod=undefined; 
-        this.durXY = undefined; 
+        this.idArr = idArr;
+        this.fun = fun;
+        this.mO = mO;
+        this.id = o.id;
+        // this.linkMod="resources/data/"+this.id+"/mod/"+o.mod.name;
+        this.link = 'resources/data/' + this.id + '/original.png';
+
+        this.aa = ['copy', 'clear'];
+        this.funDrag = undefined;
+        this.funInitMod = undefined;
+        this.durXY = undefined;
         this.durRect = undefined;
-      /*  this.rectColizi = {x:0,y:0,width:1,height:1,idArr:idArr};*/
+        /*  this.rectColizi = {x:0,y:0,width:1,height:1,idArr:idArr};*/
 
         this.content3d = new THREE.Object3D();
-        this.content3d.blok=this;
+        this.content3d.blok = this;
 
         /*this.idCT="idMatObject";//Тип общего цвета
         this.matBas="materialBase";//Тип общего цвета
         this._material=roomBig[this.matBas];*/
 
         this.c3dNa = new THREE.Object3D();
-        this.content3d.add(this.c3dNa); 
+        this.content3d.add(this.c3dNa);
         /*this.markers=new Markers(this);
         this.content = new PIXI.Container();
         this.graphics = new PIXI.Graphics();  
@@ -55,7 +51,7 @@ export class Blok{
 
         this._x=0
 */
-       
+
         /*
         if(o.shadow){
             var l="resources/data/"+this.id+"/shadow/shadow.png";                              
@@ -117,10 +113,7 @@ export class Blok{
         }
 */
 
-        
-        
-
-/*
+        /*
         this.dCol = function () {           
             self.x=self.boxColizi.__x;
             self.y=self.boxColizi.__y;            
@@ -141,7 +134,7 @@ export class Blok{
 
 
 */
-        this.clear = function (b) { 
+        this.clear = function (b) {
             /*if(this._parent&&b==undefined){                
                 this._parent.remove(this);              
             } 
@@ -151,9 +144,8 @@ export class Blok{
                     this.remove(this.children[i])
                 }
             }     
-            this.mO.dragPriceScane()  */                
+            this.mO.dragPriceScane()  */
         };
-
 
         /*this.boxColizi=undefined;      
         this._parent=undefined;
@@ -166,14 +158,12 @@ export class Blok{
         self.c3dNa.add(this.box);
         this.box.layers.set(31);*/
 
+        this.rect = [];
+        this.rect1 = [];
+        for (var i = 0; i < o.mod.r.length; i++) this.rect[i] = o.mod.r[i];
+        for (i = 0; i < o.mod.r1.length; i++) this.rect1[i] = o.mod.r1[i];
 
-        this.rect=[];
-        this.rect1=[];
-        for (var i = 0; i < o.mod.r.length; i++)this.rect[i]=o.mod.r[i];
-        for (i = 0; i < o.mod.r1.length; i++)this.rect1[i]=o.mod.r1[i];              
-            
-
-       /* this.aaSob=function(s,p){            
+        /* this.aaSob=function(s,p){            
             if(s=="clear"){
                 self.mO.par.clear(self);
                 self.clear()
@@ -182,8 +172,7 @@ export class Blok{
             if(s=="copy")self.mO.par.copy(self);
         }*/
 
-
-       /* this.setAA=function(aa){ } 
+        /* this.setAA=function(aa){ } 
         this.x=0;
         this.y=0;
         this.setXY=function(_x,_y){
@@ -199,23 +188,22 @@ export class Blok{
             }          
         }*/
 
-
-        this.setXYPosit=function(_x,_y,_z){
-            self.content3d.position.x=_x;
-            self.content3d.position.y=_y;
-            self.content3d.position.z=_z;
-           /* self.x=_x;
+        this.setXYPosit = function (_x, _y, _z) {
+            self.content3d.position.x = _x;
+            self.content3d.position.y = _y;
+            self.content3d.position.z = _z;
+            /* self.x=_x;
             self.y=_y;
             self.content3d.position.x=self.x;
             self.content3d.position.y=self.y;
             this.boxColizi.position._x = _x;
-            this.boxColizi.position.y = _y;  */          
-        }
+            this.boxColizi.position.y = _y;  */
+        };
 
-       // this.byZdvig=true
-       // this.prosZ=1    
-        this.dragObjNWD=function(){  
-       /*
+        // this.byZdvig=true
+        // this.prosZ=1
+        this.dragObjNWD = function () {
+            /*
             this.dragObjHA(self.boxHelper, this.rect);
 
             this.box.scale.set(this.rect[3],this.rect[5],this.rect[4]/this.prosZ);
@@ -229,23 +217,22 @@ export class Blok{
 
 
             */
-            if(this.funDrag!=undefined)this.funDrag();
-            this.fun("visi3d");
-        }        
+            if (this.funDrag != undefined) this.funDrag();
+            this.fun('visi3d');
+        };
 
-        this.dragObjHA=function(bH, a){                
-           /* if(a[3]>0 && a[4]>0 && a[5]>0){            
+        this.dragObjHA = function (bH, a) {
+            /* if(a[3]>0 && a[4]>0 && a[5]>0){            
                 bH.width=a[3];
                 bH.position.x=a[0]+a[3]/2;
                 bH.height=a[4];
                 bH.position.z=a[1]+a[4]/2;
                 bH.depth=a[5];
                 bH.position.y=-a[2]-a[5]/2;                 
-            }  */      
-        }
+            }  */
+        };
 
-
-       /* this.arrayChild=[]
+        /* this.arrayChild=[]
         this.arrayMat=[];
         this.recurcChild=function(c, b){
             if(c.children!=undefined){
@@ -285,8 +272,8 @@ export class Blok{
         var mDin    
         var bb 
 */
-        this.dragColor=function(){ 
-       /*     if(self._material==undefined)return
+        this.dragColor = function () {
+            /*     if(self._material==undefined)return
             mDin=self._material 
             
             this.bvColor=true
@@ -324,10 +311,10 @@ export class Blok{
                     self.arrayMat[i].material=mDin;
                 }   
                     
-            } */   
-        }
+            } */
+        };
 
-/*
+        /*
         //------------------------------
         
 
@@ -351,7 +338,7 @@ export class Blok{
             
         }*/
 
-       /* this.testMaterial=function(){
+        /* this.testMaterial=function(){
     //ставим первый цвет
             if(!roomBig[this.matBas]&&this.object && this.object.info && this.object.info.array && this.object.info.array.length>0){
                
@@ -368,13 +355,11 @@ export class Blok{
             
         }*/
 
-
-        this.funInit=undefined
-        this.modelObj
-        this.init=function(_obj){
-            
-           // this.creatBC();
-           /* this.modelObj=_obj;
+        this.funInit = undefined;
+        this.modelObj;
+        this.init = function (_obj) {
+            // this.creatBC();
+            /* this.modelObj=_obj;
             if(self.funInit!=undefined)self.funInit();
 
 
@@ -415,10 +400,9 @@ export class Blok{
             }
             
             */
-       
-             if(self.funInitMod!=undefined)self.funInitMod(); 
-        }
 
+            if (self.funInitMod != undefined) self.funInitMod();
+        };
 
         /*this.creatBC=function(){
             this.boxColizi = new RectCollis(
@@ -443,39 +427,37 @@ export class Blok{
             if(this.creatBCFun)this.creatBCFun();
         }*/
 
-/*
+        /*
         this.init2=function(){
             var idC=mO.geterMat.idColor;            
             this.idColor=idC;
             self.dragObjNWD()
         }*/
 
-
         this.dragObjNWD();
 
-       
-        this.add = function(blok){
+        this.add = function (blok) {
             this.remove(blok);
             this.content3d.add(blok.content3d);
-            this.children.push(blok)
-            blok.parent=this;
-        }
-        this.remove = function(blok){
+            this.children.push(blok);
+            blok.parent = this;
+        };
+        this.remove = function (blok) {
             var p = -1;
             var r = null;
-            for (var i = 0; i < this.children.length; i++) {                
-                if(this.children[i].idArr==blok.idArr){                    
-                    p=i;
+            for (var i = 0; i < this.children.length; i++) {
+                if (this.children[i].idArr == blok.idArr) {
+                    p = i;
                 }
-            }            
-            if(p!=-1){
-                r = this.children.splice(p,1)[0];
+            }
+            if (p != -1) {
+                r = this.children.splice(p, 1)[0];
                 this.content3d.remove(blok.content3d);
-                r.parent=undefined;                
-            }           
+                r.parent = undefined;
+            }
             return r;
-        }
-/*
+        };
+        /*
         this.setColorId = function(v){
             if(this.boolDinColor == false){
                 this.idColor=v
@@ -495,66 +477,61 @@ export class Blok{
         }
 
 */
-        this.getObj = function(){
-            var obj={}
-            obj.type=this.type;
-            obj.id=this.id;
-            obj.x=self.content3d.position.x;
-            obj.y=self.content3d.position.y;
-            obj.z=self.content3d.position.z;
-            obj.children=[];
+        this.getObj = function () {
+            var obj = {};
+            obj.type = this.type;
+            obj.id = this.id;
+            obj.x = self.content3d.position.x;
+            obj.y = self.content3d.position.y;
+            obj.z = self.content3d.position.z;
+            obj.children = [];
             for (var i = 0; i < this.children.length; i++) {
-                obj.children[i]=this.children[i].getObj();
+                obj.children[i] = this.children[i].getObj();
             }
 
-            return obj;            
-        }
+            return obj;
+        };
 
-
-        var ob,ooo
-        this.setObj = function(obj){                      
-            this.setXYPosit(obj.x,obj.y,obj.z); 
-            if(obj.children);          
+        var ob, ooo;
+        this.setObj = function (obj) {
+            this.setXYPosit(obj.x, obj.y, obj.z);
+            if (obj.children);
             for (var i = 0; i < obj.children.length; i++) {
-                ooo= mO.getIdObj(obj.children[i].id)                  
-                ob=mO.getBlok(ooo.obj)
-                ob.setObj(obj.children[i])
-                this.add(ob);                 
+                ooo = mO.getIdObj(obj.children[i].id);
+                ob = mO.getBlok(ooo.obj);
+                ob.setObj(obj.children[i]);
+                this.add(ob);
             }
-            return obj;            
-        }
+            return obj;
+        };
 
-        this.sobKey = function(tip,e,arrNa){ 
-            
-        } 
-
+        this.sobKey = function (tip, e, arrNa) {};
     }
 
     set x(v) {
-        if(this._x!=v){
-           
-            this._x = v;            
-            
-        }       
-    }   
-    get x() { return  this._x;}
-
-   
-
+        if (this._x != v) {
+            this._x = v;
+        }
+    }
+    get x() {
+        return this._x;
+    }
 
     set material(v) {
-        if(this._material!=v){           
-            this._material = v;            
-            
+        if (this._material != v) {
+            this._material = v;
+
             for (var i = 0; i < this.children.length; i++) {
-                this.children[i].material=v;
+                this.children[i].material = v;
             }
             this.dragColor();
-        }       
-    }   
-    get material() { return  this._material;}
+        }
+    }
+    get material() {
+        return this._material;
+    }
 
-/*
+    /*
     set idColor(v) {
         if(this._idColor!=v){            
             if(this.boolDinColor == true)return;
@@ -577,27 +554,27 @@ export class Blok{
     }   
     get visiMark() { return  this._visiMark;}*/
 
-
     set parent(v) {
-        if(this._parent!=v){
-          // if(this.dragParentDo) this.dragParentDo(this._parent, v)   
-            this._parent= v; 
-            if(this._parent==undefined){
-                
+        if (this._parent != v) {
+            // if(this.dragParentDo) this.dragParentDo(this._parent, v)
+            this._parent = v;
+            if (this._parent == undefined) {
                 this.mO.visi3D.event3DArr.removeChild(this.content3d);
-            } else{
+            } else {
                 this.mO.visi3D.event3DArr.addChild(this.content3d);
-            }  
-           /* if(this.dragParent) this.dragParent()  
+            }
+            /* if(this.dragParent) this.dragParent()  
 
             if(this.parent!=undefined){                 
                 if(this.drahShadow)this.drahShadow()               
-            } */         
-        }       
-    }   
-    get parent() { return  this._parent;}
+            } */
+        }
+    }
+    get parent() {
+        return this._parent;
+    }
 
-/*
+    /*
     set activObject(v) {
         if(this._activObject!=v){
             this._activObject=v
@@ -630,219 +607,224 @@ export class Blok{
     get avAct() { return  this._avAct;}*/
 }
 
-
-
-export class Markers{
+export class Markers {
     constructor(par) {
-        var self=this;
-        this.type="Markers";
-        this._visible=par._visiMark;
+        var self = this;
+        this.type = 'Markers';
+        this._visible = par._visiMark;
 
-        this.c3dAV= new THREE.Object3D();
+        this.c3dAV = new THREE.Object3D();
         par.content3d.add(this.c3dAV);
-        
+
         this.content3d = new THREE.Object3D();
         this.c3dAV.add(this.content3d);
-        this.content3d.visible=this._visible;
+        this.content3d.visible = this._visible;
 
-
-
-        this.array=[]
-        this.par=par;
-        if(tStyle.glaf.debug==true){
-           /* this.axisHelper = new THREE.AxesHelper(100)
+        this.array = [];
+        this.par = par;
+        if (tStyle.glaf.debug == true) {
+            /* this.axisHelper = new THREE.AxesHelper(100)
             this.content3d.add(this.axisHelper);  */
         }
-        this.arrayOwan
-        var aa, aaa
-        this.setO3D=function(o3d, bStart){ 
-            if(bStart==undefined) this.arrayOwan=[]          
-            if(o3d.name)
-            if(o3d.name.indexOf("markerObj")!=-1){ 
-                if(o3d.parent){
-                   o3d.parent.remove(o3d)
-                }                     
-                aa= o3d.name.split("_");  
+        this.arrayOwan;
+        var aa, aaa;
+        this.setO3D = function (o3d, bStart) {
+            if (bStart == undefined) this.arrayOwan = [];
+            if (o3d.name)
+                if (o3d.name.indexOf('markerObj') != -1) {
+                    if (o3d.parent) {
+                        o3d.parent.remove(o3d);
+                    }
+                    aa = o3d.name.split('_');
 
-                if(aa[1]){
-                      
-                    var o=par.mO.getRendomID(aa[1])                  
-                    if(o!=null){ 
-                                          
-                        var omb = this.getO3D(o)                        
-                        var pp = new THREE.Vector3(o3d.position.x,o3d.position.y,o3d.position.z-self.par.rect[2])
-                        omb.setPRS(pp, o3d.rotation, o3d.scale); 
-                        this.arrayOwan.push(omb)                    
-                    } 
+                    if (aa[1]) {
+                        var o = par.mO.getRendomID(aa[1]);
+                        if (o != null) {
+                            var omb = this.getO3D(o);
+                            var pp = new THREE.Vector3(
+                                o3d.position.x,
+                                o3d.position.y,
+                                o3d.position.z - self.par.rect[2],
+                            );
+                            omb.setPRS(pp, o3d.rotation, o3d.scale);
+                            this.arrayOwan.push(omb);
+                        }
+                    }
                 }
-            }  
-            if(o3d.children!=undefined)
-            for (var i = o3d.children.length-1; i >=0; i--) {
-                this.setO3D(o3d.children[i], true)
-            }
-        }
+            if (o3d.children != undefined)
+                for (var i = o3d.children.length - 1; i >= 0; i--) {
+                    this.setO3D(o3d.children[i], true);
+                }
+        };
 
+        this.compliteMod = function () {
+            self.par.mO.par.par.dragTimeVM();
+        };
 
-
-        this.compliteMod=function(){           
-            self.par.mO.par.par.dragTimeVM()
-        }
-        
-        this.getO3D=function(o){
-            var omb= new OMB(this, o, this.array.length);
+        this.getO3D = function (o) {
+            var omb = new OMB(this, o, this.array.length);
             this.array.push(omb);
-            return omb
-        }
+            return omb;
+        };
     }
 
-
     set visible(v) {
-        if(this._visible!=v){
-            this._visible= v;
-            this.content3d.visible= v;
+        if (this._visible != v) {
+            this._visible = v;
+            this.content3d.visible = v;
             for (var i = 0; i < this.array.length; i++) {
-                this.array[i].visible= v;
-            }                   
-        }       
-    }   
-    get visible() { return  this._visible;}
+                this.array[i].visible = v;
+            }
+        }
+    }
+    get visible() {
+        return this._visible;
+    }
 }
 
-
-export class OMB{
+export class OMB {
     constructor(par, obj, idArr) {
-        var self=this;
-        this.type="OMB";
-        this._visible=false;
-        this.idArr=idArr;
-        this.obj=obj;
-        this.par=par;
+        var self = this;
+        this.type = 'OMB';
+        this._visible = false;
+        this.idArr = idArr;
+        this.obj = obj;
+        this.par = par;
 
-        this.boolColVisi=true
+        this.boolColVisi = true;
 
-
-        this.rect=[]
-        for (var i = 0; i < this.obj.obj.mod.r.length; i++) this.rect[i]=this.obj.obj.mod.r[i]*1
+        this.rect = [];
+        for (var i = 0; i < this.obj.obj.mod.r.length; i++)
+            this.rect[i] = this.obj.obj.mod.r[i] * 1;
         this.content3d = new THREE.Object3D();
         par.content3d.add(this.content3d);
         this.c1 = new THREE.Object3D();
         this.content3d.add(this.c1);
         this.c2 = new THREE.Object3D();
-        this.c1.add(this.c2);       
+        this.c1.add(this.c2);
 
-        this.content3d.visible=this._visible; 
+        this.content3d.visible = this._visible;
 
-        if(tStyle.glaf.debug==true){
-           /* this.axisHelper = new THREE.AxesHelper(30)
+        if (tStyle.glaf.debug == true) {
+            /* this.axisHelper = new THREE.AxesHelper(30)
             this.content3d.add(this.axisHelper);*/
         }
-       
-        this.position={x:0,y:0,z:0}
-        this.setPRS=function(p,r,s){
-            this.position=p;
+
+        this.position = { x: 0, y: 0, z: 0 };
+        this.setPRS = function (p, r, s) {
+            this.position = p;
             this.content3d.position.set(p.x, -p.z, p.y);
-            this.content3d.rotation.x=-Math.PI/2
-        }
+            this.content3d.rotation.x = -Math.PI / 2;
+        };
 
-        
-        this.boolInit=false
-        this.init=function(){
-            if(this.boolInit==true)return
-            this.boolInit=true;            
-            if(this.obj.obj==undefined){                
+        this.boolInit = false;
+        this.init = function () {
+            if (this.boolInit == true) return;
+            this.boolInit = true;
+            if (this.obj.obj == undefined) {
                 $.ajax({
-                url: "resources/data/"+this.obj.id+"/config.json",
-                success: function function_name(data) {
-                    if(typeof data === "string") {
-                        var conf = JSON.parse(data)
-                        self.obj.obj = conf;
-                    } else self.obj.obj = data;                   
-                    self.init2();                                     
-                },
-                error:function function_name(data) {
-                    console.warn("Что то случилось с конфигом",data);
-                }
-            });
-            }else{
-                this.init2()
+                    url: 'resources/data/' + this.obj.id + '/config.json',
+                    success: function function_name(data) {
+                        if (typeof data === 'string') {
+                            var conf = JSON.parse(data);
+                            self.obj.obj = conf;
+                        } else self.obj.obj = data;
+                        self.init2();
+                    },
+                    error: function function_name(data) {
+                        console.warn('Что то случилось с конфигом', data);
+                    },
+                });
+            } else {
+                this.init2();
             }
-        }
+        };
 
+        this.init2 = function () {
+            this.linkMod =
+                'resources/data/' +
+                self.obj.id +
+                '/mod/' +
+                self.obj.obj.mod.name;
+            this.par.par.mO.getModel(
+                this.linkMod,
+                self.obj.obj.mod.key,
+                function (o) {
+                    self.cont3dLoad = o;
+                    self.c2.add(o);
+                    self.recurcChild(o);
+                    if (self.par)
+                        if (self.par.compliteMod) self.par.compliteMod();
+                },
+            );
+        };
 
-        this.init2=function(){            
-            this.linkMod="resources/data/"+self.obj.id+"/mod/"+self.obj.obj.mod.name;
-            this.par.par.mO.getModel(this.linkMod, self.obj.obj.mod.key, function(o){
-                self.cont3dLoad=o;
-                self.c2.add(o)                
-                self.recurcChild(o);
-                if(self.par) if(self.par.compliteMod) self.par.compliteMod()                
-            });
-        }
-
-        this.recurcChild=function(c){
-            if(c.material!=undefined){                
-                if(c.material.name.indexOf('m_')!=-1){//хз какой то обьект из базы 
+        this.recurcChild = function (c) {
+            if (c.material != undefined) {
+                if (c.material.name.indexOf('m_') != -1) {
+                    //хз какой то обьект из базы
                     this.zamenaMat(c);
                 }
             }
-            if(c.children!=undefined)
-            for (var i = 0; i < c.children.length; i++) {
-                this.recurcChild(c.children[i])
-            }
-        }   
-
-        this.zamenaMat=function(c){            
-            this.par.par.mO.geterMat.get(c.material.name,function(mat){                
-                if(mat!=null){
-                    c.material=mat
+            if (c.children != undefined)
+                for (var i = 0; i < c.children.length; i++) {
+                    this.recurcChild(c.children[i]);
                 }
-            },true);
-        } 
+        };
 
+        this.zamenaMat = function (c) {
+            this.par.par.mO.geterMat.get(
+                c.material.name,
+                function (mat) {
+                    if (mat != null) {
+                        c.material = mat;
+                    }
+                },
+                true,
+            );
+        };
 
-        this.rectObj={x:0,y:0,w:1,h:1,v:1}
-        this.getBox =function(){
-            this.rectObj.x=0;
-            this.rectObj.y=0;
-            this.rectObj.v=1
-            this.getPar(this.c2, this.rectObj);            
-            this.rectObj.x+=this.obj.obj.mod.r[0];
-            this.rectObj.w=this.obj.obj.mod.r[3];
-            this.rectObj.h=this.obj.obj.mod.r[4];
+        this.rectObj = { x: 0, y: 0, w: 1, h: 1, v: 1 };
+        this.getBox = function () {
+            this.rectObj.x = 0;
+            this.rectObj.y = 0;
+            this.rectObj.v = 1;
+            this.getPar(this.c2, this.rectObj);
+            this.rectObj.x += this.obj.obj.mod.r[0];
+            this.rectObj.w = this.obj.obj.mod.r[3];
+            this.rectObj.h = this.obj.obj.mod.r[4];
 
-            return this.rectObj
-        }  
+            return this.rectObj;
+        };
 
-
-        this.getPar =function(c3d,o){            
-            if(c3d.visible==false){
-                o.v=0;
+        this.getPar = function (c3d, o) {
+            if (c3d.visible == false) {
+                o.v = 0;
             }
-            o.x+=c3d.position.x;
-            o.y+=c3d.position.y;
+            o.x += c3d.position.x;
+            o.y += c3d.position.y;
 
-            if(c3d.sten!=undefined){
+            if (c3d.sten != undefined) {
                 return;
             }
 
-            if(c3d.parent!=undefined){
-                return this.getPar(c3d.parent, o);                
+            if (c3d.parent != undefined) {
+                return this.getPar(c3d.parent, o);
             }
-        }
-        if(this.par._visible==true)this.visible=true;
+        };
+        if (this.par._visible == true) this.visible = true;
     }
 
-
     set visible(v) {
-        if(this._visible!=v){
-            this._visible= v; 
-            this.content3d.visible=this._visible;
-            if(this._visible==true){
-                this.init()
-            }          
-        }       
-    }   
-    get visible() { return  this._visible;}
+        if (this._visible != v) {
+            this._visible = v;
+            this.content3d.visible = this._visible;
+            if (this._visible == true) {
+                this.init();
+            }
+        }
+    }
+    get visible() {
+        return this._visible;
+    }
 }
-
-
