@@ -1,0 +1,34 @@
+{
+    "id": "m_7",
+    "title": "title_m_7",
+    "key": "MeshPhongMaterial",
+    "obj": {
+        "type": "MeshPhongMaterial",
+        "color": "#ffffff",
+        "skinning": false,
+        "flatShading": false,
+        "depthFunc": 3,
+        "blending": 1,
+        "side": 0,
+        "opacity": 1,
+        "transparent": false,
+        "alphaTest": 0,
+        "wireframe": false,
+        "reflectivity": 1,
+        "refractionRatio": 0.98,
+        "specular": "#080808",
+        "emissive": "#000000",
+        "shininess": 30,
+        "textur": [
+            {
+                "id": "t_9",
+                "name": "map"
+            }
+        ]
+    },
+    "mirro": false,
+    "resurs": {
+        "array": []
+    },
+    "orig": "xz.png"
+}
