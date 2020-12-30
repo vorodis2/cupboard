@@ -11,8 +11,8 @@ export class Outline {
         this._bRight = true; //убирает правый mesh
 
         this._width = 100;
-        this._height = 100;
-        this._depth = 100;
+        this._height = 1;
+        this._depth = 1;
 
         this.content3d = new THREE.Object3D();
         this.par.content3d.add(this.content3d);
@@ -30,12 +30,15 @@ export class Outline {
     }
 
     redrawCubes() {
+        trace('redraw', this._width);
         if (this.cubs.length == 0) return;
-
         if (this._bLeft && this._bRight) {
-            this.cubs[0].scale.x =
-                this._width - this.getCubParam(this.cubs[1], 'x') * 2;
+            this.cubs[1].scale.x =
+                this._width - this.getCubParam(this.cubs[0], 'x') * 2;
         }
+
+        this.cubs[1].position.x = 100;
+        this.cubs[2].position.x = -100;
 
         if (!this._bLeft || !this._bRight) {
             this.cubs[0].scale.x =
@@ -54,34 +57,68 @@ export class Outline {
             cub.scale.z = this._height;
         });
 
-        this.setCubsPosition(this.cubs[0], this.cubs[1], this.cubs[2]);
-        this.par.par.dragObjNWD();
+        this.setCubsPosition(...this.cubs);
+        this.par.par.myRender();
     }
 
-    setCubs(c, c1, c2) {
-        for (var i = 0; i < this.cubs.length; i++) {
-            if (this.cubs[i].parent != undefined)
-                this.cubs[i].parent.remove(this.cubs[i]);
+    setGeometrys(g, g1, g2) {
+        if (g.boundingBox == null) {
+            g.computeBoundingBox();
+            g1.computeBoundingBox();
+            g2.computeBoundingBox();
         }
-
-        this.cubs.length = 0;
-        this.cubs.push(c, c1, c2);
-        if (this._material != undefined) {
-            for (var i = 0; i < this.cubs.length; i++) {
-                this.cubs[i].material = this._material;
-            }
+        if (this.cubs.length == 0) {
+            this.cubs.push(
+                new THREE.Mesh(g1, this._material),
+                new THREE.Mesh(g2, this._material),
+                new THREE.Mesh(g, this._material),
+            );
+            this.content3d.add(...this.cubs);
+        } else {
+            this.cubs[0].geometry = g1;
+            this.cubs[1].geometry = g2;
+            this.cubs[2].geometry = g;
         }
-
-        this.content3d.add(c, c1, c2);
-        this._width =
-            this.getCubParam(c, 'x') +
-            this.getCubParam(c1, 'x') +
-            this.getCubParam(c2, 'x');
-
-        this._height = this.getCubParam(c, 'z');
-        this._depth = this.getCubParam(c, 'y');
-        this.setCubsPosition(c, c1, c2);
+        // this.xzSamPredumai();
     }
+
+    // xzSamPredumai() {
+    //     this._width =
+    //         this.getCubParam(this.cubs[0], 'x') +
+    //         this.getCubParam(this.cubs[1], 'x') +
+    //         this.getCubParam(this.cubs[2], 'x');
+
+    //     this._height = this.getCubParam(this.cubs[1], 'z');
+    //     this._depth = this.getCubParam(this.cubs[1], 'y');
+
+    //     trace('start', this._width, this._height, this._depth);
+    //     this.setCubsPosition(...this.cubs);
+    // }
+
+    // setCubs(c, c1, c2) {
+    //     for (var i = 0; i < this.cubs.length; i++) {
+    //         if (this.cubs[i].parent != undefined)
+    //             this.cubs[i].parent.remove(this.cubs[i]);
+    //     }
+
+    //     this.cubs.length = 0;
+    //     this.cubs.push(c, c1, c2);
+    //     if (this._material != undefined) {
+    //         for (var i = 0; i < this.cubs.length; i++) {
+    //             this.cubs[i].material = this._material;
+    //         }
+    //     }
+
+    //     this.content3d.add(c, c1, c2);
+    //     this._width =
+    //         this.getCubParam(c, 'x') +
+    //         this.getCubParam(c1, 'x') +
+    //         this.getCubParam(c2, 'x');
+
+    //     this._height = this.getCubParam(c, 'z');
+    //     this._depth = this.getCubParam(c, 'y');
+    //     this.setCubsPosition(c, c1, c2);
+    // }
 
     setCubsPosition(c, c1, c2) {
         if (!this._bLeft) {

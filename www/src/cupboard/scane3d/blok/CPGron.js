@@ -42,8 +42,12 @@ export class CPGron {
             }
 
             if (this.outlin == undefined) return;
-            this.outlin.width = this._height;
-            this.outlin.height = this._width;
+
+            this.outlin.content3d.rotation.x = Math.PI;
+            this.outlin.content3d.rotation.y = Math.PI / 2;
+
+            this.outlin.width = this._width;
+            this.outlin.height = this._height;
         };
 
         ////////////////////////////////////////////
@@ -60,7 +64,26 @@ export class CPGron {
         this.initOut = function () {
             if (this.outlin != undefined) return;
             this.outlin = new Outline(this);
+            this.outlin.materialName = 'm_4';
+            global.pm.getId(19, function (e) {
+                var p, p1, p2;
+                for (var i = 0; i < e.children.length; i++) {
+                    if (e.children[i].name == 'm_0_') {
+                        p = e.children[i].geometry;
+                    }
+                    if (e.children[i].name == 'm_1_') {
+                        p1 = e.children[i].geometry;
+                    }
+                    if (e.children[i].name == 'm_2_') {
+                        p2 = e.children[i].geometry;
+                    }
+                }
 
+                self.outlin.setGeometrys(p, p1, p2);
+                self.draw();
+            });
+        };
+        /*
             var g = new THREE.BoxBufferGeometry(1, 1, 1);
             g.computeBoundingBox();
 
@@ -73,7 +96,7 @@ export class CPGron {
             this.outlin.setCubs(...this.cubs);
             this.outlin.materialName = 'm_5';
         };
-
+*/
         //////////////////////////////
     }
 

@@ -11,7 +11,7 @@ export class CPalka extends Blok {
         this._height = 100;
         this._depth = 100;
 
-        this._bool = true;
+        this._bool = false;
         this._bool1 = false;
         this._bool2 = false;
         this._bool3 = false;
@@ -170,7 +170,7 @@ export class CPalka extends Blok {
         };
     }
 
-    render() {
+    myRender() {
         this.fun('visi3d');
     }
 
@@ -208,7 +208,7 @@ export class CPalka extends Blok {
         if (this._bool != value) {
             this._bool = value;
             this.arrayGron[0].boolOut = value;
-            this.render();
+            this.myRender();
         }
     }
     get bool() {
@@ -219,7 +219,7 @@ export class CPalka extends Blok {
         if (this._bool1 != value) {
             this._bool1 = value;
             this.arrayGron[1].boolOut = value;
-            this.render();
+            this.myRender();
         }
     }
     get bool1() {
@@ -230,7 +230,7 @@ export class CPalka extends Blok {
         if (this._bool2 != value) {
             this._bool2 = value;
             this.arrayGron[2].boolOut = value;
-            this.render();
+            this.myRender();
         }
     }
     get bool2() {
@@ -240,7 +240,7 @@ export class CPalka extends Blok {
         if (this._bool3 != value) {
             this._bool3 = value;
             this.arrayGron[3].boolOut = value;
-            this.render();
+            this.myRender();
         }
     }
     get bool3() {
