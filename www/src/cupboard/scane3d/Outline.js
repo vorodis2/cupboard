@@ -67,6 +67,39 @@ export class Outline {
         this.par.par.dragObjNWD();
     }
 
+    setGeometrys(g, g1, g2) {
+        
+        if(g.boundingBox==null){
+            g.computeBoundingBox()
+            g1.computeBoundingBox()
+            g2.computeBoundingBox()
+        }
+        if(this.cubs.length==0){
+            this.cubs.push(new THREE.Mesh(g),new THREE.Mesh(g1),new THREE.Mesh(g2))
+            this.content3d.add(this.cubs[0], this.cubs[1], this.cubs[2]);
+        } else{
+            this.cubs[0].geometry=g;
+            this.cubs[1].geometry=g1;
+            this.cubs[2].geometry=g2;
+        }
+        this.xzSamPredumai() 
+    } 
+
+    xzSamPredumai() {    
+        this._width =
+            this.getCubParam(this.cubs[0], 'x') +
+            this.getCubParam(this.cubs[1], 'x') +
+            this.getCubParam(this.cubs[2], 'x');
+
+        this._height = this.getCubParam(this.cubs[0], 'z');
+        this._depth = this.getCubParam(this.cubs[0], 'y');
+        this.setCubsPosition(this.cubs[0], this.cubs[1], this.cubs[2]);
+
+    }
+
+
+
+
     setCubs(c, c1, c2) {
        
         for (var i = 0; i < this.cubs.length; i++) {
@@ -83,15 +116,8 @@ export class Outline {
         
 
         this.content3d.add(c, c1, c2);
-        trace(this.cubs)
-        this._width =
-            this.getCubParam(c, 'x') +
-            this.getCubParam(c1, 'x') +
-            this.getCubParam(c2, 'x');
-
-        this._height = this.getCubParam(c, 'z');
-        this._depth = this.getCubParam(c, 'y');
-        this.setCubsPosition(c, c1, c2);
+        
+        this.xzSamPredumai() 
     }
 
     setCubsPosition(c, c1, c2) {

@@ -53,7 +53,7 @@ export class CPalka extends Blok {
         this.arrayGron[2].boolOut=true
         this.arrayGron[3].boolOut=true*/
 
-
+        
 
 
 

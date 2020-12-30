@@ -35,21 +35,13 @@ export class CPGron {
 
         trace(this._width,this._height)*/
 
-        this.draw=function(){
-
-           
-
-
+        this.draw=function(){ 
             if( this.geometry._rect.w!==this._width || this.geometry._rect.h!==this._height){
                 this.geometry.setRect(0,0,this._width,this._height)
             }
-
             if(this.outlin==undefined)return
             this.outlin.width=  this._width 
-            this.outlin.height=  this._height 
-
-           
-
+            this.outlin.height=  this._height   
         }   
 
 
@@ -71,7 +63,34 @@ export class CPGron {
         this.initOut=function(){
             if(this.outlin!=undefined)return
             this.outlin=new Outline(this);
+            trace("#####################################");
+            
+            this.outlin.materialName='m_5';
 
+            global.pm.getId(19,function(e){
+                trace(e)
+
+                var p,p1,p2
+                for (var i = 0; i < e.children.length; i++) {
+                    if(e.children[i].name=="m_0_"){
+                        p=e.children[i].geometry
+                    }
+                    if(e.children[i].name=="m_1_"){
+                        p1=e.children[i].geometry
+                    }
+                    if(e.children[i].name=="m_2_"){
+                        p2=e.children[i].geometry
+                    }
+                    
+                } 
+
+                self.outlin.setGeometrys(p,p1,p2)
+
+                trace(p,p1,p2)
+
+            })
+
+/*
             var g = new THREE.BoxBufferGeometry(1, 1, 1);
             g.computeBoundingBox();
 
@@ -84,7 +103,9 @@ export class CPGron {
             this.outlin.content3d.position.x=30
             //this.outlin.setCubs([...this.cubs])
             this.outlin.setCubs(this.cubs[0],this.cubs[1],this.cubs[2])
-            this.outlin.materialName='m_5';
+
+            */
+            
 
 
         }          
