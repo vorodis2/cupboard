@@ -43,6 +43,9 @@ export class CPGron {
 
             if (this.outlin == undefined) return;
 
+            this.outlin.content3d.position.z=-this._height
+             this.outlin.content3d.position.x=this._width/2
+
             this.outlin.content3d.rotation.x = Math.PI;
             this.outlin.content3d.rotation.y = Math.PI / 2;
 
@@ -78,9 +81,11 @@ export class CPGron {
                         p2 = e.children[i].geometry;
                     }
                 }
-
                 self.outlin.setGeometrys(p, p1, p2);
-                self.draw();
+                trace("###",self._width,self._height)
+                self.outlin.setWH(self._width,self._height)
+                self.fun("dragMy")
+
             });
         };
         /*

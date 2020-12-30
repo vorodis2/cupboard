@@ -23,7 +23,7 @@ export class Glaf  {
 
         this._intRend=-60;
         this.render = function () {
-            this.intRend=1;
+            self.visi3D.intRend=1;
         }
 
         this.param=this.par.param;
@@ -61,6 +61,7 @@ export class Glaf  {
             if(s=="material"){
                 self.world.material=p;
             }
+
             /*  if(s=="mashtab"){
                     self.p20.mashtab=p;
                     self.menu.mashtab=p;

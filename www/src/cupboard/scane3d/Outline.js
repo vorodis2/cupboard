@@ -11,8 +11,8 @@ export class Outline {
         this._bRight = true; //убирает правый mesh
 
         this._width = 100;
-        this._height = 1;
-        this._depth = 1;
+        this._height = 100;
+        this._depth = 100;
 
         this.content3d = new THREE.Object3D();
         this.par.content3d.add(this.content3d);
@@ -20,6 +20,8 @@ export class Outline {
         this._material = undefined; //global.pm.mat.getId(this._materialName, () => {});
 
         this.cubs = [];
+        this.cubsW = [];
+        this.cubsH = [];
 
         /*
         this.cubs.forEach((cub) => (cub.material = this.material));
@@ -27,12 +29,42 @@ export class Outline {
 
 
 */
+
+        this.setWH = function (w,h) {
+            //if(this._width!=w||this._height!=h) {
+                trace(w,h)
+                this._width=w
+                this._height=h
+                this.redrawCubes();
+            //}   
+        }
+
+
+
     }
 
+
+
+
+
     redrawCubes() {
-        trace('redraw', this._width);
+        
         if (this.cubs.length == 0) return;
-        if (this._bLeft && this._bRight) {
+
+        this.cubs[0].position.x=this.cubsW[0]/2;
+        this.cubs[1].position.x=this._height/2;        
+        this.cubs[2].position.x=this._height-this.cubsW[2]/2;
+        let ww=this._height-this.cubsW[0]-this.cubsW[2]
+        let hh=this._width/this.cubsH[0]
+
+        this.cubs[1].scale.set(ww/this.cubsW[1],1,hh)
+
+
+        this.cubs[0].scale.set(1,1,hh)
+        this.cubs[2].scale.set(1,1,hh)
+
+
+        /*if (this._bLeft && this._bRight) {
             this.cubs[1].scale.x =
                 this._width - this.getCubParam(this.cubs[0], 'x') * 2;
         }
@@ -58,7 +90,7 @@ export class Outline {
         });
 
         this.setCubsPosition(...this.cubs);
-        this.par.par.myRender();
+        this.par.par.myRender();*/
     }
 
     setGeometrys(g, g1, g2) {
@@ -66,18 +98,30 @@ export class Outline {
             g.computeBoundingBox();
             g1.computeBoundingBox();
             g2.computeBoundingBox();
+
+            
         }
+        trace(g.boundingBox)
+        this.cubsW[0]=g.boundingBox.max.x-g.boundingBox.min.x
+        this.cubsW[1]=g1.boundingBox.max.x-g1.boundingBox.min.x
+        this.cubsW[2]=g2.boundingBox.max.x-g2.boundingBox.min.x
+
+        this.cubsH[0]=g.boundingBox.max.z-g.boundingBox.min.z
+        this.cubsH[1]=g1.boundingBox.max.z-g1.boundingBox.min.z
+        this.cubsH[2]=g2.boundingBox.max.z-g2.boundingBox.min.z
+
+
         if (this.cubs.length == 0) {
             this.cubs.push(
+                new THREE.Mesh(g, this._material),
                 new THREE.Mesh(g1, this._material),
                 new THREE.Mesh(g2, this._material),
-                new THREE.Mesh(g, this._material),
             );
             this.content3d.add(...this.cubs);
         } else {
-            this.cubs[0].geometry = g1;
-            this.cubs[1].geometry = g2;
-            this.cubs[2].geometry = g;
+            this.cubs[0].geometry = g;
+            this.cubs[1].geometry = g1;
+            this.cubs[2].geometry = g2;
         }
         // this.xzSamPredumai();
     }
@@ -169,6 +213,7 @@ export class Outline {
     set width(value) {
         if (this._width != value) {
             this._width = value;
+            console.warn("$$$$$$$$",value)
             this.redrawCubes();
         }
     }

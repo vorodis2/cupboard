@@ -25,6 +25,7 @@ export class MOPalka extends MOBaza {
 
             this.pObject=new DParamObject( this.window.content ,2,2,function(){          
                 self.drag()
+                par.par.fun("visi3D")
             },true);
             this.pObject.width=this.window.width
 

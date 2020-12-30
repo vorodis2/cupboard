@@ -28,7 +28,12 @@ export class CPalka extends Blok {
 
         this.arrayGron = [];
 
-        this.sob = function (s, p, p1) {};
+        this.sob = function (s, p, p1) {
+            if(s=="dragMy"){
+                trace(">>>>>>>",s)
+            }
+
+        };
 
         this.arrayGron[0] = new CPGron(this, this.sob);
         this.arrayGron[0].boolOut = this._bool;
@@ -52,10 +57,13 @@ export class CPalka extends Blok {
         this.arrayGron[4] = new CPGron(this, this.sob);
         this.arrayGron[4].content3d.rotation.x = Math.PI;
         this.arrayGron[4].content3d.rotation.z = Math.PI / 2;
+        this.arrayGron[4].mesh.material = global.pm.mat.getId('m_5', () => {});
 
         this.arrayGron[5] = new CPGron(this, this.sob);
         this.arrayGron[5].content3d.rotation.z = Math.PI / 2;
         this.arrayGron[5].content3d.rotation.y = Math.PI;
+        this.arrayGron[5].mesh.material = global.pm.mat.getId('m_5', () => {});
+
 
         /* for (var i = 0; i < 6; i++) {
             this.arrayGron[i]=new CPGron(this, this.sob);
@@ -208,7 +216,7 @@ export class CPalka extends Blok {
         if (this._bool != value) {
             this._bool = value;
             this.arrayGron[0].boolOut = value;
-            this.myRender();
+            
         }
     }
     get bool() {
@@ -219,7 +227,7 @@ export class CPalka extends Blok {
         if (this._bool1 != value) {
             this._bool1 = value;
             this.arrayGron[1].boolOut = value;
-            this.myRender();
+            
         }
     }
     get bool1() {
@@ -230,7 +238,7 @@ export class CPalka extends Blok {
         if (this._bool2 != value) {
             this._bool2 = value;
             this.arrayGron[2].boolOut = value;
-            this.myRender();
+           
         }
     }
     get bool2() {
@@ -240,7 +248,7 @@ export class CPalka extends Blok {
         if (this._bool3 != value) {
             this._bool3 = value;
             this.arrayGron[3].boolOut = value;
-            this.myRender();
+           
         }
     }
     get bool3() {

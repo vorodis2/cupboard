@@ -77,6 +77,7 @@ export class Main  {
 
 		this.boolCTRL=false
 		this.keydown=function(e){
+			if(self.glaf==undefined)return
 	        if(event.keyCode==17)self.boolCTRL=true
 	        if(event.keyCode==81&&self.boolCTRL)  {
             	self.localStorage.object.debug=!self.localStorage.object.debug;
@@ -86,6 +87,7 @@ export class Main  {
 
 	    }
 	    this.keyup=function(e){
+	    	if(self.glaf==undefined)return
 	        if(event.keyCode==17)self.boolCTRL=false
 	        self.glaf.keyup(e)	
 	    }
