@@ -11,40 +11,53 @@ export class CPalka extends Blok {
         this._height = 100;
         this._depth = 100;
 
-        this._bool = false;
-
+        this._bool = true;
+        this._bool1 = false;
+        this._bool2 = false;
+        this._bool3 = false;
 
         this.cnt3d = new THREE.Object3D();
         this.content3d.add(this.cnt3d);
 
-        this.mesh = new THREE.Mesh(mO.gBox, mO.mat2);
-        this.mesh.rotation.x = -Math.PI / 2;
-        this.content3d.add(this.mesh);
-
-        //this.cpg = new CPGron(this, true);
+        // this.mesh = new THREE.Mesh(mO.gBox, mO.mat2);
+        // this.mesh.rotation.x = -Math.PI / 2;
+        // this.content3d.add(this.mesh);
 
         let aa = new THREE.AxesHelper(50);
         this.content3d.add(aa);
 
+        this.arrayGron = [];
 
-        this.arrayGron=[]
-       
+        this.sob = function (s, p, p1) {};
 
+        this.arrayGron[0] = new CPGron(this, this.sob);
+        this.arrayGron[0].boolOut = this._bool;
+        this.arrayGron[0].content3d.rotation.x = Math.PI / 2;
+        this.arrayGron[0].mesh.material = global.pm.mat.getId('m_7', () => {});
 
-        this.sob=function(s,p,p1){
+        this.arrayGron[1] = new CPGron(this, this.sob);
+        this.arrayGron[1].boolOut = this._bool;
+        this.arrayGron[1].mesh.material = global.pm.mat.getId('m_7', () => {});
 
-        }  
+        this.arrayGron[2] = new CPGron(this, this.sob);
+        this.arrayGron[2].boolOut = this._bool;
+        this.arrayGron[2].content3d.rotation.x = -Math.PI / 2;
+        this.arrayGron[2].mesh.material = global.pm.mat.getId('m_7', () => {});
 
-        this.arrayGron[0]=new CPGron(this, this.sob);
-        this.arrayGron[0].boolOut=this._bool;
+        this.arrayGron[3] = new CPGron(this, this.sob);
+        this.arrayGron[3].boolOut = this._bool;
+        this.arrayGron[3].content3d.rotation.z = Math.PI;
+        this.arrayGron[3].mesh.material = global.pm.mat.getId('m_7', () => {});
 
-        this.arrayGron[0].content3d.rotation.x=Math.PI/2;
+        this.arrayGron[4] = new CPGron(this, this.sob);
+        this.arrayGron[4].content3d.rotation.x = Math.PI;
+        this.arrayGron[4].content3d.rotation.z = Math.PI / 2;
 
-        this.arrayGron[4]=new CPGron(this, this.sob);
-        this.arrayGron[4].content3d.rotation.x=Math.PI;
-        this.arrayGron[4].content3d.rotation.z=Math.PI/2;
+        this.arrayGron[5] = new CPGron(this, this.sob);
+        this.arrayGron[5].content3d.rotation.z = Math.PI / 2;
+        this.arrayGron[5].content3d.rotation.y = Math.PI;
 
-       /* for (var i = 0; i < 6; i++) {
+        /* for (var i = 0; i < 6; i++) {
             this.arrayGron[i]=new CPGron(this, this.sob);
             this.arrayGron[i].idArr=i
         }
@@ -53,34 +66,59 @@ export class CPalka extends Blok {
         this.arrayGron[2].boolOut=true
         this.arrayGron[3].boolOut=true*/
 
-
-
-
-
         this.funDrag = function () {
-            this.mesh.scale.set(this._width*0.9, this._height*0.9, this._depth*0.9);
-            this.mesh.position.y = this._depth / 2;
+            // this.mesh.scale.set(
+            //     this._width * 0.9,
+            //     this._height * 0.9,
+            //     this._depth * 0.9,
+            // );
+            // this.mesh.position.y = this._depth / 2;
 
+            //////////////////////////////////////////
+            this.arrayGron[0].width = this._width;
+            this.arrayGron[0].height = this._depth;
 
-            this.arrayGron[0].width=this._width
-            this.arrayGron[0].height=this._depth            
-            
-            this.arrayGron[0].content3d.position.x=-this._width/2;
-            this.arrayGron[0].content3d.position.y=0;
-            this.arrayGron[0].content3d.position.z=-this._height/2;
+            this.arrayGron[0].content3d.position.x = -this._width / 2;
+            this.arrayGron[0].content3d.position.y = 0;
+            this.arrayGron[0].content3d.position.z = -this._height / 2;
 
+            ///////////////////////////////////////
+            this.arrayGron[1].width = this._width;
+            this.arrayGron[1].height = this._height;
 
+            this.arrayGron[1].content3d.position.x = -this._width / 2;
+            this.arrayGron[1].content3d.position.z = this._height / 2;
 
-            this.arrayGron[4].width=this._depth
-            this.arrayGron[4].height=this._height
-            this.arrayGron[4].content3d.position.x=this._width/2;
-            this.arrayGron[4].content3d.position.y=this._depth;
-            this.arrayGron[4].content3d.position.z=-this._height/2;
-            
-            
+            ///////////////////////////////////////////////
+            this.arrayGron[2].width = this._width;
+            this.arrayGron[2].height = this._depth;
 
+            this.arrayGron[2].content3d.position.x = -this._width / 2;
+            this.arrayGron[2].content3d.position.y = this._depth;
+            this.arrayGron[2].content3d.position.z = this._height / 2;
 
+            ////////////////////////////////////////////////////
+            this.arrayGron[3].width = this._width;
+            this.arrayGron[3].height = this._height;
 
+            this.arrayGron[3].content3d.position.x = this._width / 2;
+            this.arrayGron[3].content3d.position.y = this._depth;
+            this.arrayGron[3].content3d.position.z = this._height / 2;
+
+            //////////////////////////////////////////////
+            this.arrayGron[4].width = this._depth;
+            this.arrayGron[4].height = this._height;
+
+            this.arrayGron[4].content3d.position.x = this._width / 2;
+            this.arrayGron[4].content3d.position.y = this._depth;
+            this.arrayGron[4].content3d.position.z = -this._height / 2;
+
+            //////////////////////////////////////////////////////
+            this.arrayGron[5].width = this._depth;
+            this.arrayGron[5].height = this._height;
+
+            this.arrayGron[5].content3d.position.x = -this._width / 2;
+            this.arrayGron[5].content3d.position.z = -this._height / 2;
         };
 
         this.setpositLocel = function (x, y, z) {
@@ -132,6 +170,10 @@ export class CPalka extends Blok {
         };
     }
 
+    render() {
+        this.fun('visi3d');
+    }
+
     set width(value) {
         if (this._width != value) {
             this._width = value;
@@ -162,15 +204,46 @@ export class CPalka extends Blok {
         return this._depth;
     }
 
-
     set bool(value) {
         if (this._bool != value) {
             this._bool = value;
-            this.arrayGron[0].boolOut=value;
+            this.arrayGron[0].boolOut = value;
+            this.render();
         }
     }
     get bool() {
         return this._bool;
     }
-    
+
+    set bool1(value) {
+        if (this._bool1 != value) {
+            this._bool1 = value;
+            this.arrayGron[1].boolOut = value;
+            this.render();
+        }
+    }
+    get bool1() {
+        return this._bool1;
+    }
+
+    set bool2(value) {
+        if (this._bool2 != value) {
+            this._bool2 = value;
+            this.arrayGron[2].boolOut = value;
+            this.render();
+        }
+    }
+    get bool2() {
+        return this._bool2;
+    }
+    set bool3(value) {
+        if (this._bool3 != value) {
+            this._bool3 = value;
+            this.arrayGron[3].boolOut = value;
+            this.render();
+        }
+    }
+    get bool3() {
+        return this._bool3;
+    }
 }
