@@ -42,6 +42,7 @@ export class Menu {
             this,
             function (s, p, p1) {},
         );
+        trace("###############################################")
 
         this.array[this.array.length] = global.mInfo = this.mInfo = new MInfo(
             this.par.dCont,
@@ -145,7 +146,9 @@ export class Menu {
     }
 
     transferObj(obj) {
-        this.mDev.devCtrl.transferObj(obj);
+       
+        if(this.mDev.transferObj)this.mDev.transferObj(obj);
+        
     }
 
     setActiveObject(obj) {

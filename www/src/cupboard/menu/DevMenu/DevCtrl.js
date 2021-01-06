@@ -21,6 +21,7 @@ export class DevCtrl {
     }
 
     transferObj(obj) {
+        trace("adsfasf")
         if (obj) this.world = obj;
         this.init();
     }

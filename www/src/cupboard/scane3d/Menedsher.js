@@ -228,20 +228,24 @@ export class Menedsher {
         };
 
         this.out = function (e) {
+            overTarget=null
             if (e.target) {
                 if (self.object != undefined) {
+
                     trace(e.target);
-                    e.target.material = pm.mat.getId(self.object.id, () => {});
-                    //     if (self.object.parent != undefined) {
-                    //         self.object.parent.remove(self.object);
-                    //         global.dragPic.start(
-                    //             64,
-                    //             'resources/data/' +
-                    //                 self.object.object.id +
-                    //                 '/64.png',
-                    //             self.object.object,
-                    //         );
-                    //     }
+                   // e.target.material = pm.mat.getId(self.object.id, () => {});
+
+
+                    if (self.object.parent != undefined) {
+                        self.object.parent.remove(self.object);
+                        global.dragPic.start(
+                            64,
+                            'resources/data/' +
+                                self.object.object.id +
+                                '/64.png',
+                            self.object.object,
+                        );
+                    }
                 }
                 self.fun('visi3d');
             }
@@ -271,26 +275,31 @@ export class Menedsher {
             // self.par.visiActiv.dragActiv();
         };
 
+        var overTarget
         var _yy1, _xx1;
         this.over = function (e) {
             // if(self.par.par.bactive==false)return
             if (e)
                 if (e.target) {
+                    overTarget=e.target
                     if (self.object == undefined) {
+
                         if (global.dragPic.object != undefined) {
+
+
                             if (typeof global.dragPic.object.id === 'number') {
                                 let oo = self.menedsherObject.getIdObj(3);
                                 let pp = self.menedsherObject.getBlok(oo.obj);
                                 //this.add(pp)
                                 pp.init();
                                 self.start(pp);
-                                return;
+                                
                             }
-
-                            if (global.dragPic.object.id[0] === 'm') {
+                        return;
+                         /*   if (global.dragPic.object.id[0] === 'm') {
                                 self.start(global.dragPic.object);
                                 return;
-                            }
+                            }*/
                         }
                     }
 
@@ -397,9 +406,14 @@ export class Menedsher {
             if (e) {
                 if (e.target) {
                     blok = self.poiscParam(e.target, 'blok');
+
                     if (blok != null) {
-                        self.fun('activeObject', blok);
-                        self.start(blok);
+                        if(blok.notDown){
+
+                        }else{
+                            self.fun('activeObject', blok);
+                            self.start(blok);/* */
+                        }                        
                     }
                 }
             }
@@ -579,6 +593,34 @@ export class Menedsher {
         this.visi3D.addEvent('out', this.out);
         this.visi3D.addEvent('over', this.over);
         this.visi3D.addEvent('down', this.down);
+
+
+        global.dragPic.addFunAp(function(){
+            
+            if(overTarget)if(dragPic.object)if(dragPic.object.id){
+                
+
+                var a=dragPic.object.id.split("_")
+                if(a[0]=="m"){
+                    blok = self.poiscParam(overTarget, 'blok');
+
+                    if (blok != null) {
+                        blok.material=dragPic.object.id
+                        if(blok.parent.type=="CBoard")
+                        if(blok.notDown){
+                            blok.parent.material=dragPic.object.id
+                        }
+                        trace("333333",blok)
+                    }
+                    
+                }/**/
+            }
+
+        })
+
+
+
+
 
         this.setIdColor = function (idColor, tip) {
             if (tip == undefined) tip = 'idMatObject';

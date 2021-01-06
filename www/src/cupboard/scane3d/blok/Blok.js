@@ -123,6 +123,7 @@ export class Blok {
             obj.x = self.content3d.position.x;
             obj.y = self.content3d.position.y;
             obj.z = self.content3d.position.z;
+            
             obj.children = [];
             for (var i = 0; i < this.children.length; i++) {
                 obj.children[i] = this.children[i].getObj();

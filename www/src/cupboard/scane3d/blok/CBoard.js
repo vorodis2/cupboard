@@ -114,9 +114,9 @@ export class CBoard extends Blok {
                 ooo.init();
                 this.add(ooo);
                 ooo.width = 5;
-
-                ooo.content3d.blok = null;
-                ooo.content3d.parent.blok = null;
+                ooo.notDown=true
+                //ooo.content3d.blok = null;
+                //ooo.content3d.parent.blok = null;
 
                 this.arrPalka.push(ooo);
             }

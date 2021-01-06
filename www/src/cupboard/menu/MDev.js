@@ -62,5 +62,18 @@ export class MDev {
             400,
         );
         this.dCompDev.index = 3;
+
+
+        this.transferObj = function(o){
+            trace("#####",this.devCtrl)
+        }
+        trace("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+
     }
+  /* transferObj(obj) {
+       
+      
+       // this.devCtrl.transferObj(obj);
+    }*/
+
 }

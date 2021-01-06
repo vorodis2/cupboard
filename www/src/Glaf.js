@@ -107,6 +107,7 @@ export class Glaf {
                 return;
             }
             if (s == 'initDone') {
+                trace(self.menu.transferObj, p)
                 self.menu.transferObj(p);
                 return;
             }

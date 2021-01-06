@@ -16,6 +16,7 @@ export class CPalka extends Blok {
         this._bool2 = false;
         this._bool3 = false;
 
+
         this.cnt3d = new THREE.Object3D();
         this.content3d.add(this.cnt3d);
 
@@ -134,7 +135,10 @@ export class CPalka extends Blok {
         this.dragObjNWD();
 
         this.dragColor = function () {
-            this.mesh.material = pm.mat.getId(this._material);
+            this.arrayGron[5].mesh.material =this.arrayGron[4].mesh.material = global.pm.mat.getId(this._material, () => {});
+            
+            //this.mesh.material = pm.mat.getId(this._material);
+
         };
 
         let sum;
