@@ -11,6 +11,7 @@ export class World {
         this.dCont = this.par.dCont;
 
         this.array = [];
+        this.arrInfo = [];
         this.children = this.array;
 
         this._active = true;
@@ -27,9 +28,12 @@ export class World {
         this._material = pm.getThreeName('defolt_mat').id;
 
         this.menedsher = new Menedsher(this, (s, p, p1) => {
-             self.fun(s, p, p1);
+            self.fun(s, p, p1);
             if (s == 'visi3d') {
                 this.render();
+            }
+            if (s === 'tickInfo') {
+                self.startTickInfo();
             }
         });
 
@@ -104,7 +108,26 @@ export class World {
             }
             return o;
         };
+
+        this.getArrayInfo = function () {
+            this.arrInfo.length = 0;
+            this.array.forEach((arr) => arr.getArrayInfo(this.arrInfo));
+
+            this.fun('getInfo', this.arrInfo);
+        };
+
+        this.sah = 0;
+        this.startTickInfo = function (t) {
+            if (t == undefined) t = 500;
+            this.sah++;
+            var s = this.sah;
+            setTimeout(() => {
+                if (this.sah == s) this.getArrayInfo();
+            }, t);
+        };
+
         this.init();
+        this.fun('initDone', this);
     }
 
     set active(value) {

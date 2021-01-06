@@ -619,13 +619,13 @@ export function GeometrySten() {
             arrPositionAttribut.length < arrPosition.length * 3
         ) {
             arrPositionAttribut = new Float32Array(arrPosition.length * 3);
-            this.addAttribute(
+            this.setAttribute(
                 'position',
                 new THREE.BufferAttribute(arrPositionAttribut, 3),
             );
 
             arrUvAttribut = new Float32Array(arrPosition.length * 2);
-            this.addAttribute(
+            this.setAttribute(
                 'uv',
                 new THREE.BufferAttribute(arrUvAttribut, 2),
             );
@@ -634,7 +634,7 @@ export function GeometrySten() {
             //  this.addAttribute( 'indexs', new THREE.BufferAttribute( arrIndex, 1 ) );
 
             arrNormal = new Float32Array(arrPosition.length * 3);
-            this.addAttribute(
+            this.setAttribute(
                 'normal',
                 new THREE.BufferAttribute(arrNormal, 3),
             );

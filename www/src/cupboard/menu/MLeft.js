@@ -77,7 +77,14 @@ export class MLeft {
                         'resources/data/' + p.obj.id + '/64.png',
                         p.obj,
                     );
-                if (this.idArr == 1) self.fun('material', p.obj.id);
+                if (this.idArr == 1) {
+                    global.dragPic.start(
+                        64,
+                        'resources/data/' + p.obj.id + '/64.png',
+                        p.obj,
+                    );
+                    // self.fun('material', p.obj.id);
+                }
             }
             self.fun(s, p);
         };

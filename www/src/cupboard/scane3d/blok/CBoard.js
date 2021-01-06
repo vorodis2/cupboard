@@ -70,14 +70,25 @@ export class CBoard extends Blok {
 
                     this.arrPalka[5].setXYPosit(
                         0,
-                        -this._depth / 2 + this.cDepth,
-                        -this._boolInt / 2,
+                        this._depth / 2 - this.arrPalka[5]._width / 2,
+                        -this._boolInt,
                     );
 
-                    this.arrPalka[5].width = this._boolInt;
+                    this.arrPalka[5].width = this.arrPalka[5]._width;
                     this.arrPalka[5].height =
                         this._width - this.arrPalka[4]._width * 2;
-                    this.arrPalka[5].depth = this._depth - this.cDepth;
+                    this.arrPalka[5].depth = this._boolInt;
+
+                    this.arrPalka[6].setXYPosit(
+                        0,
+                        -this._depth / 2 + this.cDepth,
+                        -this.arrPalka[6]._width / 2,
+                    );
+
+                    this.arrPalka[6].height =
+                        this._width - this.arrPalka[6]._width * 2;
+                    this.arrPalka[6].depth =
+                        this._depth - this.cDepth - this.arrPalka[6]._width;
                 }
         };
 
@@ -94,7 +105,7 @@ export class CBoard extends Blok {
 
         var xz, oo, ooo;
         this.funInitMod = function () {
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 7; i++) {
                 oo = this.mO.getIdObj(3);
                 ooo = this.mO.getBlok(oo.obj);
                 ooo.xzPar = this;
@@ -114,9 +125,20 @@ export class CBoard extends Blok {
 
             this.arrPalka[3].content3d.rotation.y = Math.PI / 2;
             this.arrPalka[4].content3d.rotation.y = Math.PI / 2;
+
             this.arrPalka[5].content3d.rotation.y = Math.PI / 2;
+            this.arrPalka[5].content3d.rotation.z = Math.PI / 2;
+
+            this.arrPalka[6].content3d.rotation.y = Math.PI / 2;
 
             this.dragObjNWD();
+        };
+
+        this.funSetInfo = function () {
+            this.objInfo.type = this.type;
+            this.objInfo.width = this._width;
+            this.objInfo.height = this._height;
+            this.objInfo.depth = this._depth;
         };
 
         this.getObj = function () {
@@ -216,122 +238,3 @@ export class CBoard extends Blok {
         return this._boolInt;
     }
 }
-
-/*
-export class Board {
-  constructor(par, obj) {
-    this.par = par;
-    this.type = 'Board';
-
-    this._width = 100;
-    this._height = 100;
-    this._depth = 100;
-
-    this.content3d = new THREE.Object3D();
-    this.par.content3d.add(this.content3d);
-
-    this.mesh;
-
-    this.init();
-  }
-
-  init() {
-    this.mesh = new THREE.Mesh(this.par.boxGeometry);
-    this.content3d.add(this.mesh);
-    this.dragWHD()
-  }
-
-  dragWHD() {
-    this.mesh.scale.set(this._width,this._height,this._depth);
-    this.mesh.position.z=-this._depth/2;
-
-    this.par.render();
-  }
-
-  set width(value) {
-    if (this._width != value) {
-      this._width = value;
-      this.dragWHD();
-    }
-  }
-  get width() {return this._width}
-
-  set height(value) {
-    if (this._height != value) {
-      this._height = value;
-      this.dragWHD();
-    }
-  }
-  get height() {return this._height}
-
-  set depth(value) {
-    if (this._depth != value) {
-      this._depth = value;
-      this.dragWHD();
-    }
-  }
-  get depth() {return this._depth}
-}
-
-
-
-export class BackPanel {
-  constructor(par, fun) {
-    this.par = par;
-    this.fun = fun;
-
-    this.type = 'BackPanel';
-
-    this.content3D = new THREE.Object3D();
-    this.par.content3D.add(this.content3D);
-
-    this._active = true;
-    this._width = 100;
-    this._height = 100;
-
-    this.init();
-  }
-
-  init() {
-    this.planeGeometry = new THREE.PlaneBufferGeometry(1, 1);
-    this.mesh = new THREE.Mesh(this.planeGeometry);
-    this.mesh.position.z =- this._width / 2;
-    this.mesh.rotation.x =- Math.PI / 2;
-    this.content3D.add(this.mesh);
-    this.dragWHD()
-  }
-
-  dragWHD() {
-    this.mesh.scale.set( this._width, this._height, 1 )
-    this.mesh.position.z =- this._height / 2;
-    this.par.render();
-  }
-
-  set active(value) {
-    if (this._active != value) {
-      this._active = value;
-      this.mesh.visible = value;
-      this.par.render()
-    }
-  }
-
-  get active() { return this._active }
-
-  set width(value) {
-    if (this._width != value) {
-      this._width = value;
-      this.dragWHD();
-    }
-  }
-  get width() {return this._width}
-
-  set height(value) {
-    if (this._height != value) {
-      this._height = value;
-      this.dragWHD();
-    }
-  }
-  get height() {return this._height}
-
-  get depth() {return this._depth}
-}*/
