@@ -29,10 +29,9 @@ export class CPalka extends Blok {
         this.arrayGron = [];
 
         this.sob = function (s, p, p1) {
-            if(s=="dragMy"){
-                trace(">>>>>>>",s)
+            if (s == 'dragMy') {
+                trace('>>>>>>>', s);
             }
-
         };
 
         this.arrayGron[0] = new CPGron(this, this.sob);
@@ -41,16 +40,16 @@ export class CPalka extends Blok {
         this.arrayGron[0].mesh.material = global.pm.mat.getId('m_7', () => {});
 
         this.arrayGron[1] = new CPGron(this, this.sob);
-        this.arrayGron[1].boolOut = this._bool;
+        this.arrayGron[1].boolOut = this._bool1;
         this.arrayGron[1].mesh.material = global.pm.mat.getId('m_7', () => {});
 
         this.arrayGron[2] = new CPGron(this, this.sob);
-        this.arrayGron[2].boolOut = this._bool;
+        this.arrayGron[2].boolOut = this._bool2;
         this.arrayGron[2].content3d.rotation.x = -Math.PI / 2;
         this.arrayGron[2].mesh.material = global.pm.mat.getId('m_7', () => {});
 
         this.arrayGron[3] = new CPGron(this, this.sob);
-        this.arrayGron[3].boolOut = this._bool;
+        this.arrayGron[3].boolOut = this._bool3;
         this.arrayGron[3].content3d.rotation.z = Math.PI;
         this.arrayGron[3].mesh.material = global.pm.mat.getId('m_7', () => {});
 
@@ -63,7 +62,6 @@ export class CPalka extends Blok {
         this.arrayGron[5].content3d.rotation.z = Math.PI / 2;
         this.arrayGron[5].content3d.rotation.y = Math.PI;
         this.arrayGron[5].mesh.material = global.pm.mat.getId('m_5', () => {});
-
 
         /* for (var i = 0; i < 6; i++) {
             this.arrayGron[i]=new CPGron(this, this.sob);
@@ -139,6 +137,23 @@ export class CPalka extends Blok {
             this.mesh.material = pm.mat.getId(this._material);
         };
 
+        let sum;
+        this.funSetInfo = function () {
+            this.objInfo.type = this.type;
+            this.objInfo.width = this._width;
+            this.objInfo.height = this._height;
+            this.objInfo.depth = this._depth;
+
+            sum = 0;
+            this.arrayGron.forEach((gron) => {
+                if (gron._boolOut) {
+                    sum += gron._height;
+                }
+            });
+
+            this.objInfo.gron = sum;
+        };
+
         this.getObj = function () {
             var obj = {};
             obj.type = this.type;
@@ -178,10 +193,6 @@ export class CPalka extends Blok {
         };
     }
 
-    myRender() {
-        this.fun('visi3d');
-    }
-
     set width(value) {
         if (this._width != value) {
             this._width = value;
@@ -216,7 +227,7 @@ export class CPalka extends Blok {
         if (this._bool != value) {
             this._bool = value;
             this.arrayGron[0].boolOut = value;
-            
+            this.fun('tickInfo');
         }
     }
     get bool() {
@@ -227,7 +238,7 @@ export class CPalka extends Blok {
         if (this._bool1 != value) {
             this._bool1 = value;
             this.arrayGron[1].boolOut = value;
-            
+            this.fun('tickInfo');
         }
     }
     get bool1() {
@@ -238,7 +249,7 @@ export class CPalka extends Blok {
         if (this._bool2 != value) {
             this._bool2 = value;
             this.arrayGron[2].boolOut = value;
-           
+            this.fun('tickInfo');
         }
     }
     get bool2() {
@@ -248,7 +259,7 @@ export class CPalka extends Blok {
         if (this._bool3 != value) {
             this._bool3 = value;
             this.arrayGron[3].boolOut = value;
-           
+            this.fun('tickInfo');
         }
     }
     get bool3() {
