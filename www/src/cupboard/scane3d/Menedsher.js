@@ -610,7 +610,7 @@ export class Menedsher {
                         if(blok.notDown){
                             blok.parent.material=dragPic.object.id
                         }
-                        trace("333333",blok)
+                       
                     }
                     
                 }/**/
